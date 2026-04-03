@@ -49,27 +49,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. GSAP Advanced Vectorized & Reveal Animations
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initial Entrances
-    gsap.from(".header", { y: -100, opacity: 0, duration: 1.5, ease: "power4.out" });
-    
-    gsap.from(".hud-group", {
+    // Master Timeline for Loading & Initial Entrances
+    const tl = gsap.timeline();
+
+    // Loader Letter Sequence
+    tl.to(".loader-text span", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
+    })
+    .to(".loader-progress", {
+        opacity: 1,
+        duration: 0.3,
+        yoyo: true,
+        repeat: 3
+    }, "-=0.2")
+    // Hide Loader overlay by slicing it up
+    .to("#loader", {
+        yPercent: -100,
+        duration: 1.2,
+        ease: "expo.inOut",
+        delay: 0.2
+    })
+    // Enter the Header
+    .from(".header", { 
+        y: -100, 
+        opacity: 0, 
+        duration: 1.2, 
+        ease: "power4.out" 
+    }, "-=0.6")
+    // Materialize the HUD Panels
+    .from(".hud-group", {
         opacity: 0,
         scale: 0.9,
         stagger: 0.2,
-        duration: 1.5,
-        ease: "expo.out",
-        delay: 0.5
-    });
-
-    // Hero Section Animations
-    gsap.from(".hero-content > *", {
+        duration: 1.2,
+        ease: "expo.out"
+    }, "-=1")
+    // Hero Content Drop-in
+    .from(".hero-content > *", {
         y: 40,
         opacity: 0,
         duration: 1.2,
         stagger: 0.15,
-        ease: "power3.out",
-        delay: 0.3
-    });
+        ease: "power3.out"
+    }, "-=0.8");
 
     // Animated Flow SVG Line
     gsap.to("#data-flow-1", {

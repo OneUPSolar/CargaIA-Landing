@@ -30,6 +30,41 @@ body {
 
 .mono { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; }
 
+/* Loader Sequence Overlay */
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-text {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 200;
+    letter-spacing: 0.4em;
+    display: flex;
+    overflow: hidden;
+}
+
+.loader-text span {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.loader-progress {
+    margin-top: 1.5rem;
+    color: var(--electric-cyan);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    opacity: 0;
+}
+
 /* Technical Infrastructure & Background */
 .mesh-bg {
     position: fixed;
