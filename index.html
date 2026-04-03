@@ -15,12 +15,22 @@
 </head>
 <body>
 
-    <!-- Loading Sequence Overlay -->
+    <!-- Breathtaking Loading Sequence Overlay -->
     <div id="loader" class="loader-overlay">
+        <div class="loader-scanline"></div>
+        
         <div class="loader-text">
             <span>C</span><span>A</span><span>R</span><span>G</span><span>A</span><span class="logo-accent">I</span><span class="logo-accent">A</span>
         </div>
-        <div class="loader-progress mono">[INITIALIZING_PROTOCOL...]</div>
+        
+        <div class="loader-progress-container">
+            <div class="loader-bar-bg">
+                <div class="loader-bar-fill"></div>
+            </div>
+            <div class="loader-terminal mono">
+                <span id="term-text">[INITIALIZING_CORE_PROTOCOL...]</span>
+            </div>
+        </div>
     </div>
 
     <!-- High-Tech Infrastructure Layer -->

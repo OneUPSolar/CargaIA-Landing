@@ -30,25 +30,46 @@ body {
 
 .mono { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; }
 
-/* Loader Sequence Overlay */
+/* Cinematic Loader Overlay */
 .loader-overlay {
     position: fixed;
     inset: 0;
-    background: var(--bg);
+    background: #020202;
     z-index: 99999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
+
+.loader-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 242, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.loader-scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(0, 242, 255, 0.015) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .loader-text {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: 5rem;
     font-weight: 200;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.5em;
     display: flex;
     overflow: hidden;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
 }
 
 .loader-text span {
@@ -57,12 +78,40 @@ body {
     opacity: 0;
 }
 
-.loader-progress {
-    margin-top: 1.5rem;
+.loader-progress-container {
+    width: 300px;
+    margin-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.loader-bar-bg {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background: var(--electric-cyan);
+    box-shadow: 0 0 10px var(--electric-cyan), 0 0 20px var(--electric-cyan);
+}
+
+.loader-terminal {
     color: var(--electric-cyan);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    opacity: 0;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    opacity: 0.8;
 }
 
 /* Technical Infrastructure & Background */

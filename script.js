@@ -52,27 +52,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Master Timeline for Loading & Initial Entrances
     const tl = gsap.timeline();
 
-    // Loader Letter Sequence
+    // Loader Letter Sequence (C A R G A I A)
     tl.to(".loader-text span", {
         y: 0,
         opacity: 1,
         duration: 0.8,
         stagger: 0.1,
-        ease: "back.out(1.7)"
+        ease: "expo.out"
     })
-    .to(".loader-progress", {
-        opacity: 1,
-        duration: 0.3,
-        yoyo: true,
-        repeat: 3
-    }, "-=0.2")
-    // Hide Loader overlay by slicing it up
+    // Scale text slightly while loading for dramatic effect
+    .to(".loader-text", {
+        scale: 1.05,
+        duration: 3,
+        ease: "power1.inOut"
+    }, "<")
+    // Terminal text sequence & Progress Bar
+    .to(".loader-bar-fill", { width: "30%", duration: 0.8, ease: "power2.out" }, "-=2.5")
+    .to("#term-text", { text: "[ESTABLISHING_DECENTRALIZED_UPLINK...]", duration: 0.5 }, "-=1.8")
+    .to(".loader-bar-fill", { width: "80%", duration: 1, ease: "power2.inOut" }, "-=1")
+    .to("#term-text", { text: "[SYSTEM_ONLINE_&_READY]", duration: 0.5 }, "-=0.3")
+    .to(".loader-bar-fill", { width: "100%", duration: 0.3, ease: "power2.in" })
+    
+    // Flash explosion of text before hiding overlay
+    .to(".loader-text", {
+        scale: 1.3,
+        opacity: 0,
+        filter: "blur(10px)",
+        duration: 0.6,
+        ease: "power4.in"
+    })
+    .to(".loader-progress-container", {
+        opacity: 0,
+        duration: 0.4
+    }, "<")
+    
+    // Hide Loader overlay smoothly backwards into the z-axis
     .to("#loader", {
-        yPercent: -100,
-        duration: 1.2,
-        ease: "expo.inOut",
-        delay: 0.2
-    })
+        opacity: 0,
+        scale: 1.1,
+        duration: 1,
+        ease: "power3.inOut"
+    }, "-=0.2")
+    .set("#loader", { display: "none" })
     // Enter the Header
     .from(".header", { 
         y: -100, 
