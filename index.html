@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CargaIA | Autonomous Energy Protocol</title>
+    <meta name="description" content="Next-generation energy infrastructure for a decentralized future.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@200;300;400&family=Outfit:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- High-Tech Infrastructure Layer -->
+    <div class="mesh-bg"></div>
+    <div class="tech-infrastructure">
+        <!-- Scanning Beam -->
+        <div class="scan-beam"></div>
+        
+        <!-- Energy Bus SVG -->
+        <svg width="100%" height="100%" viewBox="0 0 1440 4000" fill="none" class="infra-svg">
+            <!-- Vertical Data Bus -->
+            <path d="M718 0 V4000" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" />
+            <path d="M720 0 V4000" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
+            <path d="M722 0 V4000" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" />
+            
+            <!-- Horizontal Nodes -->
+            <path d="M0 600 H1440" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 10" />
+            <path d="M0 1600 H1440" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 10" />
+            
+            <!-- Animated Flow -->
+            <path id="data-flow-1" d="M720 0 V600 H1440" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-dasharray="100 2000" class="flow-line" filter="url(#glow)" />
+            
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+            </defs>
+        </svg>
+
+        <!-- HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD -->
+        <div class="hud-container">
+            <div class="hud-group top-left">
+                <div class="tech-label">[SYS_STATUS: ACTIVE]</div>
+                <div class="tech-label">[PROTOCOL_LOAD: 0xFD2]</div>
+            </div>
+            <div class="hud-group top-right">
+                <div class="tech-label">[LOAD_BALANCER_SYNC]</div>
+            </div>
+            <div class="hud-group bottom-right">
+                <div class="tech-label">[NODE_COORD: 19.432, -99.133]</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-text">
+                    <span class="logo-name">CARGA</span><span class="logo-accent">IA</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="sys-time mono" id="sys-clock">TIMESTAMP: 00:00:00</div>
+                <a href="#waitlist" class="btn-outline">AUTH_PREORDER</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero: Fintech High-Tech -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content reveal">
+                    <h1 class="hero-title">Automated <br><span class="text-white">Energy Protocol</span> <br>Node Infrastructure.</h1>
+                    <p class="hero-subtitle">Engineering the decentralized global energy grid. CargaIA is the core settlement layer for the autonomous future.</p>
+                    
+                    <div id="waitlist" class="hero-form">
+                        <div class="form-header">
+                            <span class="mono">[NETWORK_ACCESS_REQUEST]</span>
+                            <div class="corner-brackets"></div>
+                        </div>
+                        <form id="waitlist-form">
+                            <div class="input-group">
+                                <label class="mono-label">IDENT_ID</label>
+                                <input type="text" id="name" placeholder="FULL_LEGAL_NAME" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="mono-label">COM_UPLINK</label>
+                                <input type="email" id="email" placeholder="SECURE_EMAIL_ENDPOINT" required>
+                            </div>
+                            <button type="submit" class="btn-gold">INITIATE_UPLINK</button>
+                        </form>
+                        <div id="form-success" class="form-success-msg hidden">
+                            <p class="mono">[LINK_STABLISHED] UPLINK_SUCCESSFUL.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fintech Metrics (Countdown Replacement) -->
+                    <div class="metrics-grid reveal">
+                        <div class="metric-item">
+                            <div class="metric-val mono" id="days">00</div>
+                            <div class="metric-lab">PROTOCOL_ETA_D</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-val mono" id="hours">00</div>
+                            <div class="metric-lab">UPLINK_SYNC_H</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-val mono" id="minutes">00</div>
+                            <div class="metric-lab">BUFFER_ZONE_M</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Vision -->
+        <section class="tech-hub">
+            <div class="container">
+                <h2 class="section-title">Global <em>Energy Topology.</em></h2>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <div class="spec-meta mono">[TH_CAP_SYS]</div>
+                        <span class="spec-val">60A</span>
+                        <span class="spec-lab">THERMAL_THRESHOLD</span>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-meta mono">[RT_REACT]</div>
+                        <span class="spec-val">0.1ms</span>
+                        <span class="spec-lab">SYNCHRONIZATION_DELAY</span>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-meta mono">[ENC_LAYER]</div>
+                        <span class="spec-val">AES-4k</span>
+                        <span class="spec-lab">END_TO_END_ENCRYPTION</span>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-meta mono">[NET_LINK]</div>
+                        <span class="spec-val">M-IoT</span>
+                        <span class="spec-lab">NEURAL_GRID_PROTOCOL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container grid-3">
+                <div class="feature-card reveal">
+                    <div class="feature-electric-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+                        </svg>
+                    </div>
+                    <h3>UNIVERSAL_HARDWARE</h3>
+                    <p>Interoperable bridge protocol designed for standard and rapid DC infrastructure.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-electric-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </div>
+                    <h3>VAL_SETTLEMENT</h3>
+                    <p>Sub-second value transfer within the CargaIA distributed ledger network.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-electric-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
+                        </svg>
+                    </div>
+                    <h3>GRID_AUTONOMY</h3>
+                    <p>Predictive AI modeling for peak energy load balancing and node optimization.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content mono">
+                [SYSTEM_MANIFESTO] CARGAIA CORE Protocol v1.4.2 // (c) 2026 Maxify Inc.
+            </div>
+            <div class="footer-links">
+                <a href="#">ENDPOINT_PRIVACY</a>
+                <a href="#">SERVICE_PROTOCOL</a>
+                <a href="#">NETWORK_HEALTH</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
