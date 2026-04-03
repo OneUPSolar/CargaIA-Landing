@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const engSub = "Engineering the decentralized global energy grid. CargaIA is the core settlement layer for the autonomous future.";
         const spSub = "Ingeniería de la red energética global descentralizada. CargaIA es la capa de liquidación central para el futuro autónomo.";
         
-        let typeTl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
+        let typeTl = gsap.timeline(); // Remove repeating loop
 
         // Phase 1: Type English Title (First Impression)
         typeTl.to("#type-title", { text: engTitle, duration: 3, ease: "none" })
@@ -112,16 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
         .to("#type-subtitle", { text: engSub, duration: 3, ease: "none" }, "-=1.5")
 
         // Phase 2: Wait, then Erase English
-        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 5 })
+        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 4 })
         .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
         
-        // Phase 3: Type Spanish
+        // Phase 3: Type Spanish and keep it there forever
         .to("#type-title", { text: spTitle, duration: 3, ease: "none" })
-        .to("#type-subtitle", { text: spSub, duration: 3, ease: "none" }, "-=1.5")
-        
-        // Phase 4: Wait, then Erase Spanish (ready to loop back to Phase 1)
-        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 5 })
-        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5");
+        .to("#type-subtitle", { text: spSub, duration: 3, ease: "none" }, "-=1.5");
     }
 
     // Animated Flow SVG Line
