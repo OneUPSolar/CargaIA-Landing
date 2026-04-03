@@ -46,23 +46,89 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 4. Reveal Animations on Scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    // 4. GSAP Advanced Vectorized & Reveal Animations
+    gsap.registerPlugin(ScrollTrigger);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.classList.add('reveal');
-                observer.unobserve(entry.target);
-            }
+    // Initial Entrances
+    gsap.from(".header", { y: -100, opacity: 0, duration: 1.5, ease: "power4.out" });
+    
+    gsap.from(".hud-group", {
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.2,
+        duration: 1.5,
+        ease: "expo.out",
+        delay: 0.5
+    });
+
+    // Hero Section Animations
+    gsap.from(".hero-content > *", {
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.3
+    });
+
+    // Animated Flow SVG Line
+    gsap.to("#data-flow-1", {
+        strokeDashoffset: -2100, // Move the dash along the vector path
+        duration: 4,
+        ease: "linear",
+        repeat: -1
+    });
+
+    // Mouse Parallax for Tech Infrastructure
+    document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 30;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        
+        gsap.to(".mesh-bg", { x: x, y: y, duration: 1.5, ease: "power2.out" });
+        gsap.to(".infra-svg", { x: -x * 1.5, y: -y * 1.5, duration: 2, ease: "power2.out" });
+    });
+
+    // Scroll Animations for Section Titles
+    document.querySelectorAll(".section-title").forEach(title => {
+        gsap.from(title, {
+            scrollTrigger: { trigger: title, start: "top 85%" },
+            y: 30, opacity: 0, duration: 1.2, ease: "power3.out"
         });
-    }, observerOptions);
+    });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Specs Grid Reveal
+    gsap.from(".spec-item", {
+        scrollTrigger: { trigger: ".spec-grid", start: "top 80%" },
+        y: 50, opacity: 0, stagger: 0.15, duration: 1, ease: "power3.out"
+    });
+
+    // Animate Feature Cards Vectorized Icons
+    const cards = document.querySelectorAll('.feature-card');
+    cards.forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: { trigger: card, start: "top 90%" },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: "back.out(1.7)"
+        });
+        
+        // Hover effect for the vectorized icon
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card.querySelector('.feature-electric-icon svg'), {
+                scale: 1.2, rotation: 5, duration: 0.3, ease: "power2.out"
+            });
+            gsap.to(card, { borderColor: "var(--electric-cyan)", duration: 0.3 });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card.querySelector('.feature-electric-icon svg'), {
+                scale: 1, rotation: 0, duration: 0.3, ease: "power2.inOut"
+            });
+            gsap.to(card, { borderColor: "var(--glass-border)", duration: 0.3 });
+        });
+    });
 
     // 5. Form Logic (Maxify CRM Integration)
     const waitlistForm = document.getElementById('waitlist-form');
