@@ -222,6 +222,15 @@ h1, h2, h3 {
     line-height: 1.1;
 }
 
+.cursor {
+    color: var(--electric-cyan);
+    animation: blink 1s infinite step-end;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
 .hero-subtitle {
     font-size: 1.1rem;
     color: var(--text-muted);

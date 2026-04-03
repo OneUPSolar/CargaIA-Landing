@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
 
     // 4. GSAP Advanced Vectorized & Reveal Animations
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
     // Master Timeline for Loading & Initial Entrances
     const tl = gsap.timeline();
@@ -94,8 +94,38 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         duration: 1.2,
         stagger: 0.15,
-        ease: "power3.out"
+        ease: "power3.out",
+        onComplete: startTypewriter // Trigger typewriter when the hero entrance is finished!
     }, "-=0.8");
+
+    function startTypewriter() {
+        const engTitle = "Automated Energy Protocol Node Infrastructure.";
+        const spTitle = "Infraestructura de Nodo de Protocolo de Energía Automatizado.";
+        const engSub = "Engineering the decentralized global energy grid. CargaIA is the core settlement layer for the autonomous future.";
+        const spSub = "Ingeniería de la red energética global descentralizada. CargaIA es la capa de liquidación central para el futuro autónomo.";
+        
+        let typeTl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
+
+        // Phase 1: Erase English Title
+        typeTl.to("#type-title", { text: "", duration: 2, ease: "none", delay: 3 })
+        // Erase English Subtitle
+        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
+        
+        // Phase 2: Type Spanish Title
+        .to("#type-title", { text: spTitle, duration: 3, ease: "none" })
+        // Type Spanish Subtitle
+        .to("#type-subtitle", { text: spSub, duration: 3, ease: "none" }, "-=1.5")
+        
+        // Phase 3: Wait, then Erase Spanish Title
+        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 5 })
+        // Erase Spanish Subtitle
+        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
+        
+        // Phase 4: Type English Title (back to original)
+        .to("#type-title", { text: engTitle, duration: 3, ease: "none" })
+        // Type English Subtitle
+        .to("#type-subtitle", { text: engSub, duration: 3, ease: "none" }, "-=1.5");
+    }
 
     // Animated Flow SVG Line
     gsap.to("#data-flow-1", {
