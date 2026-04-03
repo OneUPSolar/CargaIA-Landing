@@ -106,25 +106,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let typeTl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
 
-        // Phase 1: Erase English Title
-        typeTl.to("#type-title", { text: "", duration: 2, ease: "none", delay: 3 })
-        // Erase English Subtitle
+        // Phase 1: Type English Title (First Impression)
+        typeTl.to("#type-title", { text: engTitle, duration: 3, ease: "none" })
+        // Type English Subtitle
+        .to("#type-subtitle", { text: engSub, duration: 3, ease: "none" }, "-=1.5")
+
+        // Phase 2: Wait, then Erase English
+        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 5 })
         .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
         
-        // Phase 2: Type Spanish Title
+        // Phase 3: Type Spanish
         .to("#type-title", { text: spTitle, duration: 3, ease: "none" })
-        // Type Spanish Subtitle
         .to("#type-subtitle", { text: spSub, duration: 3, ease: "none" }, "-=1.5")
         
-        // Phase 3: Wait, then Erase Spanish Title
+        // Phase 4: Wait, then Erase Spanish (ready to loop back to Phase 1)
         .to("#type-title", { text: "", duration: 2, ease: "none", delay: 5 })
-        // Erase Spanish Subtitle
-        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
-        
-        // Phase 4: Type English Title (back to original)
-        .to("#type-title", { text: engTitle, duration: 3, ease: "none" })
-        // Type English Subtitle
-        .to("#type-subtitle", { text: engSub, duration: 3, ease: "none" }, "-=1.5");
+        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5");
     }
 
     // Animated Flow SVG Line
