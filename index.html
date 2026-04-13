@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CargaIA | Autonomous Energy Protocol</title>
-    <meta name="description" content="Next-generation energy infrastructure for a decentralized future.">
+    <title>CargaIA | Safe EV Charging Infrastructure</title>
+    <meta name="description" content="Safety-first EV charging infrastructure and subscription platform for Mexico and cross-border markets.">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@200;300;400&family=Outfit:wght@100;200;300;400;600&display=swap" rel="stylesheet">
@@ -14,210 +13,428 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="crt-overlay crt-flicker"></div>
 
-    <!-- Breathtaking Loading Sequence Overlay -->
+    <!-- LOADER -->
     <div id="loader" class="loader-overlay">
         <div class="loader-scanline"></div>
-        
         <div class="loader-text">
             <span>C</span><span>A</span><span>R</span><span>G</span><span>A</span><span class="logo-accent">I</span><span class="logo-accent">A</span>
         </div>
-        
         <div class="loader-progress-container">
-            <div class="loader-bar-bg">
-                <div class="loader-bar-fill"></div>
-            </div>
-            <div class="loader-terminal mono">
-                <span id="term-text">[INITIALIZING_CORE_PROTOCOL...]</span>
-            </div>
+            <div class="loader-bar-bg"><div class="loader-bar-fill"></div></div>
+            <div class="loader-terminal mono"><span id="term-text">[INITIALIZING_INFRASTRUCTURE_SCAN...]</span></div>
         </div>
     </div>
 
-    <!-- High-Tech Infrastructure Layer -->
+    <!-- BACKGROUND LAYERS -->
     <div class="mesh-bg"></div>
     <div class="tech-infrastructure">
-        <!-- Scanning Beam -->
         <div class="scan-beam"></div>
-        
-        <!-- Energy Bus SVG -->
         <svg width="100%" height="100%" viewBox="0 0 1440 4000" fill="none" class="infra-svg">
-            <!-- Vertical Data Bus -->
             <path d="M718 0 V4000" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" />
             <path d="M720 0 V4000" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
             <path d="M722 0 V4000" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" />
-            
-            <!-- Horizontal Nodes -->
             <path d="M0 600 H1440" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 10" />
             <path d="M0 1600 H1440" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" stroke-dasharray="2 10" />
-            
-            <!-- Animated Flow -->
             <path id="data-flow-1" d="M720 0 V600 H1440" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-dasharray="100 2000" class="flow-line" filter="url(#glow)" />
-            
-            <defs>
-                <filter id="glow">
-                    <feGaussianBlur stdDeviation="2" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-            </defs>
+            <defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="blur" /><feComposite in="SourceGraphic" in2="blur" operator="over" /></filter></defs>
         </svg>
-
-        <!-- HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD HUD -->
         <div class="hud-container">
             <div class="hud-group top-left">
-                <div class="tech-label">[SYS_STATUS: ACTIVE]</div>
-                <div class="tech-label">[PROTOCOL_LOAD: 0xFD2]</div>
+                <div class="tech-label">[GRID_STATUS: MONITORING]</div>
+                <div class="tech-label">[LOAD_BALANCE: 0xFD2]</div>
             </div>
-            <div class="hud-group top-right">
-                <div class="tech-label">[LOAD_BALANCER_SYNC]</div>
-            </div>
-            <div class="hud-group bottom-right">
-                <div class="tech-label">[NODE_COORD: 19.432, -99.133]</div>
-            </div>
+            <div class="hud-group top-right"><div class="tech-label">[CFE_COMPLIANCE_SYNC]</div></div>
+            <div class="hud-group bottom-right"><div class="tech-label">[NODE_COORD: 32.514, -117.038]</div></div>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <header class="header">
         <div class="container nav-container">
-            <div class="logo">
-                <div class="logo-text">
-                    <span class="logo-name">CARGA</span><span class="logo-accent">IA</span>
-                </div>
-            </div>
+            <div class="logo"><div class="logo-text"><span class="logo-name">CARGA</span><span class="logo-accent">IA</span></div></div>
             <div class="nav-right">
                 <div class="sys-time mono" id="sys-clock">TIMESTAMP: 00:00:00</div>
-                <a href="#waitlist" class="btn-outline">AUTH_PREORDER</a>
+                <a href="#waitlist" class="btn-outline">EARLY_ACCESS</a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- Hero: Fintech High-Tech -->
-        <section class="hero">
-            <div class="container">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 1 — HERO                             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="hero layer" id="layer1">
+            <div class="container hero-split">
                 <div class="hero-content reveal">
+                    <div class="layer-tag mono">[01] MISSION</div>
                     <h1 class="hero-title"><span id="type-title"></span><span class="cursor">_</span></h1>
                     <p class="hero-subtitle" id="type-subtitle"></p>
                     
                     <div id="waitlist" class="hero-form">
                         <div class="form-header">
-                            <span class="mono">[NETWORK_ACCESS_REQUEST]</span>
+                            <span class="mono">[EARLY_ACCESS_REQUEST]</span>
                             <div class="corner-brackets"></div>
                         </div>
                         <form id="waitlist-form">
                             <div class="input-group">
                                 <label class="mono-label">IDENT_ID</label>
-                                <input type="text" id="name" placeholder="FULL_LEGAL_NAME" required>
+                                <input type="text" id="name" placeholder="NOMBRE_COMPLETO" required>
                             </div>
                             <div class="input-group">
                                 <label class="mono-label">COM_UPLINK</label>
-                                <input type="email" id="email" placeholder="SECURE_EMAIL_ENDPOINT" required>
+                                <input type="email" id="email" placeholder="CORREO_ELECTRONICO" required>
                             </div>
-                            <button type="submit" class="btn-gold">INITIATE_UPLINK</button>
+                            <div class="input-group">
+                                <label class="mono-label">REGION</label>
+                                <select id="region" style="background:transparent;border:none;border-bottom:0.5px solid var(--glass-border);padding:1rem 0;color:#fff;width:100%;font-size:0.9rem;font-family:var(--font-mono);appearance:none;">
+                                    <option value="tijuana" style="background:#000;">Tijuana</option>
+                                    <option value="mexicali" style="background:#000;">Mexicali</option>
+                                    <option value="juarez" style="background:#000;">Ciudad Juárez</option>
+                                    <option value="nogales" style="background:#000;">Nogales</option>
+                                    <option value="reynosa" style="background:#000;">Reynosa</option>
+                                    <option value="other_mx" style="background:#000;">Otra Ciudad (MX)</option>
+                                    <option value="us_border" style="background:#000;">U.S. Border City</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-gold">RESERVAR_ACCESO</button>
                         </form>
                         <div id="form-success" class="form-success-msg hidden">
-                            <p class="mono">[LINK_STABLISHED] UPLINK_SUCCESSFUL.</p>
+                            <p class="mono">[LINK_ESTABLISHED] ACCESO_RESERVADO.</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Fintech Metrics (Countdown Replacement) -->
-                    <div class="metrics-grid reveal">
-                        <div class="metric-item">
-                            <div class="metric-val mono" id="days">00</div>
-                            <div class="metric-lab">PROTOCOL_ETA_D</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-val mono" id="hours">00</div>
-                            <div class="metric-lab">UPLINK_SYNC_H</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-val mono" id="minutes">00</div>
-                            <div class="metric-lab">BUFFER_ZONE_M</div>
-                        </div>
-                    </div>
+                <!-- Hero Vector Illustration -->
+                <div class="hero-illustration">
+                    <svg viewBox="0 0 440 480" fill="none" class="hero-svg" id="heroSvg">
+                        <defs>
+                            <filter id="glow-cyan"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+                            <linearGradient id="cable-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00f2ff" stop-opacity="0.8"/><stop offset="100%" stop-color="#00f2ff" stop-opacity="0.2"/></linearGradient>
+                        </defs>
+                        <!-- Charger Station Body -->
+                        <rect class="draw-on" x="170" y="80" width="100" height="240" rx="8" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                        <rect class="draw-on" x="185" y="100" width="70" height="50" rx="4" stroke="var(--electric-cyan)" stroke-width="0.8" filter="url(#glow-cyan)"/>
+                        <!-- Screen Indicator -->
+                        <rect class="draw-on" x="200" y="112" width="40" height="6" rx="2" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.6"/>
+                        <rect class="draw-on" x="200" y="124" width="28" height="4" rx="1" stroke="var(--electric-cyan)" stroke-width="0.4" opacity="0.4"/>
+                        <!-- Lightning Bolt (centered) -->
+                        <path class="draw-on" d="M215 170 L208 195 L218 195 L210 220" stroke="var(--electric-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-cyan)"/>
+                        <!-- Cable -->
+                        <path class="draw-on" d="M220 320 C220 360 260 370 280 390 C300 410 310 430 310 445" stroke="url(#cable-grad)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <!-- Plug connector -->
+                        <rect class="draw-on" x="302" y="445" width="16" height="24" rx="4" stroke="var(--electric-cyan)" stroke-width="1"/>
+                        <line class="draw-on" x1="308" y1="450" x2="308" y2="460" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <line class="draw-on" x1="312" y1="450" x2="312" y2="460" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <!-- Data lines on charger -->
+                        <line class="draw-on" x1="185" y1="260" x2="270" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                        <line class="draw-on" x1="185" y1="270" x2="255" y2="270" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                        <line class="draw-on" x1="185" y1="280" x2="240" y2="280" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                        <!-- Energy rings -->
+                        <circle cx="220" cy="200" r="50" stroke="var(--electric-cyan)" stroke-width="0.3" opacity="0.15" class="energy-ring"/>
+                        <circle cx="220" cy="200" r="75" stroke="var(--electric-cyan)" stroke-width="0.2" opacity="0.08" class="energy-ring r2"/>
+                        <circle cx="220" cy="200" r="100" stroke="var(--electric-cyan)" stroke-width="0.15" opacity="0.04" class="energy-ring r3"/>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Vision -->
-        <section class="tech-hub">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- COUNTDOWN — LAUNCH TIMER                   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="countdown-section" id="countdown-section">
             <div class="container">
-                <h2 class="section-title">Global <em>Energy Topology.</em></h2>
+                <div class="countdown-label mono">[PHASE_1_LAUNCH // TIJUANA_MX]</div>
+                <div class="countdown-grid" id="countdown">
+                    <div class="countdown-unit">
+                        <span class="countdown-val" id="cd-days">00</span>
+                        <span class="countdown-lab">DAYS</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <span class="countdown-val" id="cd-hours">00</span>
+                        <span class="countdown-lab">HOURS</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <span class="countdown-val" id="cd-mins">00</span>
+                        <span class="countdown-lab">MINUTES</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <span class="countdown-val" id="cd-secs">00</span>
+                        <span class="countdown-lab">SECONDS</span>
+                    </div>
+                </div>
+                <div class="countdown-sub mono">UNTIL_INFRASTRUCTURE_DEPLOYMENT</div>
+            </div>
+        </section>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 2 — THE PROBLEM                      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="layer layer-problem" id="layer2">
+            <div class="layer-gradient layer-gradient-danger"></div>
+            <div class="container">
+                <div class="layer-tag mono">[02] THE PROBLEM</div>
+                <h2 class="section-title">Infrastructure <em>Failure.</em></h2>
+                <p class="section-intro">
+                    EV adoption is outpacing electrical infrastructure across Mexico. Unsafe, unpermitted charger 
+                    installations are melting meter cans, overloading panels, and creating real property damage. 
+                    CargaIA exists to eliminate that chaos.
+                </p>
+
+                <!-- Danger vs Safe Vector -->
+                <div class="section-illustration">
+                    <svg viewBox="0 0 700 260" fill="none" class="section-svg">
+                        <defs>
+                            <filter id="glow-red"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+                            <filter id="glow-green"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+                        </defs>
+                        <!-- LEFT: Unsafe Panel -->
+                        <text x="120" y="20" fill="#ff4444" font-size="11" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em" opacity="0.7">UNPERMITTED</text>
+                        <rect class="draw-on" x="60" y="35" width="120" height="190" rx="4" stroke="#ff4444" stroke-width="0.8" opacity="0.5"/>
+                        <!-- Tangled wires -->
+                        <path class="draw-on" d="M80 70 Q95 60 110 75 Q125 90 140 80" stroke="#ff4444" stroke-width="0.8" opacity="0.6"/>
+                        <path class="draw-on" d="M80 90 Q100 80 105 100 Q110 120 130 105" stroke="#ff6644" stroke-width="0.7" opacity="0.5"/>
+                        <path class="draw-on" d="M85 120 Q105 110 115 130 Q125 150 145 135" stroke="#ff4444" stroke-width="0.6" opacity="0.4"/>
+                        <!-- Overloaded breakers -->
+                        <rect class="draw-on" x="75" y="150" width="30" height="8" rx="1" stroke="#ff4444" stroke-width="0.8"/>
+                        <rect class="draw-on" x="75" y="165" width="30" height="8" rx="1" stroke="#ff6644" stroke-width="0.8"/>
+                        <rect class="draw-on" x="135" y="150" width="30" height="8" rx="1" stroke="#ff4444" stroke-width="0.8"/>
+                        <rect class="draw-on" x="135" y="165" width="30" height="8" rx="1" stroke="#ff6644" stroke-width="0.8"/>
+                        <!-- Spark / warning -->
+                        <path class="draw-on" d="M115 195 L120 185 L125 195" stroke="#ff4444" stroke-width="1.5" filter="url(#glow-red)"/>
+                        <line class="draw-on" x1="120" y1="199" x2="120" y2="202" stroke="#ff4444" stroke-width="1.5"/>
+                        <!-- Meter overload -->
+                        <circle class="draw-on" cx="120" cy="55" r="12" stroke="#ff4444" stroke-width="0.8" opacity="0.4"/>
+                        <line class="draw-on" x1="120" y1="55" x2="128" y2="48" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
+
+                        <!-- CENTER: Arrow -->
+                        <line class="draw-on" x1="220" y1="130" x2="320" y2="130" stroke="var(--electric-cyan)" stroke-width="0.5" stroke-dasharray="6 6" opacity="0.4"/>
+                        <path class="draw-on" d="M315 124 L325 130 L315 136" stroke="var(--electric-cyan)" stroke-width="1" opacity="0.6"/>
+                        <text x="270" y="118" fill="var(--electric-cyan)" font-size="8" font-family="var(--font-mono)" text-anchor="middle" opacity="0.3">CargaIA</text>
+
+                        <!-- RIGHT: Compliant Panel -->
+                        <text x="470" y="20" fill="#00ff88" font-size="11" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em" opacity="0.7">COMPLIANT</text>
+                        <rect class="draw-on" x="410" y="35" width="120" height="190" rx="4" stroke="var(--electric-cyan)" stroke-width="0.8" opacity="0.6"/>
+                        <!-- Clean organized wires -->
+                        <line class="draw-on" x1="425" y1="70" x2="425" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
+                        <line class="draw-on" x1="445" y1="70" x2="445" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
+                        <line class="draw-on" x1="495" y1="70" x2="495" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
+                        <line class="draw-on" x1="515" y1="70" x2="515" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
+                        <!-- Clean breakers -->
+                        <rect class="draw-on" x="425" y="80" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <rect class="draw-on" x="425" y="95" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <rect class="draw-on" x="425" y="110" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <rect class="draw-on" x="485" y="80" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <rect class="draw-on" x="485" y="95" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <rect class="draw-on" x="485" y="110" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
+                        <!-- Smart meter -->
+                        <circle class="draw-on" cx="470" cy="55" r="12" stroke="var(--electric-cyan)" stroke-width="0.8" opacity="0.5"/>
+                        <circle class="draw-on" cx="470" cy="55" r="4" stroke="#00ff88" stroke-width="0.8" opacity="0.6"/>
+                        <!-- Checkmark -->
+                        <path class="draw-on" d="M455 195 L465 205 L490 180" stroke="#00ff88" stroke-width="2" stroke-linecap="round" filter="url(#glow-green)"/>
+                    </svg>
+                </div>
+
                 <div class="spec-grid">
                     <div class="spec-item">
-                        <div class="spec-meta mono">[TH_CAP_SYS]</div>
+                        <div class="spec-meta mono">[RISK_THERMAL]</div>
                         <span class="spec-val">60A</span>
-                        <span class="spec-lab">THERMAL_THRESHOLD</span>
+                        <span class="spec-lab">UNMANAGED_LOAD_PER_CHARGER</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[RT_REACT]</div>
-                        <span class="spec-val">0.1ms</span>
-                        <span class="spec-lab">SYNCHRONIZATION_DELAY</span>
+                        <div class="spec-meta mono">[FAIL_RATE]</div>
+                        <span class="spec-val">73%</span>
+                        <span class="spec-lab">INSTALLS_WITHOUT_PERMITS</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[ENC_LAYER]</div>
-                        <span class="spec-val">AES-4k</span>
-                        <span class="spec-lab">END_TO_END_ENCRYPTION</span>
+                        <div class="spec-meta mono">[RISK_COST]</div>
+                        <span class="spec-val">$5K+</span>
+                        <span class="spec-lab">AVG_DAMAGE_FROM_BAD_INSTALL</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[NET_LINK]</div>
-                        <span class="spec-val">M-IoT</span>
-                        <span class="spec-lab">NEURAL_GRID_PROTOCOL</span>
+                        <div class="spec-meta mono">[GRID_STRAIN]</div>
+                        <span class="spec-val">CFE</span>
+                        <span class="spec-lab">ZERO_UTILITY_COORDINATION</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container grid-3">
-                <div class="feature-card reveal">
-                    <div class="feature-electric-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
-                        </svg>
-                    </div>
-                    <h3>UNIVERSAL_HARDWARE</h3>
-                    <p>Interoperable bridge protocol designed for standard and rapid DC infrastructure.</p>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 3 — HOW IT WORKS                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="layer layer-solution" id="layer3">
+            <div class="layer-gradient layer-gradient-cyan"></div>
+            <div class="container">
+                <div class="layer-tag mono">[03] THE SOLUTION</div>
+                <h2 class="section-title">How CargaIA <em>Works.</em></h2>
+                <p class="section-intro">
+                    From site qualification to managed service — one platform handles the entire lifecycle 
+                    of your EV charging infrastructure.
+                </p>
+
+                <!-- Process Flow Vector -->
+                <div class="section-illustration">
+                    <svg viewBox="0 0 750 160" fill="none" class="section-svg">
+                        <defs><filter id="glow-step"><feGaussianBlur stdDeviation="2" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
+                        <!-- Step 1: Qualify -->
+                        <circle class="draw-on" cx="100" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <path class="draw-on" d="M88 70 L96 78 L112 62" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-linecap="round" filter="url(#glow-step)"/>
+                        <text x="100" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">QUALIFY</text>
+                        <!-- Connector 1→2 -->
+                        <line class="draw-on" x1="136" y1="70" x2="218" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
+                        <!-- Step 2: Design -->
+                        <circle class="draw-on" cx="250" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <rect class="draw-on" x="237" y="57" width="26" height="20" rx="2" stroke="var(--electric-cyan)" stroke-width="1" filter="url(#glow-step)"/>
+                        <line class="draw-on" x1="237" y1="64" x2="263" y2="64" stroke="var(--electric-cyan)" stroke-width="0.6"/>
+                        <text x="250" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">DESIGN</text>
+                        <!-- Connector 2→3 -->
+                        <line class="draw-on" x1="286" y1="70" x2="368" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
+                        <!-- Step 3: Install -->
+                        <circle class="draw-on" cx="400" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <path class="draw-on" d="M396 55 L390 72 L398 72 L392 88" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-step)"/>
+                        <text x="400" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">INSTALL</text>
+                        <!-- Connector 3→4 -->
+                        <line class="draw-on" x1="436" y1="70" x2="518" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
+                        <!-- Step 4: Manage -->
+                        <circle class="draw-on" cx="550" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
+                        <circle class="draw-on" cx="550" cy="70" r="10" stroke="var(--electric-cyan)" stroke-width="0.8" filter="url(#glow-step)"/>
+                        <path class="draw-on" d="M540 70 L550 70 M550 60 L550 70" stroke="var(--electric-cyan)" stroke-width="1.2" stroke-linecap="round"/>
+                        <text x="550" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">MANAGE</text>
+                    </svg>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-electric-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
+
+                <div class="grid-3">
+                    <div class="feature-card reveal">
+                        <div class="feature-electric-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <path d="M9 12l2 2 4-4" /><rect x="3" y="3" width="18" height="18" rx="2" />
+                            </svg>
+                        </div>
+                        <h3>COMPLIANT_INFRASTRUCTURE</h3>
+                        <p>Code-conscious installation pathways with automated design, permitting, and CFE utility-submission workflows. Every install meets NOM/NEC standards.</p>
                     </div>
-                    <h3>VAL_SETTLEMENT</h3>
-                    <p>Sub-second value transfer within the CargaIA distributed ledger network.</p>
+                    <div class="feature-card reveal">
+                        <div class="feature-electric-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3>SUBSCRIPTION_MODEL</h3>
+                        <p>Hardware, installation, activation, monitoring, and maintenance — bundled into a single monthly subscription. No surprise costs.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="feature-electric-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <circle cx="12" cy="12" r="3" /><path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
+                            </svg>
+                        </div>
+                        <h3>SMART_ENERGY</h3>
+                        <p>Optional solar, batteries, smart meters, and controlled charging. Intelligent load management that protects your property and the grid.</p>
+                    </div>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-electric-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 4 — WHO WE SERVE                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="layer layer-audience" id="layer4">
+            <div class="layer-gradient layer-gradient-indigo"></div>
+            <div class="container">
+                <div class="layer-tag mono">[04] MARKET</div>
+                <h2 class="section-title">Who We <em>Serve.</em></h2>
+                <div class="audience-grid">
+                    <div class="audience-card reveal">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
+                            <path d="M6 42V20L24 6L42 20V42H30V30H18V42Z"/>
                         </svg>
+                        <h3>Homeowners</h3>
+                        <p>Safe home charging and EV readiness. Protect your property with compliant infrastructure.</p>
                     </div>
-                    <h3>GRID_AUTONOMY</h3>
-                    <p>Predictive AI modeling for peak energy load balancing and node optimization.</p>
+                    <div class="audience-card reveal">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
+                            <rect x="6" y="14" width="36" height="28" rx="2"/><path d="M6 22H42M18 6v8M30 6v8"/>
+                        </svg>
+                        <h3>Businesses</h3>
+                        <p>Charging as an amenity and revenue source. Modernize your property with managed infrastructure.</p>
+                    </div>
+                    <div class="audience-card reveal">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
+                            <path d="M20 6L8 42H18L24 24L30 42H40L28 6Z"/>
+                        </svg>
+                        <h3>Installers</h3>
+                        <p>Join the certified network. Verified standards, inspection workflows, and guaranteed payouts.</p>
+                    </div>
+                    <div class="audience-card reveal">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
+                            <path d="M24 6v36M12 18l12-12 12 12M12 30l12 12 12-12"/>
+                        </svg>
+                        <h3>Investors</h3>
+                        <p>Category-defining infrastructure play with recurring revenue, cross-border expansion, and defensible technology.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- CTA — PRE-REGISTRATION                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="cta-section" id="cta">
+            <div class="container cta-container">
+                <div class="cta-content">
+                    <div class="layer-tag mono">[05] PRE-REGISTRO</div>
+                    <h2 class="cta-title">Reserva tu lugar<br>en la <em>infraestructura del futuro.</em></h2>
+                    <p class="cta-sub">Sé de los primeros en obtener carga EV segura, certificada, y gestionada. Sin costo de registro. Sin compromiso.</p>
+                </div>
+                <div class="cta-form-wrap">
+                    <form id="cta-form">
+                        <div class="cta-input-row">
+                            <input type="text" id="cta-name" placeholder="Nombre completo" required class="cta-input">
+                            <input type="email" id="cta-email" placeholder="Correo electrónico" required class="cta-input">
+                        </div>
+                        <div class="cta-input-row">
+                            <select id="cta-region" class="cta-input cta-select">
+                                <option value="tijuana">Tijuana</option>
+                                <option value="mexicali">Mexicali</option>
+                                <option value="juarez">Ciudad Juárez</option>
+                                <option value="nogales">Nogales</option>
+                                <option value="reynosa">Reynosa</option>
+                                <option value="other_mx">Otra Ciudad (MX)</option>
+                                <option value="us_border">U.S. Border City</option>
+                            </select>
+                            <select id="cta-type" class="cta-input cta-select">
+                                <option value="homeowner">Hogar / Casa</option>
+                                <option value="business">Negocio / Comercial</option>
+                                <option value="installer">Instalador</option>
+                                <option value="investor">Inversionista</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="cta-btn">REGISTRARME AL PROGRAMA →</button>
+                    </form>
+                    <div id="cta-success" class="cta-success hidden">
+                        <p>✓ Registro exitoso. Te contactaremos antes del lanzamiento.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content mono">
-                [SYSTEM_MANIFESTO] CARGAIA CORE Protocol v1.4.2 // (c) 2026 Maxify Inc.
-            </div>
+            <div class="footer-content mono">[SYSTEM_CORE] CARGAIA Infrastructure Platform v1.0 // (c) 2026 Maxify Inc.</div>
             <div class="footer-links">
-                <a href="#">ENDPOINT_PRIVACY</a>
-                <a href="#">SERVICE_PROTOCOL</a>
-                <a href="#">NETWORK_HEALTH</a>
+                <a href="#">PRIVACY</a>
+                <a href="#">TERMS</a>
+                <a href="#">CONTACT</a>
             </div>
         </div>
     </footer>
 
-    <!-- GSAP for advanced vectorized animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>

@@ -10,41 +10,60 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateClock, 1000);
     updateClock();
 
+    // 1b. Countdown Timer — Phase 1 Launch
+    const LAUNCH_DATE = new Date('2026-06-06T00:00:00-07:00').getTime();
+    function updateCountdown() {
+        const now = Date.now();
+        const diff = Math.max(0, LAUNCH_DATE - now);
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('cd-days').textContent = pad(d);
+        document.getElementById('cd-hours').textContent = pad(h);
+        document.getElementById('cd-mins').textContent = pad(m);
+        document.getElementById('cd-secs').textContent = pad(s);
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
     // 2. Random Data Simulation for Tech Labels
     const techLabels = document.querySelectorAll('.tech-label');
     function updateTechLabels() {
         techLabels.forEach(label => {
-            if (label.textContent.includes('PROTOCOL_LOAD')) {
+            if (label.textContent.includes('LOAD_BALANCE')) {
                 const hex = Math.floor(Math.random() * 4096).toString(16).toUpperCase().padStart(3, '0');
-                label.textContent = `[PROTOCOL_LOAD: 0x${hex}]`;
+                label.textContent = `[LOAD_BALANCE: 0x${hex}]`;
+            }
+            
+            // Subtle random glitch
+            if (Math.random() > 0.95) {
+                label.classList.add('glitch-text');
+                label.setAttribute('data-text', label.textContent);
+                setTimeout(() => label.classList.remove('glitch-text'), 500);
             }
         });
     }
-    setInterval(updateTechLabels, 3000);
+    setInterval(updateTechLabels, 2000);
 
-    // 3. Countdown Logic (Fintech Metrics)
-    // Target date: June 6, 2026
-    const targetDate = new Date('June 6, 2026 00:00:00').getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            document.querySelector('.metrics-grid').innerHTML = '<div class="mono">[PROTOCOL_LIVE]</div>';
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-        document.getElementById('days').textContent = days.toString().padStart(2, '0');
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    // 3. Animated Key Metrics (ScrollTrigger reveal)
+    function animateMetric(id, target, suffix, duration) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const counter = { val: 0 };
+        gsap.to(counter, {
+            val: target,
+            duration: duration,
+            ease: "power2.out",
+            snap: { val: 1 },
+            scrollTrigger: { trigger: ".metrics-grid", start: "top 90%" },
+            onUpdate: () => { el.textContent = Math.round(counter.val) + (suffix || ''); }
+        });
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    animateMetric('metric-danger', 73, '%', 2);
+    animateMetric('metric-cities', 6, '', 2.5);
+    animateMetric('metric-savings', 40, '%', 3);
 
     // 4. GSAP Advanced Vectorized & Reveal Animations
     gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -68,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, "<")
     // Terminal text sequence & Progress Bar
     .to(".loader-bar-fill", { width: "30%", duration: 0.8, ease: "power2.out" }, "-=2.5")
-    .to("#term-text", { text: "[ESTABLISHING_DECENTRALIZED_UPLINK...]", duration: 0.5 }, "-=1.8")
+    .to("#term-text", { text: "[SCANNING_GRID_INFRASTRUCTURE...]", duration: 0.5 }, "-=1.8")
     .to(".loader-bar-fill", { width: "80%", duration: 1, ease: "power2.inOut" }, "-=1")
-    .to("#term-text", { text: "[SYSTEM_ONLINE_&_READY]", duration: 0.5 }, "-=0.3")
+    .to("#term-text", { text: "[INFRASTRUCTURE_READY]", duration: 0.5 }, "-=0.3")
     .to(".loader-bar-fill", { width: "100%", duration: 0.3, ease: "power2.in" })
     
     // Flash explosion of text before hiding overlay
@@ -116,29 +135,54 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 1.2,
         stagger: 0.15,
         ease: "power3.out",
-        onComplete: startTypewriter // Trigger typewriter when the hero entrance is finished!
-    }, "-=0.8");
+        onComplete: startTypewriter
+    }, "-=0.8")
+    // Hero SVG Draw-on
+    .to("#heroSvg .draw-on", {
+        strokeDashoffset: 0,
+        duration: 1.8,
+        stagger: 0.06,
+        ease: "power2.inOut"
+    }, "-=1.2");
 
     function startTypewriter() {
-        const engTitle = "Automated Energy Protocol Node Infrastructure.";
-        const spTitle = "Infraestructura de Nodo de Protocolo de Energía Automatizado.";
-        const engSub = "Engineering the decentralized global energy grid. CargaIA is the core settlement layer for the autonomous future.";
-        const spSub = "Ingeniería de la red energética global descentralizada. CargaIA es la capa de liquidación central para el futuro autónomo.";
+        const engTitle = "Charging an EV should not melt your meter.";
+        const spTitle = "Cargar un EV no debería derretir tu medidor.";
+        const engSub = "Safe EV charging starts with real infrastructure. CargaIA deploys compliant, managed charging for homes and businesses across Mexico.";
+        const spSub = "La carga segura de EVs comienza con infraestructura real. CargaIA instala carga gestionada y certificada para hogares y negocios en todo México.";
         
-        let typeTl = gsap.timeline(); // Remove repeating loop
-
-        // Phase 1: Type English Title (First Impression)
-        typeTl.to("#type-title", { text: engTitle, duration: 3, ease: "none" })
-        // Type English Subtitle
-        .to("#type-subtitle", { text: engSub, duration: 3, ease: "none" }, "-=1.5")
-
-        // Phase 2: Wait, then Erase English
-        .to("#type-title", { text: "", duration: 2, ease: "none", delay: 4 })
-        .to("#type-subtitle", { text: "", duration: 2, ease: "none" }, "-=1.5")
+        const titleEl = document.getElementById('type-title');
+        const subEl = document.getElementById('type-subtitle');
         
-        // Phase 3: Type Spanish and keep it there forever
-        .to("#type-title", { text: spTitle, duration: 3, ease: "none" })
-        .to("#type-subtitle", { text: spSub, duration: 3, ease: "none" }, "-=1.5");
+        let typeTl = gsap.timeline();
+
+        // Phase 1: Type English Title (Snappier)
+        typeTl.to(titleEl, { text: engTitle, duration: 1.5, ease: "none" })
+        .to(subEl, { text: engSub, duration: 2, ease: "none" }, "-=0.5")
+
+        // Phase 2: Glitch Transition
+        .to([titleEl, subEl], { 
+            onStart: () => {
+                titleEl.classList.add('glitch-text');
+                titleEl.setAttribute('data-text', engTitle);
+                subEl.classList.add('glitch-text');
+                subEl.setAttribute('data-text', engSub);
+            },
+            delay: 3,
+            duration: 0.5
+        })
+        .set([titleEl, subEl], { text: "" })
+        .to([titleEl, subEl], { 
+            onStart: () => {
+                titleEl.classList.remove('glitch-text');
+                subEl.classList.remove('glitch-text');
+            },
+            duration: 0.1
+        })
+        
+        // Phase 3: Type Spanish
+        .to(titleEl, { text: spTitle, duration: 1.5, ease: "none" })
+        .to(subEl, { text: spSub, duration: 2, ease: "none" }, "-=0.5");
     }
 
     // Animated Flow SVG Line
@@ -200,6 +244,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // SVG Draw-on for Danger section
+    document.querySelectorAll('#layer2 .draw-on').forEach((el, i) => {
+        gsap.to(el, {
+            scrollTrigger: { trigger: '#layer2 .section-illustration', start: 'top 80%' },
+            strokeDashoffset: 0,
+            duration: 1.2,
+            delay: i * 0.04,
+            ease: 'power2.inOut'
+        });
+    });
+
+    // SVG Draw-on for Flow process section
+    document.querySelectorAll('#layer3 .draw-on').forEach((el, i) => {
+        gsap.to(el, {
+            scrollTrigger: { trigger: '#layer3 .section-illustration', start: 'top 80%' },
+            strokeDashoffset: 0,
+            duration: 1,
+            delay: i * 0.06,
+            ease: 'power2.inOut'
+        });
+    });
+
+    // Audience Cards Reveal
+    document.querySelectorAll('.audience-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: { trigger: '.audience-grid', start: 'top 85%' },
+            y: 60, opacity: 0, scale: 0.95,
+            duration: 0.8, delay: i * 0.12,
+            ease: 'back.out(1.4)'
+        });
+    });
+
+    // Layer Tags Fade-in
+    document.querySelectorAll('.layer-tag').forEach(tag => {
+        gsap.from(tag, {
+            scrollTrigger: { trigger: tag, start: 'top 90%' },
+            x: -30, opacity: 0, duration: 0.8, ease: 'power3.out'
+        });
+    });
+
+    // Section Intro Text Fade
+    document.querySelectorAll('.section-intro').forEach(intro => {
+        gsap.from(intro, {
+            scrollTrigger: { trigger: intro, start: 'top 85%' },
+            y: 20, opacity: 0, duration: 1, ease: 'power3.out'
+        });
+    });
     // 5. Form Logic (Maxify CRM Integration)
     const waitlistForm = document.getElementById('waitlist-form');
     const formSuccess = document.getElementById('form-success');
@@ -216,7 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = {
                 firstName: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                tags: ['cargaia', 'fintech_v1', 'preorder_alpha'],
+                region: document.getElementById('region')?.value || 'tijuana',
+                tags: ['cargaia', 'ev_charging', 'early_access'],
                 source: 'CargaIA Landing'
             };
 
@@ -238,6 +330,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'RETRY_CONNECT';
                 submitBtn.disabled = false;
                 alert('Connection failure. Please retry the uplink.');
+            }
+        });
+    }
+
+    // 6. CTA Form Logic (Pre-Registration)
+    const ctaForm = document.getElementById('cta-form');
+    const ctaSuccess = document.getElementById('cta-success');
+
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = ctaForm.querySelector('button');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = 'PROCESANDO...';
+            submitBtn.disabled = true;
+
+            const formData = {
+                firstName: document.getElementById('cta-name').value,
+                email: document.getElementById('cta-email').value,
+                region: document.getElementById('cta-region')?.value || 'tijuana',
+                type: document.getElementById('cta-type')?.value || 'homeowner',
+                tags: ['cargaia', 'ev_charging', 'pre_registro', 'program_launch'],
+                source: 'CargaIA Landing CTA'
+            };
+
+            try {
+                const response = await fetch('https://www.gomaxify.com/api/v1/contacts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    ctaForm.classList.add('hidden');
+                    ctaSuccess.classList.remove('hidden');
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (error) {
+                console.error('CTA submit error:', error);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                alert('Error al registrar. Por favor intenta de nuevo.');
             }
         });
     }
