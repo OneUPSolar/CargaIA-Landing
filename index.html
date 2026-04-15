@@ -145,29 +145,29 @@
         <!-- ═══════════════════════════════════════════ -->
         <section class="countdown-section" id="countdown-section">
             <div class="container">
-                <div class="countdown-label mono">[PHASE_1_LAUNCH // TIJUANA_MX]</div>
+                <div class="countdown-label mono">[FASE_1 // TIJUANA_MX]</div>
                 <div class="countdown-grid" id="countdown">
                     <div class="countdown-unit">
                         <span class="countdown-val" id="cd-days">00</span>
-                        <span class="countdown-lab">DAYS</span>
+                        <span class="countdown-lab">DÍAS</span>
                     </div>
                     <div class="countdown-sep">:</div>
                     <div class="countdown-unit">
                         <span class="countdown-val" id="cd-hours">00</span>
-                        <span class="countdown-lab">HOURS</span>
+                        <span class="countdown-lab">HORAS</span>
                     </div>
                     <div class="countdown-sep">:</div>
                     <div class="countdown-unit">
                         <span class="countdown-val" id="cd-mins">00</span>
-                        <span class="countdown-lab">MINUTES</span>
+                        <span class="countdown-lab">MINUTOS</span>
                     </div>
                     <div class="countdown-sep">:</div>
                     <div class="countdown-unit">
                         <span class="countdown-val" id="cd-secs">00</span>
-                        <span class="countdown-lab">SECONDS</span>
+                        <span class="countdown-lab">SEGUNDOS</span>
                     </div>
                 </div>
-                <div class="countdown-sub mono">UNTIL_INFRASTRUCTURE_DEPLOYMENT</div>
+                <div class="countdown-sub mono">DESPLIEGUE_DE_INFRAESTRUCTURA</div>
             </div>
         </section>
         <!-- ═══════════════════════════════════════════ -->
@@ -176,88 +176,71 @@
         <section class="layer layer-problem" id="layer2">
             <div class="layer-gradient layer-gradient-danger"></div>
             <div class="container">
-                <div class="layer-tag mono">[02] THE PROBLEM</div>
-                <h2 class="section-title">Infrastructure <em>Failure.</em></h2>
-                <p class="section-intro">
-                    EV adoption is outpacing electrical infrastructure across Mexico. Unsafe, unpermitted charger 
-                    installations are melting meter cans, overloading panels, and creating real property damage. 
-                    CargaIA exists to eliminate that chaos.
-                </p>
+                <div class="layer-tag mono">[02] EL PROBLEMA</div>
+                <h2 class="section-title" id="title-problem"><span></span><span class="cursor">_</span></h2>
+                <p class="section-intro" id="intro-problem"></p>
 
-                <!-- Danger vs Safe Vector -->
-                <div class="section-illustration">
-                    <svg viewBox="0 0 700 260" fill="none" class="section-svg">
-                        <defs>
-                            <filter id="glow-red"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-                            <filter id="glow-green"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-                        </defs>
-                        <!-- LEFT: Unsafe Panel -->
-                        <text x="120" y="20" fill="#ff4444" font-size="11" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em" opacity="0.7">UNPERMITTED</text>
-                        <rect class="draw-on" x="60" y="35" width="120" height="190" rx="4" stroke="#ff4444" stroke-width="0.8" opacity="0.5"/>
-                        <!-- Tangled wires -->
-                        <path class="draw-on" d="M80 70 Q95 60 110 75 Q125 90 140 80" stroke="#ff4444" stroke-width="0.8" opacity="0.6"/>
-                        <path class="draw-on" d="M80 90 Q100 80 105 100 Q110 120 130 105" stroke="#ff6644" stroke-width="0.7" opacity="0.5"/>
-                        <path class="draw-on" d="M85 120 Q105 110 115 130 Q125 150 145 135" stroke="#ff4444" stroke-width="0.6" opacity="0.4"/>
-                        <!-- Overloaded breakers -->
-                        <rect class="draw-on" x="75" y="150" width="30" height="8" rx="1" stroke="#ff4444" stroke-width="0.8"/>
-                        <rect class="draw-on" x="75" y="165" width="30" height="8" rx="1" stroke="#ff6644" stroke-width="0.8"/>
-                        <rect class="draw-on" x="135" y="150" width="30" height="8" rx="1" stroke="#ff4444" stroke-width="0.8"/>
-                        <rect class="draw-on" x="135" y="165" width="30" height="8" rx="1" stroke="#ff6644" stroke-width="0.8"/>
-                        <!-- Spark / warning -->
-                        <path class="draw-on" d="M115 195 L120 185 L125 195" stroke="#ff4444" stroke-width="1.5" filter="url(#glow-red)"/>
-                        <line class="draw-on" x1="120" y1="199" x2="120" y2="202" stroke="#ff4444" stroke-width="1.5"/>
-                        <!-- Meter overload -->
-                        <circle class="draw-on" cx="120" cy="55" r="12" stroke="#ff4444" stroke-width="0.8" opacity="0.4"/>
-                        <line class="draw-on" x1="120" y1="55" x2="128" y2="48" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
-
-                        <!-- CENTER: Arrow -->
-                        <line class="draw-on" x1="220" y1="130" x2="320" y2="130" stroke="var(--electric-cyan)" stroke-width="0.5" stroke-dasharray="6 6" opacity="0.4"/>
-                        <path class="draw-on" d="M315 124 L325 130 L315 136" stroke="var(--electric-cyan)" stroke-width="1" opacity="0.6"/>
-                        <text x="270" y="118" fill="var(--electric-cyan)" font-size="8" font-family="var(--font-mono)" text-anchor="middle" opacity="0.3">CargaIA</text>
-
-                        <!-- RIGHT: Compliant Panel -->
-                        <text x="470" y="20" fill="#00ff88" font-size="11" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em" opacity="0.7">COMPLIANT</text>
-                        <rect class="draw-on" x="410" y="35" width="120" height="190" rx="4" stroke="var(--electric-cyan)" stroke-width="0.8" opacity="0.6"/>
-                        <!-- Clean organized wires -->
-                        <line class="draw-on" x1="425" y1="70" x2="425" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
-                        <line class="draw-on" x1="445" y1="70" x2="445" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
-                        <line class="draw-on" x1="495" y1="70" x2="495" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
-                        <line class="draw-on" x1="515" y1="70" x2="515" y2="175" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.3"/>
-                        <!-- Clean breakers -->
-                        <rect class="draw-on" x="425" y="80" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <rect class="draw-on" x="425" y="95" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <rect class="draw-on" x="425" y="110" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <rect class="draw-on" x="485" y="80" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <rect class="draw-on" x="485" y="95" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <rect class="draw-on" x="485" y="110" width="30" height="8" rx="1" stroke="var(--electric-cyan)" stroke-width="0.6" opacity="0.5"/>
-                        <!-- Smart meter -->
-                        <circle class="draw-on" cx="470" cy="55" r="12" stroke="var(--electric-cyan)" stroke-width="0.8" opacity="0.5"/>
-                        <circle class="draw-on" cx="470" cy="55" r="4" stroke="#00ff88" stroke-width="0.8" opacity="0.6"/>
-                        <!-- Checkmark -->
-                        <path class="draw-on" d="M455 195 L465 205 L490 180" stroke="#00ff88" stroke-width="2" stroke-linecap="round" filter="url(#glow-green)"/>
-                    </svg>
+                <!-- Danger vs Compliant — Visual Comparison -->
+                <div class="comparison-grid">
+                    <div class="comparison-card comparison-danger">
+                        <div class="comparison-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="#ff4444" stroke-width="1.5" width="48" height="48">
+                                <path d="M24 8 L6 40 H42 Z"/>
+                                <line x1="24" y1="20" x2="24" y2="30"/>
+                                <circle cx="24" cy="35" r="1.5" fill="#ff4444"/>
+                            </svg>
+                        </div>
+                        <h3 class="comparison-label">SIN_PERMISO</h3>
+                        <ul class="comparison-list">
+                            <li>Cables sin canalizar</li>
+                            <li>Panel sobrecargado</li>
+                            <li>Medidor derretido</li>
+                            <li>Sin coordinación CFE</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-arrow">
+                        <svg viewBox="0 0 60 24" fill="none" width="60" height="24">
+                            <line x1="0" y1="12" x2="50" y2="12" stroke="var(--electric-cyan)" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+                            <path d="M46 6 L56 12 L46 18" stroke="var(--electric-cyan)" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="comparison-card comparison-safe">
+                        <div class="comparison-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1.5" width="48" height="48">
+                                <rect x="8" y="8" width="32" height="32" rx="4"/>
+                                <path d="M16 24 L22 30 L34 18" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="comparison-label" style="color:var(--electric-cyan)">CERTIFICADO</h3>
+                        <ul class="comparison-list">
+                            <li>Diseño eléctrico completo</li>
+                            <li>Permisos y normas NOM</li>
+                            <li>Coordinación con CFE</li>
+                            <li>Monitoreo inteligente</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="spec-grid">
                     <div class="spec-item">
-                        <div class="spec-meta mono">[RISK_THERMAL]</div>
+                        <div class="spec-meta mono">[RIESGO_TÉRMICO]</div>
                         <span class="spec-val">60A</span>
-                        <span class="spec-lab">UNMANAGED_LOAD_PER_CHARGER</span>
+                        <span class="spec-lab">de carga sin control<br>por cada equipo</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[FAIL_RATE]</div>
+                        <div class="spec-meta mono">[TASA_FALLO]</div>
                         <span class="spec-val">73%</span>
-                        <span class="spec-lab">INSTALLS_WITHOUT_PERMITS</span>
+                        <span class="spec-lab">de instalaciones en México<br>no tienen permiso</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[RISK_COST]</div>
+                        <div class="spec-meta mono">[COSTO_RIESGO]</div>
                         <span class="spec-val">$5K+</span>
-                        <span class="spec-lab">AVG_DAMAGE_FROM_BAD_INSTALL</span>
+                        <span class="spec-lab">en daños promedio<br>por mala instalación</span>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-meta mono">[GRID_STRAIN]</div>
+                        <div class="spec-meta mono">[ESTRÉS_RED]</div>
                         <span class="spec-val">CFE</span>
-                        <span class="spec-lab">ZERO_UTILITY_COORDINATION</span>
+                        <span class="spec-lab">no coordina con<br>instaladores privados</span>
                     </div>
                 </div>
             </div>
@@ -269,42 +252,35 @@
         <section class="layer layer-solution" id="layer3">
             <div class="layer-gradient layer-gradient-cyan"></div>
             <div class="container">
-                <div class="layer-tag mono">[03] THE SOLUTION</div>
-                <h2 class="section-title">How CargaIA <em>Works.</em></h2>
-                <p class="section-intro">
-                    From site qualification to managed service — one platform handles the entire lifecycle 
-                    of your EV charging infrastructure.
-                </p>
+                <div class="layer-tag mono">[03] LA SOLUCIÓN</div>
+                <h2 class="section-title" id="title-solution"><span></span><span class="cursor">_</span></h2>
+                <p class="section-intro" id="intro-solution"></p>
 
-                <!-- Process Flow Vector -->
-                <div class="section-illustration">
-                    <svg viewBox="0 0 750 160" fill="none" class="section-svg">
-                        <defs><filter id="glow-step"><feGaussianBlur stdDeviation="2" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter></defs>
-                        <!-- Step 1: Qualify -->
-                        <circle class="draw-on" cx="100" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <path class="draw-on" d="M88 70 L96 78 L112 62" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-linecap="round" filter="url(#glow-step)"/>
-                        <text x="100" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">QUALIFY</text>
-                        <!-- Connector 1→2 -->
-                        <line class="draw-on" x1="136" y1="70" x2="218" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
-                        <!-- Step 2: Design -->
-                        <circle class="draw-on" cx="250" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <rect class="draw-on" x="237" y="57" width="26" height="20" rx="2" stroke="var(--electric-cyan)" stroke-width="1" filter="url(#glow-step)"/>
-                        <line class="draw-on" x1="237" y1="64" x2="263" y2="64" stroke="var(--electric-cyan)" stroke-width="0.6"/>
-                        <text x="250" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">DESIGN</text>
-                        <!-- Connector 2→3 -->
-                        <line class="draw-on" x1="286" y1="70" x2="368" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
-                        <!-- Step 3: Install -->
-                        <circle class="draw-on" cx="400" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <path class="draw-on" d="M396 55 L390 72 L398 72 L392 88" stroke="var(--electric-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-step)"/>
-                        <text x="400" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">INSTALL</text>
-                        <!-- Connector 3→4 -->
-                        <line class="draw-on" x1="436" y1="70" x2="518" y2="70" stroke="var(--electric-cyan)" stroke-width="0.4" stroke-dasharray="4 6" opacity="0.3"/>
-                        <!-- Step 4: Manage -->
-                        <circle class="draw-on" cx="550" cy="70" r="32" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <circle class="draw-on" cx="550" cy="70" r="10" stroke="var(--electric-cyan)" stroke-width="0.8" filter="url(#glow-step)"/>
-                        <path class="draw-on" d="M540 70 L550 70 M550 60 L550 70" stroke="var(--electric-cyan)" stroke-width="1.2" stroke-linecap="round"/>
-                        <text x="550" y="120" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-mono)" text-anchor="middle" letter-spacing="0.15em">MANAGE</text>
-                    </svg>
+                <!-- Process Steps -->
+                <div class="process-steps">
+                    <div class="process-step reveal">
+                        <div class="step-number mono">01</div>
+                        <h4>CALIFICAR</h4>
+                        <p>Revisamos tu panel, tu medidor y tu propiedad. En 48 horas sabes si calificas y cuánto cuesta.</p>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="process-step reveal">
+                        <div class="step-number mono">02</div>
+                        <h4>DISEÑAR</h4>
+                        <p>Generamos el plano eléctrico, tramitamos permisos ante CFE y te enviamos el diseño aprobado.</p>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="process-step reveal">
+                        <div class="step-number mono">03</div>
+                        <h4>INSTALAR</h4>
+                        <p>Técnicos certificados instalan tu cargador bajo norma NOM/NEC. Inspección incluida, sin sorpresas.</p>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="process-step reveal">
+                        <div class="step-number mono">04</div>
+                        <h4>GESTIONAR</h4>
+                        <p>Monitoreo 24/7, alertas en tiempo real, mantenimiento preventivo. Tu infraestructura, protegida siempre.</p>
+                    </div>
                 </div>
 
                 <div class="grid-3">
@@ -314,8 +290,8 @@
                                 <path d="M9 12l2 2 4-4" /><rect x="3" y="3" width="18" height="18" rx="2" />
                             </svg>
                         </div>
-                        <h3>COMPLIANT_INFRASTRUCTURE</h3>
-                        <p>Code-conscious installation pathways with automated design, permitting, and CFE utility-submission workflows. Every install meets NOM/NEC standards.</p>
+                        <h3>Todo certificado.</h3>
+                        <p>Cada instalación cumple normas NOM/NEC. Permisos, diagramas y aprobación CFE incluidos. Sin excusas, sin riesgos.</p>
                     </div>
                     <div class="feature-card reveal">
                         <div class="feature-electric-icon">
@@ -323,8 +299,8 @@
                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                             </svg>
                         </div>
-                        <h3>SUBSCRIPTION_MODEL</h3>
-                        <p>Hardware, installation, activation, monitoring, and maintenance — bundled into a single monthly subscription. No surprise costs.</p>
+                        <h3>Una sola mensualidad.</h3>
+                        <p>Hardware, instalación, activación, monitoreo y mantenimiento. Todo incluido. Sin cargos ocultos, sin contratos trampa.</p>
                     </div>
                     <div class="feature-card reveal">
                         <div class="feature-electric-icon">
@@ -332,8 +308,8 @@
                                 <circle cx="12" cy="12" r="3" /><path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
                             </svg>
                         </div>
-                        <h3>SMART_ENERGY</h3>
-                        <p>Optional solar, batteries, smart meters, and controlled charging. Intelligent load management that protects your property and the grid.</p>
+                        <h3>Inteligencia integrada.</h3>
+                        <p>Solar, baterías, medidores inteligentes y carga gestionada. Un sistema que piensa por ti y protege tu inversión.</p>
                     </div>
                 </div>
             </div>
@@ -345,36 +321,36 @@
         <section class="layer layer-audience" id="layer4">
             <div class="layer-gradient layer-gradient-indigo"></div>
             <div class="container">
-                <div class="layer-tag mono">[04] MARKET</div>
-                <h2 class="section-title">Who We <em>Serve.</em></h2>
+                <div class="layer-tag mono">[04] MERCADO</div>
+                <h2 class="section-title" id="title-market"><span></span><span class="cursor">_</span></h2>
                 <div class="audience-grid">
                     <div class="audience-card reveal">
                         <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
                             <path d="M6 42V20L24 6L42 20V42H30V30H18V42Z"/>
                         </svg>
-                        <h3>Homeowners</h3>
-                        <p>Safe home charging and EV readiness. Protect your property with compliant infrastructure.</p>
+                        <h3>Hogares</h3>
+                        <p>Carga en casa sin miedo. Tu propiedad protegida, tu medidor sano, tu EV listo cada mañana.</p>
                     </div>
                     <div class="audience-card reveal">
                         <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
                             <rect x="6" y="14" width="36" height="28" rx="2"/><path d="M6 22H42M18 6v8M30 6v8"/>
                         </svg>
-                        <h3>Businesses</h3>
-                        <p>Charging as an amenity and revenue source. Modernize your property with managed infrastructure.</p>
+                        <h3>Negocios</h3>
+                        <p>Atrae clientes EV, genera ingresos pasivos. Un cargador certificado es hoy una ventaja competitiva real.</p>
                     </div>
                     <div class="audience-card reveal">
                         <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
                             <path d="M20 6L8 42H18L24 24L30 42H40L28 6Z"/>
                         </svg>
-                        <h3>Installers</h3>
-                        <p>Join the certified network. Verified standards, inspection workflows, and guaranteed payouts.</p>
+                        <h3>Instaladores</h3>
+                        <p>Instala bajo estándar, cobra más, crece con respaldo. La red de técnicos certificados más grande de México.</p>
                     </div>
                     <div class="audience-card reveal">
                         <svg viewBox="0 0 48 48" fill="none" stroke="var(--electric-cyan)" stroke-width="1" width="48" height="48" class="audience-icon">
                             <path d="M24 6v36M12 18l12-12 12 12M12 30l12 12 12-12"/>
                         </svg>
-                        <h3>Investors</h3>
-                        <p>Category-defining infrastructure play with recurring revenue, cross-border expansion, and defensible technology.</p>
+                        <h3>Inversionistas</h3>
+                        <p>Infraestructura física + suscripciones recurrentes + expansión transfronteriza. El modelo más defensible del sector EV en Latinoamérica.</p>
                     </div>
                 </div>
             </div>
@@ -387,8 +363,24 @@
             <div class="container cta-container">
                 <div class="cta-content">
                     <div class="layer-tag mono">[05] PRE-REGISTRO</div>
-                    <h2 class="cta-title">Reserva tu lugar<br>en la <em>infraestructura del futuro.</em></h2>
-                    <p class="cta-sub">Sé de los primeros en obtener carga EV segura, certificada, y gestionada. Sin costo de registro. Sin compromiso.</p>
+                    <h2 class="cta-title">¿Tu EV llega en 2025?<br><em>La infraestructura ya debería estar lista.</em></h2>
+                    <p class="cta-sub">Los cupos de lanzamiento en Tijuana son limitados. Regístrate hoy — sin costo, sin compromiso — y garantiza tu lugar en la primera ola de instalaciones certificadas de México.</p>
+                    <div class="cta-trust">
+                        <div class="cta-trust-item">
+                            <span class="cta-trust-val">127</span>
+                            <span class="cta-trust-lab">ya registrados</span>
+                        </div>
+                        <div class="cta-trust-sep">·</div>
+                        <div class="cta-trust-item">
+                            <span class="cta-trust-val">48h</span>
+                            <span class="cta-trust-lab">tiempo de respuesta</span>
+                        </div>
+                        <div class="cta-trust-sep">·</div>
+                        <div class="cta-trust-item">
+                            <span class="cta-trust-val">$0</span>
+                            <span class="cta-trust-lab">costo de registro</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="cta-form-wrap">
                     <form id="cta-form">
@@ -413,10 +405,13 @@
                                 <option value="investor">Inversionista</option>
                             </select>
                         </div>
-                        <button type="submit" class="cta-btn">REGISTRARME AL PROGRAMA →</button>
+                        <button type="submit" class="cta-btn">ASEGURAR MI LUGAR →</button>
+                        <p class="cta-disclaimer">Sin costo. Sin compromiso. Te avisamos 2 semanas antes del lanzamiento en tu ciudad.</p>
                     </form>
                     <div id="cta-success" class="cta-success hidden">
-                        <p>✓ Registro exitoso. Te contactaremos antes del lanzamiento.</p>
+                        <div class="cta-success-icon">✓</div>
+                        <p>Estás dentro. Te contactaremos antes del lanzamiento.</p>
+                        <p class="cta-success-sub mono">Comparte con alguien que tenga un EV.</p>
                     </div>
                 </div>
             </div>
@@ -428,9 +423,9 @@
         <div class="container">
             <div class="footer-content mono">[SYSTEM_CORE] CARGAIA Infrastructure Platform v1.0 // (c) 2026 Maxify Inc.</div>
             <div class="footer-links">
-                <a href="#">PRIVACY</a>
-                <a href="#">TERMS</a>
-                <a href="#">CONTACT</a>
+                <a href="privacy.html">PRIVACIDAD</a>
+                <a href="terms.html">TÉRMINOS</a>
+                <a href="mailto:hola@cargaia.com">CONTACTO</a>
             </div>
         </div>
     </footer>

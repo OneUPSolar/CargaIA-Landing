@@ -244,25 +244,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // SVG Draw-on for Danger section
-    document.querySelectorAll('#layer2 .draw-on').forEach((el, i) => {
-        gsap.to(el, {
-            scrollTrigger: { trigger: '#layer2 .section-illustration', start: 'top 80%' },
-            strokeDashoffset: 0,
-            duration: 1.2,
-            delay: i * 0.04,
-            ease: 'power2.inOut'
+    // Section Typewriter Effects (bilingual like hero)
+    function sectionTypewriter(titleId, introId, titleEN, titleES, introEN, introES) {
+        const titleEl = document.querySelector(`#${titleId} span:first-child`);
+        const introEl = introId ? document.getElementById(introId) : null;
+        if (!titleEl) return;
+
+        ScrollTrigger.create({
+            trigger: `#${titleId}`,
+            start: 'top 80%',
+            once: true,
+            onEnter: () => {
+                const tl = gsap.timeline();
+                const targets = introEl ? [titleEl, introEl] : [titleEl];
+                tl.to(titleEl, { text: titleEN, duration: 1.2, ease: 'none' });
+                if (introEl) tl.to(introEl, { text: introEN, duration: 1.5, ease: 'none' }, '-=0.5');
+                tl.to(targets, {
+                    onStart: () => {
+                        titleEl.classList.add('glitch-text');
+                        titleEl.setAttribute('data-text', titleEN);
+                    },
+                    delay: 3, duration: 0.4
+                })
+                .set(targets, { text: '' })
+                .to(targets, {
+                    onStart: () => titleEl.classList.remove('glitch-text'),
+                    duration: 0.1
+                })
+                .to(titleEl, { text: titleES, duration: 1.2, ease: 'none' });
+                if (introEl) tl.to(introEl, { text: introES, duration: 1.5, ease: 'none' }, '-=0.5');
+            }
+        });
+    }
+
+    sectionTypewriter(
+        'title-problem', 'intro-problem',
+        'Infrastructure Failure.',
+        'Fallo de Infraestructura.',
+        'EV adoption is outpacing electrical infrastructure across Mexico. Unsafe installations melt meters, overload panels, and create real damage.',
+        'La adopción de EVs supera la infraestructura eléctrica en México. Instalaciones inseguras derriten medidores, sobrecargan paneles y causan daños reales.'
+    );
+
+    sectionTypewriter(
+        'title-solution', 'intro-solution',
+        'How CargaIA Works.',
+        'Cómo Funciona CargaIA.',
+        'From site qualification to managed service — one platform handles the entire lifecycle of your EV charging infrastructure.',
+        'Desde la calificación del sitio hasta el servicio gestionado — una plataforma maneja todo el ciclo de tu infraestructura de carga EV.'
+    );
+
+    sectionTypewriter(
+        'title-market', null,
+        'Who We Serve.',
+        'A Quién Servimos.',
+        '', ''
+    );
+
+    // Comparison Cards Reveal
+    document.querySelectorAll('.comparison-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: { trigger: '.comparison-grid', start: 'top 85%' },
+            y: 40, opacity: 0, scale: 0.95,
+            duration: 0.8, delay: i * 0.2,
+            ease: 'back.out(1.2)'
         });
     });
 
-    // SVG Draw-on for Flow process section
-    document.querySelectorAll('#layer3 .draw-on').forEach((el, i) => {
-        gsap.to(el, {
-            scrollTrigger: { trigger: '#layer3 .section-illustration', start: 'top 80%' },
-            strokeDashoffset: 0,
-            duration: 1,
-            delay: i * 0.06,
-            ease: 'power2.inOut'
+    // Process Steps Reveal
+    document.querySelectorAll('.process-step').forEach((step, i) => {
+        gsap.from(step, {
+            scrollTrigger: { trigger: '.process-steps', start: 'top 85%' },
+            y: 50, opacity: 0, scale: 0.9,
+            duration: 0.7, delay: i * 0.15,
+            ease: 'back.out(1.4)'
         });
     });
 
@@ -291,7 +345,26 @@ document.addEventListener('DOMContentLoaded', () => {
             y: 20, opacity: 0, duration: 1, ease: 'power3.out'
         });
     });
-    // 5. Form Logic (Maxify CRM Integration)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // GOOGLE SHEETS WEBHOOK — paste your deployed
+    // Apps Script Web App URL here:
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyGC43LO1vYrCql73lZvZ1mRHByTeToEQtSki2W_wJ-XezAt0IcVqgF75d6ORI0RyXDdg/exec';
+
+    async function submitToSheets(payload) {
+        // NOTE: no-cors blocks custom headers like Content-Type: application/json.
+        // Using text/plain (a "simple" header) lets the browser send the body.
+        // Apps Script reads e.postData.contents as a string — JSON.parse still works.
+        await fetch(SHEETS_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(payload)
+        });
+        return true;
+    }
+
+    // 5. Hero Waitlist Form
     const waitlistForm = document.getElementById('waitlist-form');
     const formSuccess = document.getElementById('form-success');
 
@@ -300,77 +373,60 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const submitBtn = waitlistForm.querySelector('button');
             const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'ESTABLISHING_LINK...';
+
+            submitBtn.textContent = 'ENVIANDO...';
             submitBtn.disabled = true;
 
-            const formData = {
-                firstName: document.getElementById('name').value,
+            const payload = {
+                timestamp: new Date().toISOString(),
+                nombre: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 region: document.getElementById('region')?.value || 'tijuana',
-                tags: ['cargaia', 'ev_charging', 'early_access'],
-                source: 'CargaIA Landing'
+                tipo: 'early_access',
+                fuente: 'Hero Waitlist'
             };
 
             try {
-                const response = await fetch('https://www.gomaxify.com/api/v1/contacts', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    waitlistForm.classList.add('hidden');
-                    formSuccess.classList.remove('hidden');
-                } else {
-                    throw new Error('Protocol mismatch');
-                }
+                await submitToSheets(payload);
+                waitlistForm.classList.add('hidden');
+                formSuccess.classList.remove('hidden');
             } catch (error) {
-                console.error('Uplink error:', error);
-                submitBtn.textContent = 'RETRY_CONNECT';
+                console.error('Error:', error);
+                submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-                alert('Connection failure. Please retry the uplink.');
+                alert('Error al enviar. Por favor intenta de nuevo.');
             }
         });
     }
 
-    // 6. CTA Form Logic (Pre-Registration)
+    // 6. CTA Pre-Registration Form
     const ctaForm = document.getElementById('cta-form');
     const ctaSuccess = document.getElementById('cta-success');
 
     if (ctaForm) {
         ctaForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const submitBtn = ctaForm.querySelector('button');
+            const submitBtn = ctaForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
 
             submitBtn.textContent = 'PROCESANDO...';
             submitBtn.disabled = true;
 
-            const formData = {
-                firstName: document.getElementById('cta-name').value,
+            const payload = {
+                timestamp: new Date().toISOString(),
+                nombre: document.getElementById('cta-name').value,
                 email: document.getElementById('cta-email').value,
                 region: document.getElementById('cta-region')?.value || 'tijuana',
-                type: document.getElementById('cta-type')?.value || 'homeowner',
-                tags: ['cargaia', 'ev_charging', 'pre_registro', 'program_launch'],
-                source: 'CargaIA Landing CTA'
+                tipo_usuario: document.getElementById('cta-type')?.value || 'homeowner',
+                fuente: 'CTA Pre-Registro'
             };
 
             try {
-                const response = await fetch('https://www.gomaxify.com/api/v1/contacts', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    ctaForm.classList.add('hidden');
-                    ctaSuccess.classList.remove('hidden');
-                } else {
-                    throw new Error('Server error');
-                }
+                await submitToSheets(payload);
+                ctaForm.classList.add('hidden');
+                ctaSuccess.classList.remove('hidden');
             } catch (error) {
-                console.error('CTA submit error:', error);
+                console.error('Error:', error);
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 alert('Error al registrar. Por favor intenta de nuevo.');
