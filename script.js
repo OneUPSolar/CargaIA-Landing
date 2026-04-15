@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // GOOGLE SHEETS WEBHOOK — paste your deployed
     // Apps Script Web App URL here:
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyGC43LO1vYrCql73lZvZ1mRHByTeToEQtSki2W_wJ-XezAt0IcVqgF75d6ORI0RyXDdg/exec';
+    const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxf0djXkj4NxhrK1NvOdTtGlWgs6GC58mpQWshUEazTl-KubplgNHEVTsnX05W6qchWCg/exec';
 
     async function submitToSheets(payload) {
         // NOTE: no-cors blocks custom headers like Content-Type: application/json.
