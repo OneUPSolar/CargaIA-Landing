@@ -88,14 +88,15 @@
                             </div>
                             <div class="input-group">
                                 <label class="mono-label">REGION</label>
-                                <select id="region" style="background:transparent;border:none;border-bottom:0.5px solid var(--glass-border);padding:1rem 0;color:#fff;width:100%;font-size:0.9rem;font-family:var(--font-mono);appearance:none;">
-                                    <option value="tijuana" style="background:#000;">Tijuana</option>
-                                    <option value="mexicali" style="background:#000;">Mexicali</option>
-                                    <option value="juarez" style="background:#000;">Ciudad Juárez</option>
-                                    <option value="nogales" style="background:#000;">Nogales</option>
-                                    <option value="reynosa" style="background:#000;">Reynosa</option>
-                                    <option value="other_mx" style="background:#000;">Otra Ciudad (MX)</option>
-                                    <option value="us_border" style="background:#000;">U.S. Border City</option>
+                                <select id="region" class="cta-input cta-select" required>
+                                    <option value="" disabled selected>SELECCIONA_TU_CIUDAD</option>
+                                    <option value="tijuana">Tijuana</option>
+                                    <option value="mexicali">Mexicali</option>
+                                    <option value="juarez">Ciudad Juárez</option>
+                                    <option value="nogales">Nogales</option>
+                                    <option value="reynosa">Reynosa</option>
+                                    <option value="other_mx">Otra Ciudad (MX)</option>
+                                    <option value="us_border">U.S. Border City</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn-gold">RESERVAR_ACCESO</button>
@@ -241,6 +242,21 @@
                         <div class="spec-meta mono">[ESTRÉS_RED]</div>
                         <span class="spec-val">CFE</span>
                         <span class="spec-lab">no coordina con<br>instaladores privados</span>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-val" id="metric-danger">0</div>
+                        <div class="metric-lab">TASA_FALLO_ESTIMADA</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-val" id="metric-cities">0</div>
+                        <div class="metric-lab">CIUDADES_DESPLIEGUE</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-val" id="metric-savings">0</div>
+                        <div class="metric-lab">AHORRO_PROMEDIO</div>
                     </div>
                 </div>
             </div>
