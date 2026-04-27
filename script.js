@@ -345,6 +345,114 @@ document.addEventListener('DOMContentLoaded', () => {
             y: 20, opacity: 0, duration: 1, ease: 'power3.out'
         });
     });
+
+    // 7. BYD SEAL Canvas Image Sequence Scrubbing (Apple Style)
+    const carCanvas = document.getElementById('car-canvas');
+    const carSection = document.getElementById('car-section');
+    
+    if (carCanvas && carSection) {
+        const context = carCanvas.getContext('2d');
+        carCanvas.width = 1920;
+        carCanvas.height = 1080;
+
+        const frameCount = 60;
+        const currentFrame = index => (
+            // Expects: assets/car-sequence/frame_0001.png, 0002.png...
+            `assets/car-sequence/frame_${(index + 1).toString().padStart(4, '0')}.png`
+        );
+
+        const images = [];
+        const carSequence = { frame: 0 };
+
+        // Preload images
+        for (let i = 0; i < frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+        }
+
+        // Draw the first frame when it loads
+        images[0].onload = render;
+        
+        // Fallback placeholder if no images exist yet
+        images[0].onerror = () => {
+            console.warn("BYD SEAL frames not found in 'assets/car-sequence/'. Displaying placeholder rect for demo.");
+            context.fillStyle = 'rgba(0, 242, 255, 0.1)';
+            context.fillRect(660, 340, 600, 400);
+            context.fillStyle = '#fff';
+            context.font = '30px monospace';
+            context.fillText('[ BYD SEAL 360 RENDER PLACEHOLDER ]', 680, 550);
+            context.font = '20px monospace';
+            context.fillText('Use tools/extract_frames.py to generate frames', 700, 600);
+        };
+
+        function render() {
+            context.clearRect(0, 0, carCanvas.width, carCanvas.height);
+            // Draw the image centered
+            if(images[carSequence.frame].complete && images[carSequence.frame].naturalWidth !== 0) {
+                const img = images[carSequence.frame];
+                const hRatio = carCanvas.width / img.width;
+                const vRatio = carCanvas.height / img.height;
+                const ratio  = Math.min(hRatio, vRatio);
+                const centerShift_x = (carCanvas.width - img.width*ratio) / 2;
+                const centerShift_y = (carCanvas.height - img.height*ratio) / 2;  
+                context.drawImage(img, 0,0, img.width, img.height,
+                                centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);  
+            } else {
+                // Placeholder rendering if frames are missing
+                context.save();
+                context.translate(carCanvas.width/2, carCanvas.height/2);
+                context.rotate(carSequence.frame * 0.1);
+                context.fillStyle = `rgba(0, 242, 255, ${0.1 + (carSequence.frame/120)})`;
+                context.fillRect(-300, -200, 600, 400);
+                context.restore();
+            }
+        }
+
+        // Setup the GSAP timeline
+        const carTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: carSection,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5, // Slightly snappy scrub
+            }
+        });
+
+        // Initialize hotspots
+        gsap.set('.hs-line', { width: 0 });
+        gsap.set('.hs-content', { opacity: 0, x: 20 });
+        gsap.set('.hs-port .hs-content', { x: -20 });
+
+        // Phase 1: Scrub the image sequence frames 0 -> 59
+        carTl.to(carSequence, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: "none",
+            duration: 5,
+            onUpdate: render
+        });
+
+        // Concurrently animate hotspots at specific frame positions
+        // Show Battery Hotspot around 20% progress
+        carTl.to('#hs-battery', { opacity: 1, duration: 0.2 }, 1)
+             .to('#hs-battery .hs-line', { width: 150, duration: 0.5 }, 1.2)
+             .to('#hs-battery .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 1.5)
+             .to('#hs-battery', { opacity: 0, duration: 0.3 }, 2.5); // Hide it
+
+        // Show Port Hotspot around 50% progress
+        carTl.to('#hs-port', { opacity: 1, duration: 0.2 }, 2.6)
+             .to('#hs-port .hs-line', { width: 120, duration: 0.5 }, 2.8)
+             .to('#hs-port .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 3.1)
+             .to('#hs-port', { opacity: 0, duration: 0.3 }, 4.0); // Hide it
+
+        // Show Aero Hotspot near the end
+        carTl.to('#hs-aero', { opacity: 1, duration: 0.2 }, 4.1)
+             .to('#hs-aero .hs-line', { width: 100, duration: 0.5 }, 4.3)
+             .to('#hs-aero .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 4.5)
+             .to('#hs-aero', { opacity: 0, duration: 0.3 }, 4.9);
+    }
+
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // GOOGLE SHEETS WEBHOOK — paste your deployed
     // Apps Script Web App URL here:
