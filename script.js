@@ -47,7 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setInterval(updateTechLabels, 2000);
 
-    // 3. Animated Key Metrics (ScrollTrigger reveal)
+    // 3. Scroll Reveal Animation Logic
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Reveal only once
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 4. Animated Key Metrics (ScrollTrigger reveal)
     function animateMetric(id, target, suffix, duration) {
         const el = document.getElementById(id);
         if (!el) return;
