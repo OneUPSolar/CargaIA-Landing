@@ -57,8 +57,10 @@ def extract_and_process(video_path, output_dir="assets/car-sequence", target_fra
         pil_image = Image.fromarray(frame_rgb)
 
         print(f"Procesando frame {frame_count:04d}/{target_frames:04d} con IA (rembg)...")
-        # Remover fondo con IA
-        transparent_image = remove(pil_image)
+        # Remover fondo con IA usando explícitamente CPU para evitar crash de CoreML en Mac
+        from rembg import new_session
+        session = new_session(providers=['CPUExecutionProvider'])
+        transparent_image = remove(pil_image, session=session)
 
         # Guardar como frame_0001.png, frame_0002.png...
         output_filename = os.path.join(output_dir, f"frame_{frame_count:04d}.png")
