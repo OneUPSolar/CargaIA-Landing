@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 0.5, // Slightly snappy scrub
+                pin: "#car-pin", // Pin the container while scrolling through the 400vh section
             }
         });
 
