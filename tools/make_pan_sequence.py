@@ -1,24 +1,29 @@
 import cv2
 import os
 import numpy as np
+from PIL import Image
+from rembg import remove, new_session
 
 input_path = "/Users/joshuav/.gemini/antigravity/brain/a8264400-d117-4be1-8288-8284f460b027/byd_seal_base_1777326285620.png"
 output_dir = "/Users/joshuav/Desktop/CargaIA/assets/car-sequence"
 
 os.makedirs(output_dir, exist_ok=True)
 
-print("Loading image...")
-img = cv2.imread(input_path, cv2.IMREAD_COLOR)
-if img is None:
-    print("Error cargando la imagen")
-    exit(1)
+print("Loading and removing background from base image...")
+# Load with PIL to use rembg
+pil_img = Image.open(input_path)
+session = new_session(providers=['CPUExecutionProvider'])
+transparent_img = remove(pil_img, session=session)
+
+# Convert to OpenCV RGBA format
+img = cv2.cvtColor(np.array(transparent_img), cv2.COLOR_RGBA2BGRA)
 
 h, w = img.shape[:2]
 
 # Create a 1920x1080 canvas
 canvas_w, canvas_h = 1920, 1080
 
-print("Generating 60 frames...")
+print("Generating 60 frames with transparent backgrounds...")
 for i in range(60):
     progress = i / 59.0 # 0.0 to 1.0
     
@@ -34,7 +39,8 @@ for i in range(60):
     x_offset = int((canvas_w - new_w) / 2 + (canvas_w * 0.1) - (progress * canvas_w * 0.2))
     y_offset = int((canvas_h - new_h) / 2 + (canvas_h * 0.05) - (progress * canvas_h * 0.1))
     
-    canvas = np.zeros((canvas_h, canvas_w, 3), dtype=np.uint8)
+    # RGBA canvas
+    canvas = np.zeros((canvas_h, canvas_w, 4), dtype=np.uint8)
     
     y1, y2 = max(0, y_offset), min(canvas_h, y_offset + new_h)
     x1, x2 = max(0, x_offset), min(canvas_w, x_offset + new_w)

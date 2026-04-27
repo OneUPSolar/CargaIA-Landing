@@ -45,6 +45,10 @@ def extract_and_process(video_path, output_dir="assets/car-sequence", target_fra
     frame_count = 1
     current_frame = 0
 
+    from rembg import new_session
+    print("Loading rembg model...")
+    session = new_session(providers=['CPUExecutionProvider'])
+
     while cap.isOpened() and frame_count <= target_frames:
         cap.set(cv2.CAP_PROP_POS_FRAMES, current_frame)
         ret, frame = cap.read()
@@ -57,9 +61,7 @@ def extract_and_process(video_path, output_dir="assets/car-sequence", target_fra
         pil_image = Image.fromarray(frame_rgb)
 
         print(f"Procesando frame {frame_count:04d}/{target_frames:04d} con IA (rembg)...")
-        # Remover fondo con IA usando explícitamente CPU para evitar crash de CoreML en Mac
-        from rembg import new_session
-        session = new_session(providers=['CPUExecutionProvider'])
+        # Remover fondo con IA usando explícitamente CPU
         transparent_image = remove(pil_image, session=session)
 
         # Guardar como frame_0001.png, frame_0002.png...
