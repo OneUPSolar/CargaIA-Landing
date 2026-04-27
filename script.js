@@ -387,10 +387,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         function render() {
+            const frameIndex = Math.round(carSequence.frame);
             context.clearRect(0, 0, carCanvas.width, carCanvas.height);
             // Draw the image centered
-            if(images[carSequence.frame].complete && images[carSequence.frame].naturalWidth !== 0) {
-                const img = images[carSequence.frame];
+            if(images[frameIndex] && images[frameIndex].complete && images[frameIndex].naturalWidth !== 0) {
+                const img = images[frameIndex];
                 const hRatio = carCanvas.width / img.width;
                 const vRatio = carCanvas.height / img.height;
                 const ratio  = Math.min(hRatio, vRatio);
@@ -402,8 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Placeholder rendering if frames are missing
                 context.save();
                 context.translate(carCanvas.width/2, carCanvas.height/2);
-                context.rotate(carSequence.frame * 0.1);
-                context.fillStyle = `rgba(0, 242, 255, ${0.1 + (carSequence.frame/120)})`;
+                context.rotate(frameIndex * 0.1);
+                context.fillStyle = `rgba(0, 242, 255, ${0.1 + (frameIndex/120)})`;
                 context.fillRect(-300, -200, 600, 400);
                 context.restore();
             }
