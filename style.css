@@ -1262,7 +1262,7 @@ h1, h2, h3 {
     max-width: 1200px;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8));
+    mix-blend-mode: screen;
 }
 
 .car-hotspots {
