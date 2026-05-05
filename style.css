@@ -253,7 +253,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 100;
-    border-bottom: 0.5px solid var(--glass-border);
+    border-bottom: 1px solid var(--hairline);
     backdrop-filter: blur(40px);
 }
 
@@ -272,7 +272,7 @@ body {
     text-transform: uppercase;
 }
 
-.logo-accent { font-weight: 600; color: #fff; }
+.logo-accent { font-weight: 600; color: var(--ink); }
 
 .nav-right {
     display: flex;
@@ -563,8 +563,8 @@ h1, h2, h3 {
 /* Countdown Section */
 .countdown-section {
     padding: 10rem 0;
-    border-top: 0.5px solid var(--glass-border);
-    border-bottom: 0.5px solid var(--glass-border);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
     text-align: center;
     background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(4,8,12,0.7) 50%, rgba(0,0,0,0.2) 100%);
     position: relative;
@@ -867,7 +867,7 @@ h1, h2, h3 {
 /* CTA Section */
 .cta-section {
     padding: 10rem 0;
-    border-top: 0.5px solid var(--glass-border);
+    border-top: 1px solid var(--hairline);
     position: relative;
     background: radial-gradient(ellipse at 50% 80%, rgba(0, 242, 255, 0.03) 0%, transparent 60%);
 }
@@ -900,9 +900,11 @@ h1, h2, h3 {
 }
 
 .cta-form-wrap {
-    background: rgba(4, 4, 6, 0.6);
-    border: 0.5px solid var(--glass-border);
-    border-radius: 8px;
+    background: var(--bg-card);
+    border: none;
+    box-shadow: 0 0 0 1px var(--hairline), inset 0 0 30px rgba(255, 255, 255, 0.03), 0 20px 60px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(40px);
+    border-radius: 12px;
     padding: 2.5rem;
 }
 
@@ -916,9 +918,9 @@ h1, h2, h3 {
 .cta-input {
     background: transparent;
     border: none;
-    border-bottom: 0.5px solid var(--glass-border);
+    border-bottom: 1px solid var(--hairline);
     padding: 1rem 0;
-    color: #fff;
+    color: var(--ink);
     font-size: 0.9rem;
     font-family: var(--font-mono);
     width: 100%;
@@ -1091,17 +1093,20 @@ h1, h2, h3 {
     gap: 0;
     max-width: 1100px;
     margin: 6rem auto 0;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--hairline);
     border-radius: 12px;
     overflow: hidden;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .spec-item {
-    border-right: 0.5px solid var(--glass-border);
+    border-right: 1px solid var(--hairline);
     padding: 4rem 2rem;
     text-align: center;
     position: relative;
-    background: rgba(4,4,6,0.4);
+    background: transparent;
     transition: background 0.3s;
 }
 
@@ -1141,7 +1146,7 @@ h1, h2, h3 {
 }
 
 .feature-card {
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--hairline);
     padding: 4rem 0;
     transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
@@ -1195,7 +1200,7 @@ h1, h2, h3 {
 /* Footer */
 .footer {
     padding: 12rem 0;
-    border-top: 0.5px solid var(--glass-border);
+    border-top: 1px solid var(--hairline);
     text-align: center;
 }
 

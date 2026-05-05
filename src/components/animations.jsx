@@ -86,7 +86,7 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
       position: 'relative',
       width: '100%',
       height: '100vh',
-      background: '#000',
+      background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
       fontFamily: '-apple-system, sans-serif',
@@ -277,31 +277,6 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
           <div style={stageStyles.stageHolder}>
             <div ref={canvasRef} style={canvasStyle}>
               {children}
-            </div>
-          </div>
-
-          <div style={stageStyles.controls}>
-            <button
-              style={stageStyles.button}
-              onClick={() => setPlaying(p => !p)}
-            >
-              {playing ? '⏸ 暂停' : '▶ 播放'}
-            </button>
-
-            <button
-              style={stageStyles.button}
-              onClick={() => setTime(0)}
-            >
-              ⏮ 开始
-            </button>
-
-            <div style={stageStyles.timeDisplay}>
-              {time.toFixed(2)}s / {duration.toFixed(2)}s
-            </div>
-
-            <div style={stageStyles.scrubber} onMouseDown={handleSeek}>
-              <div style={{ ...stageStyles.scrubberFill, width: `${progress * 100}%` }} />
-              <div style={{ ...stageStyles.scrubberHandle, left: `${progress * 100}%` }} />
             </div>
           </div>
         </div>
