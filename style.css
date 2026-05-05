@@ -1292,7 +1292,17 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.05) 0%, #000 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.08) 0%, transparent 60%), #000;
+}
+
+.car-pin-container::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 1;
 }
 
 .car-canvas-wrapper {
@@ -1349,11 +1359,12 @@ h1, h2, h3 {
 }
 
 .hs-content {
-    background: rgba(4, 4, 6, 0.85);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
+    background: var(--bg-card);
+    border: none;
+    box-shadow: 0 0 0 1px var(--hairline), inset 0 0 30px rgba(255, 255, 255, 0.03), 0 10px 30px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(40px);
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     width: 320px;
     opacity: 0; 
     transform: translateX(20px); 
