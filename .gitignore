@@ -30,3 +30,7 @@ Thumbs.db
 dist/
 build/
 out/
+
+# Build artifacts
+build_termsheet.py
+preview-*.png
