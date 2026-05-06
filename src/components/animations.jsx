@@ -85,24 +85,25 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
     wrapper: {
       position: 'relative',
       width: '100%',
-      height: '100vh',
-      background: 'transparent',
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
       fontFamily: '-apple-system, sans-serif',
     },
     stageHolder: {
-      flex: 1,
       position: 'relative',
-      overflow: 'hidden',
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'visible',
     },
     canvas: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
+      position: 'relative',
       transformOrigin: 'center center',
-      background: '#111',
-      overflow: 'hidden',
+      background: 'transparent',
+      overflow: 'visible',
     },
     controls: {
       position: 'absolute',
@@ -167,13 +168,14 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
     },
   };
 
-  function Stage({ duration = 10, width = 1920, height = 1080, fps = 60, loop = true, children, bgColor = '#fff' }) {
+  function Stage({ duration = 10, width = 1920, height = 1080, fps = 60, loop = true, children, bgColor = 'transparent', maxWidth = 380, maxHeight = 760 }) {
     const [time, setTime] = useState(0);
     const [playing, setPlaying] = useState(true);
     const [scale, setScale] = useState(1);
     const rafRef = useRef(null);
     const startTimeRef = useRef(performance.now());
     const canvasRef = useRef(null);
+    const wrapperRef = useRef(null);
 
     // Recording mode: render-video.js injects window.__recording = true before goto.
     // When set, force loop=false so the export ends on the final frame instead of
@@ -183,15 +185,20 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
 
     useEffect(() => {
       function updateScale() {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight - 56;
-        const s = Math.min(vw / width, vh / height);
+        // Inline embed mode: scale to fit within maxWidth/maxHeight bounds,
+        // and never exceed the container's available width on mobile.
+        const containerWidth = wrapperRef.current
+          ? wrapperRef.current.getBoundingClientRect().width
+          : window.innerWidth;
+        const targetW = Math.min(maxWidth, containerWidth - 32);
+        const targetH = maxHeight;
+        const s = Math.min(targetW / width, targetH / height);
         setScale(s);
       }
       updateScale();
       window.addEventListener('resize', updateScale);
       return () => window.removeEventListener('resize', updateScale);
-    }, [width, height]);
+    }, [width, height, maxWidth, maxHeight]);
 
     useEffect(() => {
       if (!playing) return;
@@ -268,13 +275,22 @@ import React, { createContext, useContext, useState, useEffect, useRef, useCallb
       width,
       height,
       background: bgColor,
-      transform: `translate(-50%, -50%) scale(${scale})`,
+      transform: `scale(${scale})`,
+    };
+
+    // Reserve real (post-scale) layout space so the surrounding section
+    // doesn't collapse to zero height around the absolute-positioned canvas.
+    const holderStyle = {
+      ...stageStyles.stageHolder,
+      width: width * scale,
+      height: height * scale,
+      maxWidth: '100%',
     };
 
     return (
       <TimeContext.Provider value={ctx}>
-        <div style={stageStyles.wrapper}>
-          <div style={stageStyles.stageHolder}>
+        <div ref={wrapperRef} style={stageStyles.wrapper}>
+          <div style={holderStyle}>
             <div ref={canvasRef} style={canvasStyle}>
               {children}
             </div>
