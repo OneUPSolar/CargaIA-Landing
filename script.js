@@ -377,110 +377,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 7. BYD SEAL Canvas + Hologram Overlays (Motion Design Principles Applied)
-    const carCanvas = document.getElementById('car-canvas');
+    // 7. EV Transparent Images Sequence (Fluid Professional Crossfade)
     const evSection = document.getElementById('car-section');
+    const evContainer = document.getElementById('ev-image-container');
     
-    if (carCanvas && evSection) {
-        const context = carCanvas.getContext('2d');
-        carCanvas.width = 1920;
-        carCanvas.height = 1080;
-
-        const frameCount = 60;
-        const currentFrame = index => (
-            `assets/car-sequence/frame_${(index + 1).toString().padStart(4, '0')}.png`
-        );
-
-        const images = [];
-        const carSequence = { frame: 0 };
-
-        // Preload frames
-        for (let i = 0; i < frameCount; i++) {
-            const img = new Image();
-            img.src = currentFrame(i);
-            images.push(img);
-        }
-
-        images[0].onload = render;
-        images[0].onerror = () => {
-            console.warn("BYD frames not found. Displaying placeholder.");
-            context.fillStyle = 'rgba(0, 242, 255, 0.05)';
-            context.fillRect(660, 340, 600, 400);
-        };
-
-        function render() {
-            const frameIndex = Math.round(carSequence.frame);
-            context.clearRect(0, 0, carCanvas.width, carCanvas.height);
-            if(images[frameIndex] && images[frameIndex].complete && images[frameIndex].naturalWidth !== 0) {
-                const img = images[frameIndex];
-                const hRatio = carCanvas.width / img.width;
-                const vRatio = carCanvas.height / img.height;
-                const ratio  = Math.min(hRatio, vRatio);
-                const centerShift_x = (carCanvas.width - img.width*ratio) / 2;
-                const centerShift_y = (carCanvas.height - img.height*ratio) / 2;  
-                context.drawImage(img, 0,0, img.width, img.height, centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);  
-            }
-        }
-
+    if (evSection && evContainer) {
         // Setup the GSAP timeline
         const evTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#car-pin",
                 start: "top top",
-                end: "+=3000", // Explicit scroll depth to fix pinning duplication
-                scrub: 1.5, // 1.5s dampening matches Emil's smooth scroll requirement
+                end: "+=2200", // Shortened from 3000 to remove blank space
+                scrub: 1.5,
                 pin: true,
                 pinSpacing: true
             }
         });
 
-        // Initialize SVG Hologram states applying Jakub Krehel's materializing blur principle
-        gsap.set('#battery-matrix', { opacity: 0, y: 15, filter: "blur(4px)" });
-        gsap.set('#charge-node', { opacity: 0, y: 15, filter: "blur(4px)" });
-        gsap.set('#aero-lines', { opacity: 0, y: 15, filter: "blur(4px)" });
-        gsap.set('#energy-conduit', { strokeDashoffset: 400 });
-        gsap.set('.wind-flow', { strokeDashoffset: 2000 });
-
         // Initialize hotspots with blur
         gsap.set('.hs-line', { width: 0 });
         gsap.set('.hs-content', { opacity: 0, x: 20, filter: "blur(4px)" });
         gsap.set('.hs-port .hs-content', { x: -20, filter: "blur(4px)" });
+        
+        // Initial Image setup: Battery visible, others hidden
+        gsap.set('#ev-img-battery', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)" });
+        gsap.set('#ev-img-port', { opacity: 0, scale: 1.05, filter: "brightness(1.2) contrast(1.1) blur(4px)" });
+        gsap.set('#ev-img-aero', { opacity: 0, scale: 1.05, filter: "brightness(1.2) contrast(1.1) blur(4px)" });
 
-        // Entire scrub duration covers 0->59 frames
-        evTl.to(carSequence, {
-            frame: frameCount - 1,
-            snap: "frame",
-            ease: "none",
-            duration: 6, // Global track length
-            onUpdate: render
-        }, 0);
+        // --- PHASE 1: Battery Matrix (0-33%) ---
+        evTl.to('#ev-img-battery', { scale: 1.05, duration: 1.5, ease: "none" })
+            .to('#hs-battery', { opacity: 1, duration: 0.2 }, "-=1.2")
+            .to('#hs-battery .hs-line', { width: 100, duration: 0.4 }, "-=1")
+            .to('#hs-battery .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
+            .to({}, { duration: 0.8 }); // Hold text visible
 
-        // --- PHASE 1: Battery Matrix (Frames ~5-20) ---
-        // Enter: blur -> sharp, translate -> 0
-        evTl.to('#battery-matrix', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 0.5)
-            .to('#hs-battery', { opacity: 1, duration: 0.2 }, 0.5)
-            .to('#hs-battery .hs-line', { width: 100, duration: 0.4 }, 0.7)
-            .to('#hs-battery .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 0.9)
-            // Exit: Subtler exit (Jakub principle) - move slightly up, slight blur, fast fade
-            .to('#battery-matrix', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, 2.0)
-            .to('#hs-battery', { opacity: 0, filter: "blur(2px)", duration: 0.3 }, 2.0);
+        // --- PHASE 2: Smart Port (33-66%) ---
+        // Crossfade to port image while fading out old text
+        evTl.to('#hs-battery', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
+            .to('#ev-img-battery', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(4px)", duration: 0.8 }, "<")
+            .to('#ev-img-port', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to('#hs-port', { opacity: 1, duration: 0.2 }, "-=1.2")
+            .to('#hs-port .hs-line', { width: 80, duration: 0.4 }, "-=1.0")
+            .to('#hs-port .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
+            .to({}, { duration: 0.8 }); // Hold
 
-        // --- PHASE 2: Smart Port (Frames ~25-40) ---
-        evTl.to('#charge-node', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 2.5)
-            .to('#energy-conduit', { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 2.5)
-            .to('#hs-port', { opacity: 1, duration: 0.2 }, 2.5)
-            .to('#hs-port .hs-line', { width: 80, duration: 0.4 }, 2.7)
-            .to('#hs-port .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 2.9)
-            .to('#charge-node', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, 4.0)
-            .to('#hs-port', { opacity: 0, filter: "blur(2px)", duration: 0.3 }, 4.0);
-
-        // --- PHASE 3: Aerodynamics (Frames ~45-60) ---
-        evTl.to('#aero-lines', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 4.5)
-            .to('.wind-flow', { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 4.5)
-            .to('#hs-aero', { opacity: 1, duration: 0.2 }, 4.5)
-            .to('#hs-aero .hs-line', { width: 120, duration: 0.4 }, 4.7)
-            .to('#hs-aero .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 4.9)
-            .to('#aero-lines', { opacity: 0, duration: 0.3 }, 5.8)
-            .to('#hs-aero', { opacity: 0, duration: 0.3 }, 5.8);
+        // --- PHASE 3: Aerodynamics (66-100%) ---
+        // Crossfade to aero image while fading out old text
+        evTl.to('#hs-port', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
+            .to('#ev-img-port', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(4px)", duration: 0.8 }, "<")
+            .to('#ev-img-aero', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to('#hs-aero', { opacity: 1, duration: 0.2 }, "-=1.2")
+            .to('#hs-aero .hs-line', { width: 120, duration: 0.4 }, "-=1.0")
+            .to('#hs-aero .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
+            .to({}, { duration: 0.5 }) // Reduced hold to fix blank space
+            .to('#hs-aero', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.5 })
+            .to('#ev-img-aero', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(6px)", duration: 0.8 }, "<");
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

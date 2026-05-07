@@ -33,6 +33,7 @@
         </div>
     </div>
 
+
     <!-- BACKGROUND LAYERS -->
     <div class="mesh-bg"></div>
     <div class="tech-infrastructure">
@@ -71,8 +72,13 @@
         <!-- ═══════════════════════════════════════════ -->
         <!-- LAYER 1 — HERO                             -->
         <!-- ═══════════════════════════════════════════ -->
-        <section class="hero layer" id="layer1">
-            <div class="container hero-split">
+        <section class="hero layer" id="layer1" style="position: relative; overflow: hidden;">
+            <!-- BACKGROUND VIDEO (Restricted to Hero) -->
+            <video autoplay loop muted playsinline class="hero-bg-video">
+                <source src="/hero_bg.mp4" type="video/mp4">
+            </video>
+
+            <div class="container hero-split" style="grid-template-columns: 1fr; z-index: 2; position: relative;">
                 <div class="hero-content reveal-on-scroll">
                     <div class="layer-tag mono">[01] MISSION</div>
                     <h1 class="hero-title"><span id="type-title"></span><span class="cursor">_</span></h1>
@@ -111,38 +117,6 @@
                             <p class="mono">[LINK_ESTABLISHED] ACCESO_RESERVADO.</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Hero Vector Illustration -->
-                <div class="hero-illustration reveal-on-scroll">
-                    <svg viewBox="0 0 440 480" fill="none" class="hero-svg" id="heroSvg">
-                        <defs>
-                            <filter id="glow-cyan"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-                            <linearGradient id="cable-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00f2ff" stop-opacity="0.8"/><stop offset="100%" stop-color="#00f2ff" stop-opacity="0.2"/></linearGradient>
-                        </defs>
-                        <!-- Charger Station Body -->
-                        <rect class="draw-on" x="170" y="80" width="100" height="240" rx="8" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-                        <rect class="draw-on" x="185" y="100" width="70" height="50" rx="4" stroke="var(--electric-cyan)" stroke-width="0.8" filter="url(#glow-cyan)"/>
-                        <!-- Screen Indicator -->
-                        <rect class="draw-on" x="200" y="112" width="40" height="6" rx="2" stroke="var(--electric-cyan)" stroke-width="0.5" opacity="0.6"/>
-                        <rect class="draw-on" x="200" y="124" width="28" height="4" rx="1" stroke="var(--electric-cyan)" stroke-width="0.4" opacity="0.4"/>
-                        <!-- Lightning Bolt (centered) -->
-                        <path class="draw-on" d="M215 170 L208 195 L218 195 L210 220" stroke="var(--electric-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-cyan)"/>
-                        <!-- Cable -->
-                        <path class="draw-on" d="M220 320 C220 360 260 370 280 390 C300 410 310 430 310 445" stroke="url(#cable-grad)" stroke-width="2" stroke-linecap="round" fill="none"/>
-                        <!-- Plug connector -->
-                        <rect class="draw-on" x="302" y="445" width="16" height="24" rx="4" stroke="var(--electric-cyan)" stroke-width="1"/>
-                        <line class="draw-on" x1="308" y1="450" x2="308" y2="460" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <line class="draw-on" x1="312" y1="450" x2="312" y2="460" stroke="var(--electric-cyan)" stroke-width="0.8"/>
-                        <!-- Data lines on charger -->
-                        <line class="draw-on" x1="185" y1="260" x2="270" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                        <line class="draw-on" x1="185" y1="270" x2="255" y2="270" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                        <line class="draw-on" x1="185" y1="280" x2="240" y2="280" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-                        <!-- Energy rings -->
-                        <circle cx="220" cy="200" r="50" stroke="var(--electric-cyan)" stroke-width="0.3" opacity="0.15" class="energy-ring"/>
-                        <circle cx="220" cy="200" r="75" stroke="var(--electric-cyan)" stroke-width="0.2" opacity="0.08" class="energy-ring r2"/>
-                        <circle cx="220" cy="200" r="100" stroke="var(--electric-cyan)" stroke-width="0.15" opacity="0.04" class="energy-ring r3"/>
-                    </svg>
                 </div>
             </div>
         </section>
@@ -379,44 +353,11 @@
         <!-- ═══════════════════════════════════════════ -->
         <section class="car-scroll-section" id="car-section">
             <div class="car-pin-container" id="car-pin">
-                <!-- Restored Canvas Layer -->
-                <div class="car-canvas-wrapper">
-                    <canvas id="car-canvas"></canvas>
-                </div>
-
-                <!-- Overlay Hologram Layer (Sin Fondo) -->
-                <div class="ev-svg-wrapper" id="ev-svg-container" style="pointer-events: none;">
-                    <svg viewBox="0 0 1000 600" class="ev-wireframe">
-                        <defs>
-                            <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="6" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                            </filter>
-                            <filter id="neon-glow-intense" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="12" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                            </filter>
-                        </defs>
-                        
-                        <g id="ev-camera" transform="translate(0, 0) scale(1)">
-                            <g id="battery-matrix">
-                                <rect x="300" y="320" width="400" height="30" rx="4" class="ev-path battery-casing" />
-                                <path class="ev-path battery-cells" d="M320,320 V350 M340,320 V350 M360,320 V350 M380,320 V350 M400,320 V350 M420,320 V350 M440,320 V350 M460,320 V350 M480,320 V350 M500,320 V350 M520,320 V350 M540,320 V350 M560,320 V350 M580,320 V350 M600,320 V350 M620,320 V350 M640,320 V350 M660,320 V350 M680,320 V350" />
-                            </g>
-
-                            <g id="charge-node" transform="translate(700, 250)">
-                                <circle cx="0" cy="0" r="15" class="ev-path charge-port-bg" />
-                                <circle cx="0" cy="0" r="4" class="ev-path charge-port-core" />
-                                <path class="ev-path energy-line" id="energy-conduit" d="M-15,0 L-50,0 L-70,50 L-300,50" />
-                            </g>
-
-                            <g id="aero-lines">
-                                <path class="ev-path wind-flow" d="M100,290 C300,290 400,160 600,160 C800,160 900,290 1100,290" />
-                                <path class="ev-path wind-flow" d="M100,310 C350,310 450,180 650,180 C850,180 950,310 1100,310" />
-                                <path class="ev-path wind-flow" d="M100,330 C300,330 400,220 600,220 C800,220 900,330 1100,330" />
-                            </g>
-                        </g>
-                    </svg>
+                <!-- Photorealistic EV Layers (Fluid Crossfade) -->
+                <div class="ev-image-container" id="ev-image-container">
+                    <img src="assets/ev_battery_view.png" id="ev-img-battery" class="ev-photo" alt="EV Battery X-Ray" />
+                    <img src="assets/ev_port_view.png" id="ev-img-port" class="ev-photo" alt="EV Smart Port" />
+                    <img src="assets/ev_aero_view.png" id="ev-img-aero" class="ev-photo" alt="EV Aerodynamics" />
                 </div>
 
                 <div class="car-hotspots">

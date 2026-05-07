@@ -1467,85 +1467,29 @@ h1, h2, h3 {
     z-index: 1;
 }
 
-.car-canvas-wrapper {
+/* Photorealistic EV Images */
+.ev-image-container {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-origin: center center;
-    will-change: transform, opacity;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
 }
 
-#car-canvas {
-    width: 100%;
-    max-width: 1200px;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8));
-}
-
-.ev-svg-wrapper {
+.ev-photo {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    z-index: 6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ev-wireframe {
-    width: 100%;
-    max-width: 1200px;
-    height: auto;
-}
-
-.ev-path {
-    fill: none;
-    stroke: var(--electric-cyan);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.battery-casing {
-    stroke: rgba(0, 242, 255, 0.4);
-    fill: rgba(0, 242, 255, 0.05);
-}
-
-.battery-cells {
-    stroke: var(--electric-cyan);
-    stroke-width: 2;
-    opacity: 0.8;
-}
-
-.charge-port-bg {
-    stroke: rgba(0, 242, 255, 0.5);
-    fill: rgba(0, 0, 0, 0.5);
-}
-
-.charge-port-core {
-    fill: var(--electric-cyan);
-    opacity: 0.8;
-}
-
-.energy-line {
-    stroke: #fff;
-    stroke-width: 3;
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    filter: url(#neon-glow-intense);
-}
-
-.wind-flow {
-    stroke: rgba(0, 242, 255, 0.5);
-    stroke-width: 2;
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    filter: url(#neon-glow);
+    object-fit: cover;
+    opacity: 0;
+    mix-blend-mode: screen; /* Removes black background */
+    filter: brightness(1.2) contrast(1.1); /* Enhances details for holograph look */
 }
 
 .car-hotspots {
@@ -1634,3 +1578,113 @@ h1, h2, h3 {
     left: 15%;
 }
 .hs-aero .hs-line { width: 120px; margin-right: 1rem; }
+
+/* ==========================================================================
+   TASTE-LEVEL UI CARDS (Hero Illustration)
+   ========================================================================== */
+
+.ui-glass-card {
+    background: rgba(10, 10, 12, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.core-card {
+    background: rgba(10, 10, 12, 0.8);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.05);
+}
+
+.core-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 242, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.ui-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 8px;
+}
+
+.ui-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.ui-dot.data { background: var(--electric-cyan); box-shadow: 0 0 8px var(--electric-cyan); }
+.ui-dot.core { background: #fff; }
+.ui-dot.power { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+
+.ui-title {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.ui-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ui-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ui-label {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+}
+
+.ui-value {
+    font-size: 0.75rem;
+    color: #fff;
+}
+
+.ui-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.ui-progress-fill {
+    height: 100%;
+    background: var(--electric-cyan);
+    box-shadow: 0 0 10px var(--electric-cyan);
+}
+
+.core-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.ui-graph {
+    margin-top: 8px;
+    opacity: 0.6;
+}
+
+.hero-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1; }
