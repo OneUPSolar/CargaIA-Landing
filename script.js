@@ -65,23 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 
-    // 4. Animated Key Metrics (ScrollTrigger reveal)
-    function animateMetric(id, target, suffix, duration) {
+    // 4. Animated Key Metrics & Rings (ScrollTrigger reveal)
+    function animateMetric(id, ringId, target, ringPercent, suffix, duration) {
         const el = document.getElementById(id);
+        const ring = document.getElementById(ringId);
         if (!el) return;
+        
         const counter = { val: 0 };
+        const totalDash = 465;
+        
         gsap.to(counter, {
             val: target,
             duration: duration,
             ease: "power2.out",
             snap: { val: 1 },
             scrollTrigger: { trigger: ".metrics-grid", start: "top 90%" },
-            onUpdate: () => { el.textContent = Math.round(counter.val) + (suffix || ''); }
+            onUpdate: () => { 
+                el.textContent = Math.round(counter.val) + (suffix || '');
+                if (ring) {
+                    // Calculate current progress relative to target to animate the ring synchronously
+                    const currentPercent = (counter.val / target) * ringPercent;
+                    const offset = totalDash - (totalDash * (currentPercent / 100));
+                    ring.style.strokeDashoffset = offset;
+                }
+            }
         });
     }
-    animateMetric('metric-danger', 73, '%', 2);
-    animateMetric('metric-cities', 6, '', 2.5);
-    animateMetric('metric-savings', 40, '%', 3);
+    animateMetric('metric-danger', 'ring-danger', 73, 73, '%', 2);
+    animateMetric('metric-cities', 'ring-cities', 6, 60, '', 2.5); // 6 out of 10 cities = 60% ring fill
+    animateMetric('metric-savings', 'ring-savings', 40, 40, '%', 3);
 
     // 4. GSAP Advanced Vectorized & Reveal Animations
     gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -364,50 +376,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. BYD SEAL Canvas Image Sequence Scrubbing (Apple Style)
+    // 7. BYD SEAL Canvas + Hologram Overlays (Motion Design Principles Applied)
     const carCanvas = document.getElementById('car-canvas');
-    const carSection = document.getElementById('car-section');
+    const evSection = document.getElementById('car-section');
     
-    if (carCanvas && carSection) {
+    if (carCanvas && evSection) {
         const context = carCanvas.getContext('2d');
         carCanvas.width = 1920;
         carCanvas.height = 1080;
 
         const frameCount = 60;
         const currentFrame = index => (
-            // Expects: assets/car-sequence/frame_0001.png, 0002.png...
             `assets/car-sequence/frame_${(index + 1).toString().padStart(4, '0')}.png`
         );
 
         const images = [];
         const carSequence = { frame: 0 };
 
-        // Preload images
+        // Preload frames
         for (let i = 0; i < frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
             images.push(img);
         }
 
-        // Draw the first frame when it loads
         images[0].onload = render;
-        
-        // Fallback placeholder if no images exist yet
         images[0].onerror = () => {
-            console.warn("BYD SEAL frames not found in 'assets/car-sequence/'. Displaying placeholder rect for demo.");
-            context.fillStyle = 'rgba(0, 242, 255, 0.1)';
+            console.warn("BYD frames not found. Displaying placeholder.");
+            context.fillStyle = 'rgba(0, 242, 255, 0.05)';
             context.fillRect(660, 340, 600, 400);
-            context.fillStyle = '#fff';
-            context.font = '30px monospace';
-            context.fillText('[ BYD SEAL 360 RENDER PLACEHOLDER ]', 680, 550);
-            context.font = '20px monospace';
-            context.fillText('Use tools/extract_frames.py to generate frames', 700, 600);
         };
 
         function render() {
             const frameIndex = Math.round(carSequence.frame);
             context.clearRect(0, 0, carCanvas.width, carCanvas.height);
-            // Draw the image centered
             if(images[frameIndex] && images[frameIndex].complete && images[frameIndex].naturalWidth !== 0) {
                 const img = images[frameIndex];
                 const hRatio = carCanvas.width / img.width;
@@ -415,62 +417,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ratio  = Math.min(hRatio, vRatio);
                 const centerShift_x = (carCanvas.width - img.width*ratio) / 2;
                 const centerShift_y = (carCanvas.height - img.height*ratio) / 2;  
-                context.drawImage(img, 0,0, img.width, img.height,
-                                centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);  
-            } else {
-                // Placeholder rendering if frames are missing
-                context.save();
-                context.translate(carCanvas.width/2, carCanvas.height/2);
-                context.rotate(frameIndex * 0.1);
-                context.fillStyle = `rgba(0, 242, 255, ${0.1 + (frameIndex/120)})`;
-                context.fillRect(-300, -200, 600, 400);
-                context.restore();
+                context.drawImage(img, 0,0, img.width, img.height, centerShift_x, centerShift_y, img.width*ratio, img.height*ratio);  
             }
         }
 
         // Setup the GSAP timeline
-        const carTl = gsap.timeline({
+        const evTl = gsap.timeline({
             scrollTrigger: {
-                trigger: carSection,
+                trigger: "#car-pin",
                 start: "top top",
-                end: "bottom bottom",
-                scrub: 0.5, // Slightly snappy scrub
-                pin: "#car-pin", // Pin the container while scrolling through the 400vh section
+                end: "+=3000", // Explicit scroll depth to fix pinning duplication
+                scrub: 1.5, // 1.5s dampening matches Emil's smooth scroll requirement
+                pin: true,
+                pinSpacing: true
             }
         });
 
-        // Initialize hotspots
-        gsap.set('.hs-line', { width: 0 });
-        gsap.set('.hs-content', { opacity: 0, x: 20 });
-        gsap.set('.hs-port .hs-content', { x: -20 });
+        // Initialize SVG Hologram states applying Jakub Krehel's materializing blur principle
+        gsap.set('#battery-matrix', { opacity: 0, y: 15, filter: "blur(4px)" });
+        gsap.set('#charge-node', { opacity: 0, y: 15, filter: "blur(4px)" });
+        gsap.set('#aero-lines', { opacity: 0, y: 15, filter: "blur(4px)" });
+        gsap.set('#energy-conduit', { strokeDashoffset: 400 });
+        gsap.set('.wind-flow', { strokeDashoffset: 2000 });
 
-        // Phase 1: Scrub the image sequence frames 0 -> 59
-        carTl.to(carSequence, {
+        // Initialize hotspots with blur
+        gsap.set('.hs-line', { width: 0 });
+        gsap.set('.hs-content', { opacity: 0, x: 20, filter: "blur(4px)" });
+        gsap.set('.hs-port .hs-content', { x: -20, filter: "blur(4px)" });
+
+        // Entire scrub duration covers 0->59 frames
+        evTl.to(carSequence, {
             frame: frameCount - 1,
             snap: "frame",
             ease: "none",
-            duration: 5,
+            duration: 6, // Global track length
             onUpdate: render
-        });
+        }, 0);
 
-        // Concurrently animate hotspots at specific frame positions
-        // Show Battery Hotspot around 20% progress
-        carTl.to('#hs-battery', { opacity: 1, duration: 0.2 }, 1)
-             .to('#hs-battery .hs-line', { width: 150, duration: 0.5 }, 1.2)
-             .to('#hs-battery .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 1.5)
-             .to('#hs-battery', { opacity: 0, duration: 0.3 }, 2.5); // Hide it
+        // --- PHASE 1: Battery Matrix (Frames ~5-20) ---
+        // Enter: blur -> sharp, translate -> 0
+        evTl.to('#battery-matrix', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 0.5)
+            .to('#hs-battery', { opacity: 1, duration: 0.2 }, 0.5)
+            .to('#hs-battery .hs-line', { width: 100, duration: 0.4 }, 0.7)
+            .to('#hs-battery .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 0.9)
+            // Exit: Subtler exit (Jakub principle) - move slightly up, slight blur, fast fade
+            .to('#battery-matrix', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, 2.0)
+            .to('#hs-battery', { opacity: 0, filter: "blur(2px)", duration: 0.3 }, 2.0);
 
-        // Show Port Hotspot around 50% progress
-        carTl.to('#hs-port', { opacity: 1, duration: 0.2 }, 2.6)
-             .to('#hs-port .hs-line', { width: 120, duration: 0.5 }, 2.8)
-             .to('#hs-port .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 3.1)
-             .to('#hs-port', { opacity: 0, duration: 0.3 }, 4.0); // Hide it
+        // --- PHASE 2: Smart Port (Frames ~25-40) ---
+        evTl.to('#charge-node', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 2.5)
+            .to('#energy-conduit', { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 2.5)
+            .to('#hs-port', { opacity: 1, duration: 0.2 }, 2.5)
+            .to('#hs-port .hs-line', { width: 80, duration: 0.4 }, 2.7)
+            .to('#hs-port .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 2.9)
+            .to('#charge-node', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, 4.0)
+            .to('#hs-port', { opacity: 0, filter: "blur(2px)", duration: 0.3 }, 4.0);
 
-        // Show Aero Hotspot near the end
-        carTl.to('#hs-aero', { opacity: 1, duration: 0.2 }, 4.1)
-             .to('#hs-aero .hs-line', { width: 100, duration: 0.5 }, 4.3)
-             .to('#hs-aero .hs-content', { opacity: 1, x: 0, duration: 0.3 }, 4.5)
-             .to('#hs-aero', { opacity: 0, duration: 0.3 }, 4.9);
+        // --- PHASE 3: Aerodynamics (Frames ~45-60) ---
+        evTl.to('#aero-lines', { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, 4.5)
+            .to('.wind-flow', { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 4.5)
+            .to('#hs-aero', { opacity: 1, duration: 0.2 }, 4.5)
+            .to('#hs-aero .hs-line', { width: 120, duration: 0.4 }, 4.7)
+            .to('#hs-aero .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, 4.9)
+            .to('#aero-lines', { opacity: 0, duration: 0.3 }, 5.8)
+            .to('#hs-aero', { opacity: 0, duration: 0.3 }, 5.8);
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

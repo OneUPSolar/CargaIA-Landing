@@ -45,7 +45,7 @@ body {
 .loader-overlay {
     position: fixed;
     inset: 0;
-    background: #020202;
+    background: #020202; /* Very dark background */
     z-index: 99999;
     display: flex;
     flex-direction: column;
@@ -58,54 +58,122 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 242, 255, 0.08) 0%, transparent 60%);
+    background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
     pointer-events: none;
 }
 
 .loader-scanline {
     position: absolute;
     inset: 0;
-    background: linear-gradient(transparent 50%, rgba(0, 242, 255, 0.015) 50%);
+    background: linear-gradient(transparent 50%, rgba(0, 242, 255, 0.02) 50%);
     background-size: 100% 4px;
     pointer-events: none;
     z-index: 1;
 }
 
+/* Huashu Glass Panel */
+.loader-glass-panel {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-card);
+    backdrop-filter: blur(40px);
+    border-radius: 12px;
+    padding: 3.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 0 1px var(--hairline), 
+                inset 0 0 40px rgba(255, 255, 255, 0.02), 
+                0 50px 150px rgba(0,0,0,0.9), 
+                0 0 50px rgba(0, 242, 255, 0.05);
+    overflow: hidden;
+}
+
+/* Corner Accents for Glass Panel */
+.loader-glass-panel::before,
+.loader-glass-panel::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.loader-glass-panel::before {
+    top: -1px; left: -1px;
+    border-top: 1px solid var(--electric-cyan);
+    border-left: 1px solid var(--electric-cyan);
+}
+
+.loader-glass-panel::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 1px solid var(--electric-cyan);
+    border-right: 1px solid var(--electric-cyan);
+}
+
+.loader-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--silver);
+    opacity: 0.6;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 1rem;
+}
+
+.loader-status {
+    color: var(--electric-cyan);
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
 .loader-text {
     font-family: var(--font-heading);
-    font-size: 5rem;
+    font-size: 4.5rem; /* Slightly smaller to fit panel nicely */
     font-weight: 200;
-    letter-spacing: 0.5em;
+    letter-spacing: 0.4em;
     display: flex;
     overflow: hidden;
     position: relative;
-    z-index: 2;
-    text-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
 }
 
 .loader-text span {
     display: inline-block;
     transform: translateY(100%);
     opacity: 0;
+    color: var(--ink-80);
+}
+
+.loader-text span.logo-accent {
+    color: var(--ink);
+    font-weight: 400;
 }
 
 .loader-progress-container {
-    width: 300px;
-    margin-top: 3.5rem;
+    width: 100%;
+    min-width: 350px;
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
-    position: relative;
-    z-index: 2;
+    gap: 1.5rem;
 }
 
 .loader-bar-bg {
     width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
+    height: 2px;
+    background: var(--dim);
     position: relative;
     overflow: hidden;
+    border-radius: 2px;
 }
 
 .loader-bar-fill {
@@ -114,14 +182,28 @@ body {
     top: 0;
     bottom: 0;
     width: 0%;
-    background: var(--electric-cyan);
-    box-shadow: 0 0 10px var(--electric-cyan), 0 0 20px var(--electric-cyan);
+    background: linear-gradient(90deg, transparent, var(--electric-cyan));
+    box-shadow: 0 0 15px var(--electric-cyan), 0 0 30px var(--electric-cyan);
+    border-radius: 2px;
+}
+
+/* Glitch/Electric flare at the end of the progress bar */
+.loader-bar-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    bottom: -2px;
+    width: 4px;
+    background: #fff;
+    box-shadow: 0 0 10px #fff, 0 0 20px var(--electric-cyan);
+    border-radius: 4px;
 }
 
 .loader-terminal {
     color: var(--electric-cyan);
-    font-size: 0.6rem;
-    letter-spacing: 0.4em;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
     opacity: 0.8;
 }
 
@@ -143,9 +225,8 @@ body {
     content: '';
     position: absolute; inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
-    opacity: 0.03;
+    opacity: 0.08;
     pointer-events: none;
-    mix-blend-mode: overlay;
     z-index: 200;
 }
 
@@ -536,28 +617,83 @@ h1, h2, h3 {
     color: var(--electric-cyan);
 }
 
-/* Metrics Section */
+/* Metrics Section HUD Rings */
 .metrics-grid {
-    margin-top: 5rem;
+    margin-top: 6rem;
     display: flex;
-    gap: 5rem; /* Reduced from 8rem */
+    justify-content: center;
+    gap: 6rem;
 }
 
-.metric-item {
-    text-align: left;
+.hud-ring-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ring-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 0 1px var(--hairline), inset 0 0 30px rgba(255, 255, 255, 0.02), 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.ring-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 2;
+}
+
+.ring-fill {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 465; /* 2 * PI * 74 ~= 465 */
+    stroke-dashoffset: 465; /* start empty */
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.danger-ring { stroke: #ff4444; }
+.cyan-ring { stroke: var(--electric-cyan); }
+.indigo-ring { stroke: var(--electric-indigo); }
+
+.ring-content {
+    position: relative;
+    z-index: 2;
 }
 
 .metric-val {
-    font-size: 3.5rem;
-    font-weight: 100;
-    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 200;
+    color: var(--ink);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    line-height: 1;
 }
 
 .metric-lab {
+    font-family: var(--font-mono);
     font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    color: var(--text-muted);
-    margin-top: 1rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-60);
 }
 
 /* Countdown Section */
@@ -723,33 +859,46 @@ h1, h2, h3 {
     background: var(--bg-card);
     border: none;
     border-radius: 12px;
-    padding: 3rem 2.5rem;
-    width: 280px;
+    padding: 3.5rem 2.5rem;
+    width: 290px;
     text-align: center;
     backdrop-filter: blur(40px);
-    box-shadow: 0 0 0 1px var(--hairline), inset 0 0 30px rgba(255, 255, 255, 0.03), 0 10px 30px rgba(0, 0, 0, 0.8);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 0 1px var(--hairline), 
+                inset 0 0 40px rgba(255, 255, 255, 0.02), 
+                0 50px 150px rgba(0, 0, 0, 0.9);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .comparison-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 0 1px var(--dim), inset 0 0 30px rgba(255, 255, 255, 0.06), 0 20px 40px rgba(0, 0, 0, 1);
 }
 
 .comparison-danger {
-    box-shadow: inset 0 0 30px rgba(255, 68, 68, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 1px var(--hairline), 
+                inset 0 0 40px rgba(255, 68, 68, 0.05), 
+                0 50px 150px rgba(0, 0, 0, 0.9),
+                0 0 50px rgba(255, 68, 68, 0.05);
 }
 
 .comparison-danger:hover {
-    box-shadow: inset 0 0 30px rgba(255, 68, 68, 0.1), 0 20px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0 1px rgba(255, 68, 68, 0.5), 
+                inset 0 0 50px rgba(255, 68, 68, 0.1), 
+                0 60px 160px rgba(0, 0, 0, 1),
+                0 0 80px rgba(255, 68, 68, 0.1);
 }
 
 .comparison-safe {
-    box-shadow: inset 0 0 30px rgba(0, 242, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 1px var(--hairline), 
+                inset 0 0 40px rgba(0, 242, 255, 0.05), 
+                0 50px 150px rgba(0, 0, 0, 0.9),
+                0 0 50px rgba(0, 242, 255, 0.05);
 }
 
 .comparison-safe:hover {
-    box-shadow: inset 0 0 30px rgba(0, 242, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0 1px var(--electric-cyan), 
+                inset 0 0 50px rgba(0, 242, 255, 0.1), 
+                0 60px 160px rgba(0, 0, 0, 1),
+                0 0 80px rgba(0, 242, 255, 0.1);
 }
 
 .comparison-icon {
@@ -1093,49 +1242,58 @@ h1, h2, h3 {
     gap: 0;
     max-width: 1100px;
     margin: 6rem auto 0;
-    border: 1px solid var(--hairline);
     border-radius: 12px;
     overflow: hidden;
     background: var(--bg-card);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(40px);
+    box-shadow: 0 0 0 1px var(--hairline), 
+                inset 0 0 40px rgba(255, 255, 255, 0.02), 
+                0 50px 150px rgba(0,0,0,0.9);
 }
 
 .spec-item {
     border-right: 1px solid var(--hairline);
-    padding: 4rem 2rem;
+    padding: 4.5rem 2rem;
     text-align: center;
     position: relative;
     background: transparent;
-    transition: background 0.3s;
+    transition: background 0.4s ease;
 }
 
 .spec-item:last-child { border-right: none; }
 
-.spec-item:hover { background: rgba(0,242,255,0.02); }
+.spec-item:hover { 
+    background: rgba(0,242,255,0.03); 
+    box-shadow: inset 0 0 30px rgba(0,242,255,0.05);
+}
 
 .spec-meta {
-    font-size: 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
     color: var(--electric-cyan);
-    opacity: 0.4;
-    letter-spacing: 0.2em;
-    margin-bottom: 1.5rem;
+    opacity: 0.6;
+    letter-spacing: 0.25em;
+    margin-bottom: 2rem;
     display: block;
 }
 
 .spec-val {
-    font-size: 3.5rem;
+    font-family: var(--font-heading);
+    font-size: 3.8rem;
     font-weight: 100;
     display: block;
+    color: var(--ink);
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
 }
 
 .spec-lab {
-    font-size: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
     letter-spacing: 0.25em;
-    opacity: 0.3;
+    color: var(--ink-60);
     display: block;
-    margin-top: 1rem;
-    line-height: 1.6;
+    margin-top: 1.5rem;
+    line-height: 1.8;
 }
 
 /* Features Grid */
@@ -1281,11 +1439,10 @@ h1, h2, h3 {
     .layer { padding: 6rem 0; }
 }
 
-/* Car Scroll Section (BYD SEAL 2.5D) */
+/* Car Scroll Section (Photorealistic Images) */
 .car-scroll-section {
     position: relative;
     width: 100%;
-    height: 400vh; 
     background: #000;
 }
 
@@ -1328,6 +1485,67 @@ h1, h2, h3 {
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8));
+}
+
+.ev-svg-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ev-wireframe {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+}
+
+.ev-path {
+    fill: none;
+    stroke: var(--electric-cyan);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.battery-casing {
+    stroke: rgba(0, 242, 255, 0.4);
+    fill: rgba(0, 242, 255, 0.05);
+}
+
+.battery-cells {
+    stroke: var(--electric-cyan);
+    stroke-width: 2;
+    opacity: 0.8;
+}
+
+.charge-port-bg {
+    stroke: rgba(0, 242, 255, 0.5);
+    fill: rgba(0, 0, 0, 0.5);
+}
+
+.charge-port-core {
+    fill: var(--electric-cyan);
+    opacity: 0.8;
+}
+
+.energy-line {
+    stroke: #fff;
+    stroke-width: 3;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    filter: url(#neon-glow-intense);
+}
+
+.wind-flow {
+    stroke: rgba(0, 242, 255, 0.5);
+    stroke-width: 2;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    filter: url(#neon-glow);
 }
 
 .car-hotspots {
