@@ -35,7 +35,7 @@ export default function AppPreview() {
 
   const kwhToDeliver = (batteryKwh * (targetCharge - currentCharge)) / 100;
   const kwhDelivered = Math.max(0, (batteryKwh * (simulatedCharge - currentCharge)) / 100);
-  const costPerKwh = 1.2; // Pesos
+  const costPerKwh = 8.0; // Pesos
   const totalCost = kwhDelivered * costPerKwh;
 
   const handleStart = () => {
@@ -114,8 +114,8 @@ export default function AppPreview() {
             {/* Stats Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '24px' }}>
               <div style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.02)' }}>
-                <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginBottom: '4px' }}>ENERGÍA (kWh)</div>
-                <div style={{ fontSize: '18px', fontWeight: '500' }}>+{kwhDelivered.toFixed(1)}</div>
+                <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginBottom: '4px' }}>RECARGA AÑADIDA</div>
+                <div style={{ fontSize: '18px', fontWeight: '500' }}>+{Math.round(simulatedCharge - currentCharge)}%</div>
               </div>
               <div style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.02)' }}>
                 <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginBottom: '4px' }}>COSTO EST.</div>
@@ -126,13 +126,6 @@ export default function AppPreview() {
 
           {/* Controls */}
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '8px', color: 'rgba(255,255,255,0.7)' }}>
-                <span>Capacidad Batería</span>
-                <span>{batteryKwh} kWh</span>
-              </div>
-              <input type="range" min="40" max="120" value={batteryKwh} onChange={(e) => setBatteryKwh(Number(e.target.value))} disabled={isCharging} style={{ width: '100%', accentColor: 'var(--electric-cyan)' }} />
-            </div>
 
             <div style={{ marginBottom: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '8px', color: 'rgba(255,255,255,0.7)' }}>
