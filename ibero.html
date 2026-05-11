@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CargaIA × Ibero Tijuana | Programa de Prácticas con Certificación</title>
     <meta name="description" content="Alianza estratégica Maxify Technologies × Universidad Iberoamericana Tijuana. 15 prácticas profesionales con certificación oficial en electromovilidad, fotovoltaicos e inteligencia artificial.">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://cargaia.com/ibero">
     <meta property="og:title" content="CargaIA × Ibero Tijuana — Programa de Prácticas con Certificación">
     <meta property="og:description" content="Made in Mexico, US-Founded. La primera red EV diseñada por estudiantes de Ibero TJ.">
+    <meta property="og:image" content="https://cargaia.com/og-card.jpg">
+    <meta property="og:url" content="https://cargaia.com/ibero">
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CargaIA × Ibero Tijuana — Programa de Prácticas con Certificación">
+    <meta name="twitter:description" content="Made in Mexico, US-Founded. La primera red EV diseñada por estudiantes de Ibero TJ.">
+    <meta name="twitter:image" content="https://cargaia.com/og-card.jpg">
+    <meta name="theme-color" content="#00f2ff">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -463,7 +473,7 @@
                     <h2 class="section-title">¿Eres estudiante de Ibero TJ?<br><span class="accent">Empieza aquí.</span></h2>
                     <p class="section-sub">Las primeras 15 plazas son para la cohorte 2026. Llena la forma — te contactamos en 48 horas.</p>
                 </div>
-                <form id="apply-form" class="apply-form" action="https://formspree.io/f/2995824397954055612" method="POST">
+                <form id="apply-form" class="apply-form">
                     <div class="form-row">
                         <div class="form-field">
                             <label for="nombre" class="mono">NOMBRE COMPLETO</label>
@@ -599,10 +609,14 @@
                 btn.textContent = 'ENVIANDO...';
                 try {
                     const data = new FormData(form);
-                    const res = await fetch(form.action, {
+                    const payload = Object.fromEntries(data.entries());
+                    payload.timestamp = new Date().toISOString();
+                    
+                    const res = await fetch('https://script.google.com/macros/s/AKfycbyGC43LO1vYrCql73lZvZ1mRHByTeToEQtSki2W_wJ-XezAt0IcVqgF75d6ORI0RyXDdg/exec', {
                         method: 'POST',
-                        body: data,
-                        headers: { 'Accept': 'application/json' }
+                        mode: 'cors',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify(payload)
                     });
                     if (res.ok) {
                         form.innerHTML = `

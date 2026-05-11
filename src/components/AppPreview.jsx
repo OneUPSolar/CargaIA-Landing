@@ -35,7 +35,7 @@ export default function AppPreview() {
 
   const kwhToDeliver = (batteryKwh * (targetCharge - currentCharge)) / 100;
   const kwhDelivered = Math.max(0, (batteryKwh * (simulatedCharge - currentCharge)) / 100);
-  const costPerKwh = 8.0; // Pesos
+  const costPerKwh = 8.0; // Estimación basada en tarifa CFE DAC promedio (MXN/kWh)
   const totalCost = kwhDelivered * costPerKwh;
 
   const handleStart = () => {
@@ -121,6 +121,9 @@ export default function AppPreview() {
                 <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginBottom: '4px' }}>COSTO EST.</div>
                 <div style={{ fontSize: '18px', fontWeight: '500', color: 'var(--neon-green)' }}>${totalCost.toFixed(2)}</div>
               </div>
+            </div>
+            <div style={{ marginTop: '12px', fontSize: '9px', color: 'rgba(255,255,255,0.3)', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+              *Estimación basada en tarifa CFE DAC promedio.
             </div>
           </div>
 

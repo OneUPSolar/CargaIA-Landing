@@ -445,14 +445,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeoutId = setTimeout(() => controller.abort(), 8000);
 
         try {
-            await fetch(SHEETS_WEBHOOK_URL, {
+            const res = await fetch(SHEETS_WEBHOOK_URL, {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(payload),
                 signal: controller.signal
             });
             clearTimeout(timeoutId);
+            if (!res.ok) throw new Error('Submission failed');
             return true;
         } catch (error) {
             clearTimeout(timeoutId);
