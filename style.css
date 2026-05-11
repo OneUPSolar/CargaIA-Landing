@@ -1688,3 +1688,246 @@ h1, h2, h3 {
 }
 
 .hero-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════ */
+/* RESERVATIONS SECTION                                         */
+/* ═══════════════════════════════════════════════════════════ */
+.reservations-section {
+    padding: 10rem 0 12rem;
+    border-bottom: 1px solid var(--hairline);
+    text-align: center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(2,6,10,0.65) 50%, rgba(0,0,0,0.4) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.reservations-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(0, 242, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.reservations-label {
+    color: var(--electric-cyan);
+    opacity: 0.7;
+    letter-spacing: 0.4em;
+    font-size: 0.6rem;
+    margin-bottom: 2.5rem;
+}
+
+.reservations-title {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    min-height: 4rem;
+}
+
+.reservations-intro {
+    max-width: 640px;
+    margin: 0 auto 4rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 1rem;
+    line-height: 1.6;
+    min-height: 3rem;
+}
+
+/* Progress */
+.reservations-progress {
+    max-width: 720px;
+    margin: 0 auto 5rem;
+}
+.reservations-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.reservations-progress-count {
+    color: #fff;
+    font-weight: 400;
+}
+.reservations-progress-amount {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.65rem;
+}
+.reservations-progress-track {
+    position: relative;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+}
+.reservations-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: linear-gradient(90deg, rgba(0,242,255,0.4) 0%, var(--electric-cyan) 100%);
+    box-shadow: 0 0 16px rgba(0,242,255,0.45), 0 0 4px rgba(0,242,255,0.7);
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+.reservations-progress-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #fff;
+    box-shadow: 0 0 12px #fff;
+    opacity: 0.9;
+}
+.reservations-progress-hud {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.6rem;
+    pointer-events: none;
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.3);
+}
+
+/* Tier grid */
+.reservations-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.reservation-tier {
+    position: relative;
+    background: rgba(8,12,18,0.55);
+    border: 1px solid var(--hairline);
+    padding: 2rem 1.8rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.4s ease, transform 0.4s ease, background 0.4s ease;
+}
+.reservation-tier:hover {
+    border-color: rgba(0,242,255,0.4);
+    background: rgba(10,16,24,0.7);
+    transform: translateY(-2px);
+}
+.reservation-tier-featured {
+    border-color: rgba(0,242,255,0.35);
+    background: rgba(0,32,40,0.45);
+}
+.reservation-tier-featured:hover {
+    border-color: rgba(0,242,255,0.65);
+}
+.tier-badge {
+    position: absolute;
+    top: -10px;
+    left: 1.8rem;
+    background: var(--electric-cyan);
+    color: #00121a;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+}
+.tier-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 1.5rem;
+}
+.reservation-tier-featured .tier-tag {
+    color: var(--electric-cyan);
+}
+.tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 1.8rem;
+}
+.tier-price-amount {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    font-size: 2.4rem;
+    letter-spacing: 0.01em;
+    color: #fff;
+    line-height: 1;
+}
+.tier-price-currency {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.4);
+}
+.tier-perks {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    flex: 1;
+}
+.tier-perks li {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.6rem;
+    display: flex;
+    gap: 0.55rem;
+}
+.tier-perk-mark {
+    color: var(--electric-cyan);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    opacity: 0.65;
+}
+.tier-cta {
+    appearance: none;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    padding: 0.95rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+    width: 100%;
+}
+.tier-cta:hover {
+    border-color: var(--electric-cyan);
+    background: rgba(0,242,255,0.07);
+    color: var(--electric-cyan);
+}
+.reservation-tier-featured .tier-cta {
+    border-color: var(--electric-cyan);
+    color: var(--electric-cyan);
+}
+.reservation-tier-featured .tier-cta:hover {
+    background: var(--electric-cyan);
+    color: #00121a;
+}
+
+.reservations-fineprint {
+    margin-top: 3rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    min-height: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .reservations-tiers {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+    }
+    .reservations-section { padding: 7rem 0 8rem; }
+    .reservations-progress-meta { flex-direction: column; gap: 0.4rem; }
+}

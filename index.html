@@ -169,6 +169,82 @@
             </div>
         </section>
         <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 1.5 — RESERVATIONS / TIER SELECT      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="reservations-section" id="reservations-section">
+            <div class="container reveal-on-scroll">
+                <div class="reservations-label mono">[FASE_1 // <span id="reservations-label-mode"></span>]</div>
+
+                <h2 class="reservations-title" id="reservations-title"><span></span><span class="cursor">_</span></h2>
+                <p class="reservations-intro" id="reservations-intro"></p>
+
+                <!-- Progress bar -->
+                <div class="reservations-progress">
+                    <div class="reservations-progress-meta mono">
+                        <span class="reservations-progress-count"><span id="rsv-filled">23</span> / <span id="rsv-total">200</span> CUPOS</span>
+                        <span class="reservations-progress-amount">~$<span id="rsv-dollars">11,500</span> USD COMPROMETIDOS</span>
+                    </div>
+                    <div class="reservations-progress-track">
+                        <div class="reservations-progress-fill" id="rsv-fill" style="width: 11.5%"></div>
+                        <div class="reservations-progress-hud mono">
+                            <span class="reservations-progress-hud-l">START</span>
+                            <span class="reservations-progress-hud-r">GOAL_200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier cards -->
+                <div class="reservations-tiers">
+                    <div class="reservation-tier" data-tier="standard">
+                        <div class="tier-tag mono">STANDARD</div>
+                        <div class="tier-price">
+                            <span class="tier-price-amount">$10,000</span>
+                            <span class="tier-price-currency">MXN</span>
+                        </div>
+                        <ul class="tier-perks">
+                            <li><span class="tier-perk-mark">»</span> Reservación de instalación Fase 1</li>
+                            <li><span class="tier-perk-mark">»</span> Aplicable a primera mensualidad</li>
+                            <li><span class="tier-perk-mark">»</span> 100% reembolsable si no podemos instalar</li>
+                        </ul>
+                        <button class="tier-cta mono" data-tier-cta="standard">RESERVAR_STANDARD</button>
+                    </div>
+
+                    <div class="reservation-tier reservation-tier-featured" data-tier="priority">
+                        <div class="tier-badge mono">RECOMENDADO</div>
+                        <div class="tier-tag mono">PRIORITY</div>
+                        <div class="tier-price">
+                            <span class="tier-price-amount">$25,000</span>
+                            <span class="tier-price-currency">MXN</span>
+                        </div>
+                        <ul class="tier-perks">
+                            <li><span class="tier-perk-mark">»</span> Todo lo de STANDARD</li>
+                            <li><span class="tier-perk-mark">»</span> Instalación prioritaria en cohorte 1</li>
+                            <li><span class="tier-perk-mark">»</span> Visita de site survey sin costo</li>
+                            <li><span class="tier-perk-mark">»</span> Tarifa congelada 24 meses</li>
+                        </ul>
+                        <button class="tier-cta mono" data-tier-cta="priority">RESERVAR_PRIORITY</button>
+                    </div>
+
+                    <div class="reservation-tier" data-tier="founder">
+                        <div class="tier-tag mono">FOUNDER</div>
+                        <div class="tier-price">
+                            <span class="tier-price-amount">$50,000</span>
+                            <span class="tier-price-currency">MXN</span>
+                        </div>
+                        <ul class="tier-perks">
+                            <li><span class="tier-perk-mark">»</span> Todo lo de PRIORITY</li>
+                            <li><span class="tier-perk-mark">»</span> Tarifa de fundador de por vida</li>
+                            <li><span class="tier-perk-mark">»</span> Acceso anticipado a V2G / arbitraje</li>
+                            <li><span class="tier-perk-mark">»</span> Reconocimiento público (opcional)</li>
+                        </ul>
+                        <button class="tier-cta mono" data-tier-cta="founder">RESERVAR_FOUNDER</button>
+                    </div>
+                </div>
+
+                <p class="reservations-fineprint mono" id="reservations-fineprint"></p>
+            </div>
+        </section>
+        <!-- ═══════════════════════════════════════════ -->
         <!-- LAYER 2 — THE PROBLEM                      -->
         <!-- ═══════════════════════════════════════════ -->
         <section class="layer layer-problem" id="layer2">

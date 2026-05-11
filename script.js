@@ -306,6 +306,81 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // ─────────────────────────────────────────────────
+    // RESERVATIONS — bilingual label + title + intro
+    // ─────────────────────────────────────────────────
+    sectionTypewriter(
+        'reservations-title', 'reservations-intro',
+        'Reserve your install.',
+        'Reserva tu instalación.',
+        'Lock in Fase 1 Tijuana. Choose your tier — your deposit applies to your first monthly bill, or is fully refunded if your site does not qualify.',
+        'Asegura tu lugar en Fase 1 Tijuana. Elige tu tier — tu depósito aplica a tu primera mensualidad, o se reembolsa 100% si tu sitio no califica.'
+    );
+
+    // Cycle the [FASE_1 // ...] mode label between ES / EN
+    (function cycleReservationsLabel() {
+        const el = document.getElementById('reservations-label-mode');
+        if (!el) return;
+        const modes = ['CUPOS_RESERVADOS', 'SLOTS_RESERVED'];
+        let i = 0;
+        el.textContent = modes[0];
+        setInterval(() => {
+            i = (i + 1) % modes.length;
+            el.textContent = modes[i];
+        }, 3500);
+    })();
+
+    // Cycle the fineprint between ES / EN
+    (function cycleReservationsFineprint() {
+        const el = document.getElementById('reservations-fineprint');
+        if (!el) return;
+        const lines = [
+            'DEPÓSITO 100% REEMBOLSABLE · SUJETO A CALIFICACIÓN DE SITIO',
+            'DEPOSIT 100% REFUNDABLE · SUBJECT TO SITE QUALIFICATION'
+        ];
+        let i = 0;
+        el.textContent = lines[0];
+        setInterval(() => {
+            i = (i + 1) % lines.length;
+            el.textContent = lines[i];
+        }, 3500);
+    })();
+
+    // Tier CTA — placeholder (Stripe wires here later)
+    document.querySelectorAll('[data-tier-cta]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tier = e.currentTarget.getAttribute('data-tier-cta');
+            // For now, scroll to the waitlist form and prefill a hidden field if you want.
+            const target = document.getElementById('waitlist') || document.getElementById('cta');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            // TODO: replace with Stripe Checkout session create
+            console.log('[CARGAIA] tier reservation requested:', tier);
+        });
+    });
+
+    // Animate progress bar fill on scroll-in
+    (function animateReservationsProgress() {
+        const fillEl = document.getElementById('rsv-fill');
+        const filledEl = document.getElementById('rsv-filled');
+        if (!fillEl || !filledEl) return;
+        const filled = parseInt(filledEl.textContent, 10) || 0;
+        const total = parseInt(document.getElementById('rsv-total').textContent, 10) || 200;
+        const pct = Math.max(0, Math.min(100, (filled / total) * 100));
+
+        ScrollTrigger.create({
+            trigger: '#reservations-section',
+            start: 'top 75%',
+            once: true,
+            onEnter: () => {
+                fillEl.style.width = '0%';
+                requestAnimationFrame(() => {
+                    fillEl.style.width = pct + '%';
+                });
+            }
+        });
+    })();
 
     sectionTypewriter(
         'title-problem', 'intro-problem',
