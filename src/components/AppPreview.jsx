@@ -15,9 +15,9 @@ const TARIFFS = {
 };
 
 const TARIFF_LABELS = {
-  madrugada: 'MADRUGADA',
-  dia:       'DÍA',
-  pico:      'PICO',
+  madrugada: 'SUPER OFF PEAK',
+  dia:       'OFF PEAK',
+  pico:      'ON PEAK',
 };
 
 const TARIFF_RANGES = {
