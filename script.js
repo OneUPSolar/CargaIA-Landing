@@ -599,8 +599,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const hero = document.getElementById('layer1');
         if (!hero) return;
         const heroBottom = hero.getBoundingClientRect().bottom;
-        // Trigger when the user has scrolled past 50% of the hero
-        if (heroBottom < window.innerHeight * 0.5) {
+        // Trigger when the user has scrolled past 40% of the hero
+        if (heroBottom < window.innerHeight * 0.6) {
             modalAutoOpened = true;
             window.removeEventListener('scroll', onFirstScrollPastHero);
             if (typeof window.openSimulatorModal === 'function') {
