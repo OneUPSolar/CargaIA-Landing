@@ -608,9 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //     Also reset browser scroll restoration so reloading the page
     //     puts the user back at the top, where they should start.
 
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
+
 
     let modalAutoOpened = false;
     let scrollTriggerArmed = false;
