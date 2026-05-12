@@ -25,12 +25,17 @@ const iosFrameStyles = {
     borderRadius: 60,
     boxShadow: '0 0 0 2px #1f2937, 0 20px 60px rgba(0,0,0,0.3)',
     position: 'relative',
+    maxWidth: '380px',
+    width: 'min(90vw, 380px)',
+    aspectRatio: '9 / 19.5',
   },
   screen: {
     position: 'relative',
     borderRadius: 48,
     overflow: 'hidden',
     background: '#fff',
+    width: '100%',
+    height: '100%',
   },
   statusBar: {
     position: 'absolute',
@@ -136,11 +141,9 @@ function IosFrame({
   const textColor = darkMode ? '#fff' : '#000';
 
   return (
-    <div style={iosFrameStyles.wrapper}>
+    <div className="ios-frame-bezel" style={iosFrameStyles.wrapper}>
       <div style={{
         ...iosFrameStyles.screen,
-        width,
-        height,
         background: darkMode ? '#000' : '#fff',
       }}>
         {showStatusBar && (

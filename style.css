@@ -1790,15 +1790,16 @@ h1, h2, h3 {
 }
 .reservations-progress-hud {
     position: absolute;
-    inset: 0;
+    top: -1.4rem;
+    inset-inline: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0.6rem;
+    padding: 0;
     pointer-events: none;
     font-size: 0.5rem;
     letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.4);
 }
 
 /* Tier grid */
@@ -1934,4 +1935,104 @@ h1, h2, h3 {
     }
     .reservations-section { padding: 7rem 0 8rem; }
     .reservations-progress-meta { flex-direction: column; gap: 0.4rem; }
+}
+
+.brand-i {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+@media (max-width: 768px) {
+    .loader-text {
+        font-size: clamp(2.5rem, 14vw, 7rem) !important;
+        white-space: nowrap;
+        letter-spacing: 0.2em;
+    }
+    .loader-header {
+        font-size: clamp(0.55rem, 2.2vw, 0.8rem);
+        padding: 0 1rem;
+        gap: 0.5rem;
+    }
+    .loader-glass-panel {
+        padding: 1.5rem 1rem;
+        max-width: 92vw;
+    }
+    .loader-terminal {
+        font-size: clamp(0.5rem, 2vw, 0.75rem);
+    }
+    .spec-grid,
+    .metrics-grid,
+    .stats-grid,
+    .grid-2,
+    .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .spec-grid > *,
+    .metrics-grid > *,
+    .stats-grid > * {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .car-scroll-section {
+        overflow: hidden;
+    }
+    .ev-image-container {
+        width: 100% !important;
+        max-width: 100vw;
+        left: 0 !important;
+        transform: translate(0, -50%) !important;
+    }
+    .ev-photo {
+        width: 100% !important;
+        max-width: 100vw;
+        left: 0 !important;
+        transform: translate(0, -50%) !important;
+        object-fit: cover;
+    }
+    .hotspot {
+        position: absolute !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        width: auto !important;
+        max-width: calc(100vw - 2rem);
+    }
+    .hs-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        transform: none !important;
+    }
+    .hs-line {
+        display: none !important;
+    }
+    .hs-battery, .hs-port, .hs-aero {
+        top: auto !important;
+        bottom: 8% !important;
+    }
+    .layer {
+        position: relative;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .layer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 1px;
+        background: var(--electric-cyan);
+        opacity: 0.4;
+    }
+    .ios-frame-bezel,
+    [class*="iosFrame"] {
+        padding: 8px !important;
+        border-radius: 32px !important;
+    }
 }
