@@ -581,13 +581,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. Hero Simulator CTA
+    // 5. Hero Simulator CTA — manual trigger.
+    // Also marks modalAutoOpened so the scroll-trigger doesn't fire later.
     const simulatorCTA = document.getElementById('open-simulator-cta');
     if (simulatorCTA) {
         simulatorCTA.addEventListener('click', () => {
             if (typeof window.openSimulatorModal === 'function') {
                 window.openSimulatorModal();
             }
+            // Prevent the scroll-trigger from auto-opening later in this session
+            modalAutoOpened = true;
+            window.removeEventListener('scroll', onFirstScrollPastHero);
         });
     }
 
