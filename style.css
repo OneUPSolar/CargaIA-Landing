@@ -2056,3 +2056,420 @@ html, body {
         border-radius: 32px !important;
     }
 }
+
+  .hero-cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+  }
+
+  .hero-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    padding: 1.1rem 1.75rem;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-cta-icon {
+    display: inline-block;
+    font-size: 0.85em;
+    transform: translateY(-1px);
+  }
+
+  .hero-cta-hint {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 768px) {
+    .hero-cta-block { align-items: stretch; }
+    .hero-cta-button { width: 100%; justify-content: center; }
+    .hero-cta-hint { text-align: center; }
+  }
+
+  /* ════════════════════════════════════════════════════════
+     SIMULATOR MODAL — app-switcher style, multi-screen flow
+     ════════════════════════════════════════════════════════ */
+
+  .sim-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: simBackdropIn 0.4s ease-out;
+  }
+
+  @keyframes simBackdropIn {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to   { opacity: 1; backdrop-filter: blur(16px) saturate(1.2); }
+  }
+
+  .sim-modal-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10001;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sim-modal-close:hover {
+    background: rgba(255,255,255,0.18);
+    transform: scale(1.05);
+  }
+
+  .sim-modal-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 100%;
+    max-height: 100vh;
+    animation: simStageSlideUp 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  @keyframes simStageSlideUp {
+    from { transform: translateY(60vh); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* App-switcher header (icon + name above the frame) */
+  .sim-app-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #fff;
+  }
+  .sim-app-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #0A0A14;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .sim-app-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* Phone frame — corners-rounded screen container */
+  .sim-phone-frame {
+    width: min(380px, 90vw);
+    aspect-ratio: 9 / 19.5;
+    max-height: 80vh;
+    background: #000;
+    border-radius: 36px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.6),
+      0 10px 30px rgba(0, 242, 255, 0.08),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+  }
+  .sim-phone-screens {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* Each screen layer — slide animations between them */
+  .sim-screen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #0A0A0C 0%, #121216 100%);
+    color: #fff;
+    overflow-y: auto;
+    transition: transform 0.5s cubic-bezier(0.5, 0, 0.2, 1),
+                opacity 0.4s ease;
+  }
+  .sim-screen.is-active    { transform: translateX(0);     opacity: 1; }
+  .sim-screen.is-hidden    { transform: translateX(100%);  opacity: 0; pointer-events: none; }
+  .sim-screen.is-exit-left { transform: translateX(-100%); opacity: 0; pointer-events: none; }
+
+  /* Simulator screen wrapping — kill the inline AppPreview margins */
+  .sim-screen-simulator {
+    padding: 0;
+  }
+  .sim-screen-simulator > div {
+    margin: 0 !important;
+  }
+
+  /* "TU TURNO" CTA overlay that appears after auto-demo */
+  .sim-cta-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(10,10,12,0.98) 0%, rgba(10,10,12,0) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: simCtaFadeIn 0.5s ease-out;
+  }
+  @keyframes simCtaFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .sim-cta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--electric-cyan);
+  }
+  .sim-cta-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--electric-cyan);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+    transition: transform 0.15s ease;
+  }
+  .sim-cta-button:active { transform: scale(0.97); }
+
+  /* Form screen */
+  .sim-form {
+    padding: 1.5rem 1.25rem 1rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .sim-form-header { margin-bottom: 1.25rem; }
+  .sim-form-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--electric-cyan);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+  .sim-form-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    color: #fff;
+  }
+  .sim-form-header p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin: 0.25rem 0 0;
+  }
+  .sim-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+  }
+  .sim-form-field {
+    opacity: 0;
+    transform: translateY(-15px);
+    animation: simFieldDropIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  }
+  @keyframes simFieldDropIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .sim-form-field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
+  }
+  .sim-form-field input,
+  .sim-form-field select {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .sim-form-field input:focus,
+  .sim-form-field select:focus {
+    outline: none;
+    border-color: var(--electric-cyan);
+    background: rgba(0, 242, 255, 0.05);
+  }
+
+  /* PERFIL: tipo de cliente buttons */
+  .sim-form-tipo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .sim-form-tipo-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    color: rgba(255,255,255,0.5);
+    font-family: inherit;
+  }
+  .sim-form-tipo-btn:hover { border-color: rgba(255,255,255,0.15); }
+  .sim-form-tipo-btn.is-selected {
+    background: rgba(0, 242, 255, 0.08);
+    border-color: var(--electric-cyan);
+    color: #fff;
+  }
+  .sim-form-tipo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--electric-cyan);
+  }
+  .sim-form-tipo-btn:not(.is-selected) .sim-form-tipo-label {
+    color: rgba(255,255,255,0.6);
+  }
+  .sim-form-tipo-desc {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .sim-form-error {
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 107, 107, 0.08);
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    border-radius: 6px;
+  }
+
+  .sim-form-submit {
+    margin-top: auto;
+    padding: 1rem;
+    background: var(--electric-cyan);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: translateY(-15px);
+    animation: simFieldDropIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  }
+  .sim-form-submit:disabled {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.3);
+    cursor: not-allowed;
+  }
+
+  /* Success screen */
+  .sim-success {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  .sim-success-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 242, 255, 0.1);
+    border: 1px solid var(--electric-cyan);
+    color: var(--electric-cyan);
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .sim-success-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--electric-cyan);
+    letter-spacing: 0.2em;
+  }
+  .sim-success h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0;
+  }
+  .sim-success p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+  }
+  .sim-success-close {
+    margin-top: 1.5rem;
+    padding: 0.65rem 1.5rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+  }
+
+  /* Mobile tuning */
+  @media (max-width: 768px) {
+    .sim-phone-frame {
+      width: 92vw;
+      max-height: 78vh;
+      border-radius: 28px;
+    }
+    .sim-modal-close {
+      top: 1rem;
+      right: 1rem;
+      width: 38px;
+      height: 38px;
+    }
+  }

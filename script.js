@@ -575,40 +575,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. Hero Waitlist Form
-    const waitlistForm = document.getElementById('waitlist-form');
-    const formSuccess = document.getElementById('form-success');
-
-    if (waitlistForm) {
-        waitlistForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = waitlistForm.querySelector('button');
-            const originalText = submitBtn.textContent;
-
-            submitBtn.textContent = 'ENVIANDO...';
-            submitBtn.disabled = true;
-
-            const payload = {
-                timestamp: new Date().toISOString(),
-                nombre: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                region: document.getElementById('region')?.value || 'tijuana',
-                tipo: 'early_access',
-                fuente: 'Hero Waitlist'
-            };
-
-            try {
-                await submitToSheets(payload);
-                waitlistForm.classList.add('hidden');
-                formSuccess.classList.remove('hidden');
-            } catch (error) {
-                console.error('Error:', error);
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                alert('Error al enviar. Por favor intenta de nuevo.');
+    // 5. Hero Simulator CTA
+    const simulatorCTA = document.getElementById('open-simulator-cta');
+    if (simulatorCTA) {
+        simulatorCTA.addEventListener('click', () => {
+            if (typeof window.openSimulatorModal === 'function') {
+                window.openSimulatorModal();
             }
         });
     }
+
+    // 5b. Scroll-down trigger — opens the modal on first scroll past hero,
+    //     but ONLY if the user hasn't already opened it manually this session.
+    let modalAutoOpened = false;
+    function onFirstScrollPastHero() {
+        if (modalAutoOpened) return;
+        const hero = document.getElementById('layer1');
+        if (!hero) return;
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        // Trigger when the user has scrolled past 50% of the hero
+        if (heroBottom < window.innerHeight * 0.5) {
+            modalAutoOpened = true;
+            window.removeEventListener('scroll', onFirstScrollPastHero);
+            if (typeof window.openSimulatorModal === 'function') {
+                window.openSimulatorModal();
+            }
+        }
+    }
+    window.addEventListener('scroll', onFirstScrollPastHero, { passive: true });
 
     // 6. CTA Pre-Registration Form
     const ctaForm = document.getElementById('cta-form');

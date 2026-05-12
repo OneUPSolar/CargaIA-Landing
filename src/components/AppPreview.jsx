@@ -50,7 +50,7 @@ function formatMinutes(totalMinutes) {
   return m === 0 ? `${h}h` : `${h}h${m}m`;
 }
 
-export default function AppPreview() {
+export default function AppPreview({ autoPlay = false, onAutoPlayComplete } = {}) {
   const [batteryKwh, setBatteryKwh] = useState(82);
   const [currentCharge, setCurrentCharge] = useState(20);
   const [targetCharge, setTargetCharge] = useState(80);
@@ -104,6 +104,49 @@ export default function AppPreview() {
     }
     return () => clearInterval(interval);
   }, [isCharging, simulatedCharge, targetCharge, chargeLevel]);
+
+  // Auto-play demo sequence — runs once when autoPlay prop is true.
+  // Sequence: pause 600ms, animate currentCharge to 25%, animate
+  // targetCharge to 85%, switch to dcfast, start charging, wait until
+  // simulated reaches target, fire callback.
+  useEffect(() => {
+    if (!autoPlay) return;
+    let cancelled = false;
+    let timeouts = [];
+
+    const tick = (fn, ms) => {
+      const id = setTimeout(() => { if (!cancelled) fn(); }, ms);
+      timeouts.push(id);
+    };
+
+    // Brief pause so the user sees the initial state
+    tick(() => setCurrentCharge(25), 400);
+    tick(() => setTargetCharge(85), 900);
+    tick(() => setChargeLevel('dcfast'), 1400);
+    tick(() => {
+      setSimulatedCharge(25);
+      setIsCharging(true);
+    }, 1900);
+
+    return () => {
+      cancelled = true;
+      timeouts.forEach(clearTimeout);
+    };
+  }, [autoPlay]);
+
+  // Fire the onAutoPlayComplete callback when the auto demo finishes.
+  // We watch for the moment isCharging flips false while simulatedCharge
+  // is at (or above) the auto-demo target.
+  useEffect(() => {
+    if (!autoPlay) return;
+    if (!isCharging && simulatedCharge >= 85 && targetCharge === 85) {
+      // Demo done — fire callback after a short beat so user reads the value
+      const id = setTimeout(() => {
+        if (typeof onAutoPlayComplete === 'function') onAutoPlayComplete();
+      }, 700);
+      return () => clearTimeout(id);
+    }
+  }, [autoPlay, isCharging, simulatedCharge, targetCharge, onAutoPlayComplete]);
 
   const kw = CHARGER_KW[chargeLevel] ?? 7;
   const costPerKwh = TARIFFS[tariffWindow][chargeLevel];
