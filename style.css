@@ -1490,8 +1490,9 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    mix-blend-mode: screen; /* Removes black background */
-    filter: brightness(1.2) contrast(1.1); /* Enhances details for holograph look */
+    /* Videos render as full-color backgrounds.
+       mix-blend-mode and filter removed — they were for transparent PNGs. */
+    background: #000;
 }
 
 .car-hotspots {

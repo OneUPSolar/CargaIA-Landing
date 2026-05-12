@@ -475,9 +475,9 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.set('.hs-port .hs-content', { x: -20, filter: "blur(4px)" });
         
         // Initial Image setup: Battery visible, others hidden
-        gsap.set('#ev-img-battery', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)" });
-        gsap.set('#ev-img-port', { opacity: 0, scale: 1.05, filter: "brightness(1.2) contrast(1.1) blur(4px)" });
-        gsap.set('#ev-img-aero', { opacity: 0, scale: 1.05, filter: "brightness(1.2) contrast(1.1) blur(4px)" });
+        gsap.set('#ev-img-battery', { opacity: 1, scale: 1, filter: "blur(0px)" });
+        gsap.set('#ev-img-port', { opacity: 0, scale: 1.05, filter: "blur(4px)" });
+        gsap.set('#ev-img-aero', { opacity: 0, scale: 1.05, filter: "blur(4px)" });
 
         // --- PHASE 1: Battery Matrix (0-33%) ---
         evTl.to('#ev-img-battery', { scale: 1.05, duration: 1.5, ease: "none" })
@@ -489,8 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- PHASE 2: Smart Port (33-66%) ---
         // Crossfade to port image while fading out old text
         evTl.to('#hs-battery', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
-            .to('#ev-img-battery', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(4px)", duration: 0.8 }, "<")
-            .to('#ev-img-port', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to('#ev-img-battery', { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
+            .to('#ev-img-port', { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
             .to('#hs-port', { opacity: 1, duration: 0.2 }, "-=1.2")
             .to('#hs-port .hs-line', { width: 80, duration: 0.4 }, "-=1.0")
             .to('#hs-port .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
@@ -499,15 +499,36 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- PHASE 3: Aerodynamics (66-100%) ---
         // Crossfade to aero image while fading out old text
         evTl.to('#hs-port', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
-            .to('#ev-img-port', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(4px)", duration: 0.8 }, "<")
-            .to('#ev-img-aero', { opacity: 1, scale: 1, filter: "brightness(1.2) contrast(1.1) blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to('#ev-img-port', { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
+            .to('#ev-img-aero', { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
             .to('#hs-aero', { opacity: 1, duration: 0.2 }, "-=1.2")
             .to('#hs-aero .hs-line', { width: 120, duration: 0.4 }, "-=1.0")
             .to('#hs-aero .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
             .to({}, { duration: 0.5 }) // Reduced hold to fix blank space
             .to('#hs-aero', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.5 })
-            .to('#ev-img-aero', { opacity: 0, filter: "brightness(1.2) contrast(1.1) blur(6px)", duration: 0.8 }, "<");
+            .to('#ev-img-aero', { opacity: 0, filter: "blur(6px)", duration: 0.8 }, "<");
     }
+
+    // Pause EV videos when scrolled out of view to save battery/CPU.
+    // Resume when scrolled back in.
+    (function manageEvVideos() {
+        const videos = document.querySelectorAll('#ev-image-container video');
+        if (!videos.length || typeof IntersectionObserver === 'undefined') return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                videos.forEach((v) => {
+                    if (entry.isIntersecting) {
+                        const playPromise = v.play();
+                        if (playPromise && playPromise.catch) playPromise.catch(() => {});
+                    } else {
+                        v.pause();
+                    }
+                });
+            });
+        }, { threshold: 0.05 });
+        const section = document.getElementById('car-section');
+        if (section) observer.observe(section);
+    })();
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // GOOGLE SHEETS WEBHOOK — paste your deployed

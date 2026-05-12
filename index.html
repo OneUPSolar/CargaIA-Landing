@@ -447,11 +447,28 @@
         <!-- ═══════════════════════════════════════════ -->
         <section class="car-scroll-section" id="car-section">
             <div class="car-pin-container" id="car-pin">
-                <!-- Photorealistic EV Layers (Fluid Crossfade) -->
                 <div class="ev-image-container" id="ev-image-container">
-                    <img src="assets/ev_battery_view.png" id="ev-img-battery" class="ev-photo" alt="EV Battery X-Ray" />
-                    <img src="assets/ev_port_view.png" id="ev-img-port" class="ev-photo" alt="EV Smart Port" />
-                    <img src="assets/ev_aero_view.png" id="ev-img-aero" class="ev-photo" alt="EV Aerodynamics" />
+                    <video
+                        src="assets/ev_battery_view.mp4"
+                        id="ev-img-battery"
+                        class="ev-photo"
+                        autoplay loop muted playsinline preload="metadata"
+                        aria-label="EV Battery cutaway view"
+                    ></video>
+                    <video
+                        src="assets/ev_port_view.mp4"
+                        id="ev-img-port"
+                        class="ev-photo"
+                        autoplay loop muted playsinline preload="metadata"
+                        aria-label="EV charging port detail"
+                    ></video>
+                    <video
+                        src="assets/ev_aero_view.mp4"
+                        id="ev-img-aero"
+                        class="ev-photo"
+                        autoplay loop muted playsinline preload="metadata"
+                        aria-label="EV aerodynamic flow visualization"
+                    ></video>
                 </div>
 
                 <div class="car-hotspots">
