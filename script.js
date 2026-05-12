@@ -457,6 +457,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const evContainer = document.getElementById('ev-image-container');
     
     if (evSection && evContainer) {
+        // Detect viewport and pick the correct video variants for this device.
+        function getActiveVideoIds() {
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const suffix = isMobile ? '-mobile' : '-desktop';
+            return {
+                battery: '#ev-img-battery' + suffix,
+                port:    '#ev-img-port'    + suffix,
+                aero:    '#ev-img-aero'    + suffix
+            };
+        }
+        let evIds = getActiveVideoIds();
+
         // Setup the GSAP timeline
         const evTl = gsap.timeline({
             scrollTrigger: {
@@ -475,12 +487,12 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.set('.hs-port .hs-content', { x: -20, filter: "blur(4px)" });
         
         // Initial Image setup: Battery visible, others hidden
-        gsap.set('#ev-img-battery', { opacity: 1, scale: 1, filter: "blur(0px)" });
-        gsap.set('#ev-img-port', { opacity: 0, scale: 1.05, filter: "blur(4px)" });
-        gsap.set('#ev-img-aero', { opacity: 0, scale: 1.05, filter: "blur(4px)" });
+        gsap.set(evIds.battery, { opacity: 1, scale: 1, filter: "blur(0px)" });
+        gsap.set(evIds.port, { opacity: 0, scale: 1.05, filter: "blur(4px)" });
+        gsap.set(evIds.aero, { opacity: 0, scale: 1.05, filter: "blur(4px)" });
 
         // --- PHASE 1: Battery Matrix (0-33%) ---
-        evTl.to('#ev-img-battery', { scale: 1.05, duration: 1.5, ease: "none" })
+        evTl.to(evIds.battery, { scale: 1.05, duration: 1.5, ease: "none" })
             .to('#hs-battery', { opacity: 1, duration: 0.2 }, "-=1.2")
             .to('#hs-battery .hs-line', { width: 100, duration: 0.4 }, "-=1")
             .to('#hs-battery .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
@@ -489,8 +501,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- PHASE 2: Smart Port (33-66%) ---
         // Crossfade to port image while fading out old text
         evTl.to('#hs-battery', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
-            .to('#ev-img-battery', { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
-            .to('#ev-img-port', { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to(evIds.battery, { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
+            .to(evIds.port, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
             .to('#hs-port', { opacity: 1, duration: 0.2 }, "-=1.2")
             .to('#hs-port .hs-line', { width: 80, duration: 0.4 }, "-=1.0")
             .to('#hs-port .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
@@ -499,14 +511,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- PHASE 3: Aerodynamics (66-100%) ---
         // Crossfade to aero image while fading out old text
         evTl.to('#hs-port', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.3 }, "+=0")
-            .to('#ev-img-port', { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
-            .to('#ev-img-aero', { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
+            .to(evIds.port, { opacity: 0, filter: "blur(4px)", duration: 0.8 }, "<")
+            .to(evIds.aero, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5, ease: "power1.out" }, "<")
             .to('#hs-aero', { opacity: 1, duration: 0.2 }, "-=1.2")
             .to('#hs-aero .hs-line', { width: 120, duration: 0.4 }, "-=1.0")
             .to('#hs-aero .hs-content', { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "power2.out" }, "-=0.6")
             .to({}, { duration: 0.5 }) // Reduced hold to fix blank space
             .to('#hs-aero', { opacity: 0, y: -5, filter: "blur(2px)", duration: 0.5 })
-            .to('#ev-img-aero', { opacity: 0, filter: "blur(6px)", duration: 0.8 }, "<");
+            .to(evIds.aero, { opacity: 0, filter: "blur(6px)", duration: 0.8 }, "<");
+            
+        // Handle viewport rotation
+        window.matchMedia('(max-width: 768px)').addEventListener('change', () => {
+            evIds = getActiveVideoIds();
+            if (window.ScrollTrigger) ScrollTrigger.refresh();
+        });
     }
 
     // Pause EV videos when scrolled out of view to save battery/CPU.

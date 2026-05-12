@@ -1495,6 +1495,16 @@ h1, h2, h3 {
     background: #000;
 }
 
+/* Desktop video visible by default, mobile hidden */
+.ev-photo-desktop { display: block; }
+.ev-photo-mobile  { display: none; }
+
+/* At 768px and below, swap: mobile visible, desktop hidden */
+@media (max-width: 768px) {
+  .ev-photo-desktop { display: none !important; }
+  .ev-photo-mobile  { display: block !important; }
+}
+
 .car-hotspots {
     position: absolute;
     inset: 0;
@@ -1691,6 +1701,16 @@ h1, h2, h3 {
 }
 
 .hero-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1; }
+
+/* Desktop hero video visible by default, mobile hidden */
+.hero-bg-desktop { display: block; }
+.hero-bg-mobile  { display: none; }
+
+/* At 768px and below, swap: mobile visible, desktop hidden */
+@media (max-width: 768px) {
+  .hero-bg-desktop { display: none !important; }
+  .hero-bg-mobile  { display: block !important; }
+}
 .hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(2,6,10,0.95) 0%, rgba(2,6,10,0.85) 35%, rgba(2,6,10,0.8) 60%, rgba(2,6,10,0.95) 100%); z-index: 1; pointer-events: none; }
 
 /* ═══════════════════════════════════════════════════════════ */
