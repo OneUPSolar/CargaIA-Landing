@@ -59,6 +59,19 @@ export default function AppPreview() {
   const [isCharging, setIsCharging] = useState(false);
   const [vehicleLabelIdx, setVehicleLabelIdx] = useState(0);
   const [simulatedCharge, setSimulatedCharge] = useState(20);
+  const [currentTime, setCurrentTime] = useState('9:41');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const d = new Date();
+      const h = d.getHours() % 12 || 12;
+      const m = d.getMinutes().toString().padStart(2, '0');
+      setCurrentTime(`${h}:${m}`);
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 30000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     setSimulatedCharge(currentCharge);
@@ -133,7 +146,7 @@ export default function AppPreview() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', margin: '4rem 0' }}>
-      <IosFrame time="9:41" battery={Math.round(simulatedCharge)} darkMode={true}>
+      <IosFrame time={currentTime} battery={Math.round(simulatedCharge)} darkMode={true}>
         <div style={{
           padding: '24px 20px',
           color: '#fff',
