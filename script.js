@@ -591,15 +591,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5b. Scroll-down trigger — opens the modal on first scroll past hero,
-    //     but ONLY if the user hasn't already opened it manually this session.
+    // 5b. Scroll-down trigger — opens the modal when the user actively scrolls
+    //     past ~40% of the hero. Hardened against three failure modes:
+    //
+    //     (a) browser scroll-position restoration on reload/tab-return
+    //         (fires scroll events before the user has done anything)
+    //     (b) initial layout shift while fonts and hero video load
+    //         (heroBottom briefly small before min-height: 100vh resolves)
+    //     (c) programmatic scrolls from other scripts (GSAP/ScrollTrigger
+    //         setup, smooth-scroll polyfills)
+    //
+    //     Fix: require the page to be visually settled (window 'load' +
+    //     500ms grace) AND a real scroll-position delta from the initial
+    //     resting position before we count the scroll as user intent.
+    //
+    //     Also reset browser scroll restoration so reloading the page
+    //     puts the user back at the top, where they should start.
+
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
     let modalAutoOpened = false;
+    let scrollTriggerArmed = false;
+    let initialScrollY = window.scrollY;
+
     function onFirstScrollPastHero() {
         if (modalAutoOpened) return;
+        if (!scrollTriggerArmed) return;
+
+        // Require the user to have scrolled at least 60px from the resting
+        // position — this filters out passive scroll-restoration jitter and
+        // minor layout-shift wobble.
+        if (Math.abs(window.scrollY - initialScrollY) < 60) return;
+
         const hero = document.getElementById('layer1');
         if (!hero) return;
         const heroBottom = hero.getBoundingClientRect().bottom;
-        // Trigger when the user has scrolled past 40% of the hero
+
         if (heroBottom < window.innerHeight * 0.6) {
             modalAutoOpened = true;
             window.removeEventListener('scroll', onFirstScrollPastHero);
@@ -608,6 +637,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    // Arm the trigger only after the page is fully loaded AND has had
+    // 500ms of grace time for layout to settle. Recapture initialScrollY
+    // at the moment of arming so we measure real user movement from there.
+    function armScrollTrigger() {
+        setTimeout(() => {
+            initialScrollY = window.scrollY;
+            scrollTriggerArmed = true;
+        }, 500);
+    }
+
+    if (document.readyState === 'complete') {
+        armScrollTrigger();
+    } else {
+        window.addEventListener('load', armScrollTrigger, { once: true });
+    }
+
     window.addEventListener('scroll', onFirstScrollPastHero, { passive: true });
 
     // 6. CTA Pre-Registration Form
