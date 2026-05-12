@@ -397,6 +397,7 @@ h1, h2, h3 {
     margin-bottom: 2.5rem;
     line-height: 1.1;
     min-height: 17rem; /* Prevents SVG from jumping while typewriter runs */
+    text-shadow: 0 8px 32px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.9);
 }
 
 .cursor {
@@ -451,6 +452,7 @@ h1, h2, h3 {
     font-weight: 300;
     min-height: 5rem; /* Stable height during typewriter */
     line-height: 1.7;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.9);
 }
 
 /* Frosted Fintech Form */
@@ -1688,7 +1690,7 @@ h1, h2, h3 {
 }
 
 .hero-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1; }
-.hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(2,6,10,0.85) 0%, rgba(2,6,10,0.5) 40%, rgba(2,6,10,0.95) 100%); z-index: 1; pointer-events: none; }
+.hero-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(2,6,10,0.95) 0%, rgba(2,6,10,0.7) 35%, rgba(2,6,10,0.6) 60%, rgba(2,6,10,0.95) 100%); z-index: 1; pointer-events: none; }
 
 /* ═══════════════════════════════════════════════════════════ */
 /* RESERVATIONS SECTION                                         */
