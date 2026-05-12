@@ -154,6 +154,82 @@
             </div>
         </section>
         <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER 3.5 — VEHICLE INTEGRATION (BYD SEAL) -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="car-scroll-section" id="car-section">
+            <div class="car-pin-container" id="car-pin">
+                <div class="ev-image-container" id="ev-image-container">
+                    <!-- BATTERY PHASE -->
+                    <video src="assets/ev_battery_view.mp4"
+                           id="ev-img-battery-desktop"
+                           class="ev-photo ev-photo-desktop"
+                           data-phase="battery"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV battery cutaway view"></video>
+                    <video src="assets/ev_battery_view_mobile.mp4"
+                           id="ev-img-battery-mobile"
+                           class="ev-photo ev-photo-mobile"
+                           data-phase="battery"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV battery cutaway view"></video>
+
+                    <!-- PORT PHASE -->
+                    <video src="assets/ev_port_view.mp4"
+                           id="ev-img-port-desktop"
+                           class="ev-photo ev-photo-desktop"
+                           data-phase="port"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV charging port detail"></video>
+                    <video src="assets/ev_port_view_mobile.mp4"
+                           id="ev-img-port-mobile"
+                           class="ev-photo ev-photo-mobile"
+                           data-phase="port"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV charging port detail"></video>
+
+                    <!-- AERO PHASE -->
+                    <video src="assets/ev_aero_view.mp4"
+                           id="ev-img-aero-desktop"
+                           class="ev-photo ev-photo-desktop"
+                           data-phase="aero"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV aerodynamic flow visualization"></video>
+                    <video src="assets/ev_aero_view_mobile.mp4"
+                           id="ev-img-aero-mobile"
+                           class="ev-photo ev-photo-mobile"
+                           data-phase="aero"
+                           autoplay loop muted playsinline preload="none"
+                           aria-label="EV aerodynamic flow visualization"></video>
+                </div>
+
+                <div class="car-hotspots">
+                    <div class="hotspot hs-battery" id="hs-battery">
+                        <div class="hs-line"></div>
+                        <div class="hs-content">
+                            <div class="hs-title mono">[1] BATERÍA BLADE</div>
+                            <div class="hs-desc">Arquitectura térmica ultra-segura. Nuestra red gestiona la carga para maximizar la vida útil de las celdas sin sobrecalentar tu instalación.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotspot hs-port" id="hs-port">
+                        <div class="hs-line"></div>
+                        <div class="hs-content">
+                            <div class="hs-title mono">[2] PUERTO INTELIGENTE</div>
+                            <div class="hs-desc">Handshake bidireccional. El cargador Carga<span class="brand-i">I</span>A se comunica con el BMS del vehículo para balancear la demanda eléctrica de tu hogar en tiempo real.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hotspot hs-aero" id="hs-aero">
+                        <div class="hs-line"></div>
+                        <div class="hs-content">
+                            <div class="hs-title mono">[3] EFICIENCIA e-PLATFORM</div>
+                            <div class="hs-desc">Menor resistencia aerodinámica = Menos kWh necesarios. Optimiza tu recibo CFE reduciendo el tiempo de carga nocturna.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ═══════════════════════════════════════════ -->
         <!-- LAYER 1.5 — RESERVATIONS / TIER SELECT      -->
         <!-- ═══════════════════════════════════════════ -->
         <section class="reservations-section" id="reservations-section">
@@ -426,82 +502,6 @@
             </div>
         </section>
 
-        <!-- ═══════════════════════════════════════════ -->
-        <!-- LAYER 3.5 — VEHICLE INTEGRATION (BYD SEAL) -->
-        <!-- ═══════════════════════════════════════════ -->
-        <section class="car-scroll-section" id="car-section">
-            <div class="car-pin-container" id="car-pin">
-                <div class="ev-image-container" id="ev-image-container">
-                    <!-- BATTERY PHASE -->
-                    <video src="assets/ev_battery_view.mp4"
-                           id="ev-img-battery-desktop"
-                           class="ev-photo ev-photo-desktop"
-                           data-phase="battery"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV battery cutaway view"></video>
-                    <video src="assets/ev_battery_view_mobile.mp4"
-                           id="ev-img-battery-mobile"
-                           class="ev-photo ev-photo-mobile"
-                           data-phase="battery"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV battery cutaway view"></video>
-
-                    <!-- PORT PHASE -->
-                    <video src="assets/ev_port_view.mp4"
-                           id="ev-img-port-desktop"
-                           class="ev-photo ev-photo-desktop"
-                           data-phase="port"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV charging port detail"></video>
-                    <video src="assets/ev_port_view_mobile.mp4"
-                           id="ev-img-port-mobile"
-                           class="ev-photo ev-photo-mobile"
-                           data-phase="port"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV charging port detail"></video>
-
-                    <!-- AERO PHASE -->
-                    <video src="assets/ev_aero_view.mp4"
-                           id="ev-img-aero-desktop"
-                           class="ev-photo ev-photo-desktop"
-                           data-phase="aero"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV aerodynamic flow visualization"></video>
-                    <video src="assets/ev_aero_view_mobile.mp4"
-                           id="ev-img-aero-mobile"
-                           class="ev-photo ev-photo-mobile"
-                           data-phase="aero"
-                           autoplay loop muted playsinline preload="none"
-                           aria-label="EV aerodynamic flow visualization"></video>
-                </div>
-
-                <div class="car-hotspots">
-                    <div class="hotspot hs-battery" id="hs-battery">
-                        <div class="hs-line"></div>
-                        <div class="hs-content">
-                            <div class="hs-title mono">[1] BATERÍA BLADE</div>
-                            <div class="hs-desc">Arquitectura térmica ultra-segura. Nuestra red gestiona la carga para maximizar la vida útil de las celdas sin sobrecalentar tu instalación.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="hotspot hs-port" id="hs-port">
-                        <div class="hs-line"></div>
-                        <div class="hs-content">
-                            <div class="hs-title mono">[2] PUERTO INTELIGENTE</div>
-                            <div class="hs-desc">Handshake bidireccional. El cargador Carga<span class="brand-i">I</span>A se comunica con el BMS del vehículo para balancear la demanda eléctrica de tu hogar en tiempo real.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="hotspot hs-aero" id="hs-aero">
-                        <div class="hs-line"></div>
-                        <div class="hs-content">
-                            <div class="hs-title mono">[3] EFICIENCIA e-PLATFORM</div>
-                            <div class="hs-desc">Menor resistencia aerodinámica = Menos kWh necesarios. Optimiza tu recibo CFE reduciendo el tiempo de carga nocturna.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- LAYER 4 — WHO WE SERVE                     -->
         <!-- ═══════════════════════════════════════════ -->
         <section class="layer layer-audience" id="layer4">

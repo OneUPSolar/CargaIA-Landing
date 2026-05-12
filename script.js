@@ -525,6 +525,12 @@ document.addEventListener('DOMContentLoaded', () => {
             evIds = getActiveVideoIds();
             if (window.ScrollTrigger) ScrollTrigger.refresh();
         });
+
+        // Recompute pin offsets once images/videos have settled. Safe to call
+        // even if not needed; ScrollTrigger.refresh() is idempotent.
+        window.addEventListener('load', () => {
+            if (window.ScrollTrigger) ScrollTrigger.refresh();
+        });
     }
 
     // Pause EV videos when scrolled out of view to save battery/CPU.
