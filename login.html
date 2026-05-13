@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CargaIA | Acceso CRM</title>
+<meta name="description" content="Acceso al panel de control CargaIA — equipo interno.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<meta name="theme-color" content="#00f2ff">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@200;300;400&family=Outfit:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #ffffff;
+    --silver: #c0c0c8;
+    --electric-cyan: #00f2ff;
+    --electric-indigo: #6e00ff;
+    --ink: #FFFFFF;
+    --muted: rgba(255, 255, 255, 0.40);
+    --dim: rgba(255, 255, 255, 0.18);
+    --hairline: rgba(255, 255, 255, 0.12);
+    --bg: #000000;
+    --bg-card: rgba(4, 4, 6, 0.85);
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.35);
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; }
+
+  /* Background mesh + glow */
+  .mesh-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(0, 242, 255, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(110, 0, 255, 0.05) 0%, transparent 55%),
+      radial-gradient(circle at center, rgba(0, 242, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* CRT scanlines */
+  .crt-overlay {
+    position: fixed; inset: 0; z-index: 9000;
+    background:
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 3px, 4px 100%;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+  }
+  .crt-flicker { animation: flicker 4s infinite; }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Scan beam */
+  .scan-beam {
+    position: fixed; left: 0; right: 0; top: 0;
+    height: 100vh; z-index: 1; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.04), transparent);
+    height: 200px;
+    animation: scan 8s linear infinite;
+  }
+  @keyframes scan {
+    0% { transform: translateY(-200px); }
+    100% { transform: translateY(100vh); }
+  }
+
+  /* Center wrap */
+  .wrap {
+    position: relative; z-index: 10;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+
+  /* Top HUD */
+  .hud-top {
+    position: fixed; top: 1.5rem; left: 0; right: 0;
+    display: flex; justify-content: space-between;
+    padding: 0 1.75rem; z-index: 20;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--silver);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+  .hud-top .right { color: var(--electric-cyan); }
+
+  /* Logo */
+  .brand {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    font-size: 2rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .brand .accent { color: var(--electric-cyan); font-weight: 600; }
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Glass panel */
+  .panel {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: var(--bg-card);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    padding: 3rem 2.75rem;
+    box-shadow:
+      0 0 0 1px var(--hairline),
+      inset 0 0 40px rgba(255, 255, 255, 0.025),
+      0 50px 150px rgba(0,0,0,0.9),
+      0 0 50px rgba(0, 242, 255, 0.06);
+  }
+
+  /* Corner brackets */
+  .panel::before, .panel::after,
+  .panel .br::before, .panel .br::after {
+    content: ''; position: absolute;
+    width: 18px; height: 18px;
+    border-color: var(--electric-cyan);
+  }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--electric-cyan); border-left: 1px solid var(--electric-cyan); }
+  .panel::after { top: -1px; right: -1px; border-top: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
+  .panel .br::before { bottom: -1px; left: -1px; border-bottom: 1px solid var(--electric-cyan); border-left: 1px solid var(--electric-cyan); }
+  .panel .br::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
+
+  .panel-header {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .panel-header .status {
+    color: var(--electric-cyan);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-weight: 200;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  h1 em { color: var(--electric-cyan); font-style: normal; font-weight: 400; }
+
+  .subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 2.25rem;
+  }
+
+  .input-group { margin-bottom: 2rem; text-align: left; }
+  .mono-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--electric-cyan);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .input-group input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--hairline);
+    padding: 0.9rem 0;
+    color: var(--ink);
+    width: 100%;
+    font-size: 0.9rem;
+    transition: 0.4s;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+  .input-group input::placeholder { color: rgba(255,255,255,0.2); }
+  .input-group input:focus {
+    outline: none;
+    border-bottom-color: var(--electric-cyan);
+    background: rgba(0, 242, 255, 0.02);
+  }
+
+  /* Button */
+  .btn-gold {
+    background: var(--ink);
+    color: #000;
+    padding: 1.4rem 0;
+    width: 100%;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--dim);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
+    font-family: var(--font-main);
+  }
+  .btn-gold:hover {
+    background: #000;
+    color: var(--ink);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border: 1px solid var(--electric-cyan);
+  }
+  .btn-gold:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -150%;
+    width: 100%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.4), transparent);
+    transform: rotate(35deg);
+    transition: left 0.8s ease;
+  }
+  .btn-gold:hover::before { left: 150%; }
+
+  .msg {
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    min-height: 1rem;
+  }
+  .msg.error { color: #ff4444; }
+  .msg.ok { color: var(--electric-cyan); }
+
+  .footer-line {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .footer-line a {
+    color: var(--silver);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 2px;
+    transition: 0.3s;
+  }
+  .footer-line a:hover { color: var(--electric-cyan); border-color: var(--electric-cyan); }
+
+  @media (max-width: 480px) {
+    .panel { padding: 2.25rem 1.75rem; }
+    .brand { font-size: 1.6rem; }
+    .hud-top { font-size: 0.55rem; padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="crt-overlay crt-flicker"></div>
+  <div class="mesh-bg"></div>
+  <div class="scan-beam"></div>
+
+  <div class="hud-top">
+    <span>[CARGAIA_CRM // SECURE_TERMINAL]</span>
+    <span class="right">[AUTH_REQUIRED]</span>
+  </div>
+
+  <div class="wrap">
+    <div class="brand">CARGA<span class="accent">IA</span></div>
+    <div class="brand-sub">// Soft CRM · Internal Access</div>
+
+    <form class="panel" id="loginForm" autocomplete="off">
+      <div class="br"></div>
+
+      <div class="panel-header">
+        <span>[SESSION_INIT]</span>
+        <span class="status">● READY</span>
+      </div>
+
+      <h1>Acceso <em>CRM</em></h1>
+      <p class="subtitle">// equipo interno · 2026</p>
+
+      <div class="input-group">
+        <label class="mono-label" for="token">Access Token</label>
+        <input
+          type="password"
+          id="token"
+          name="token"
+          placeholder="••••••••••••••••••••••••••••••"
+          required
+          autofocus
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <button type="submit" class="btn-gold" id="submitBtn">
+        <span id="btnLabel">Iniciar Sesión</span>
+      </button>
+
+      <div class="msg" id="msg"></div>
+
+      <div class="footer-line">
+        ¿Sin acceso? <a href="https://wa.me/526631674617?text=Hola%20Manny%2C%20necesito%20acceso%20al%20CRM%20de%20CargaIA">Pedir invitación</a>
+      </div>
+    </form>
+  </div>
+
+<script>
+  // Worker endpoint — production
+  const WORKER_BASE = 'https://cargaia-crm.hi-7e4.workers.dev';
+
+  const form = document.getElementById('loginForm');
+  const tokenInput = document.getElementById('token');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnLabel = document.getElementById('btnLabel');
+  const msg = document.getElementById('msg');
+
+  function setMsg(text, type) {
+    msg.textContent = text;
+    msg.className = 'msg ' + (type || '');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const token = tokenInput.value.trim();
+    if (!token) return;
+
+    submitBtn.disabled = true;
+    btnLabel.textContent = 'Verificando…';
+    setMsg('// validating credentials…', 'ok');
+
+    try {
+      const res = await fetch(WORKER_BASE + '/api/auth/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+
+      if (res.ok) {
+        setMsg('// access granted · redirecting…', 'ok');
+        btnLabel.textContent = '✓ Autenticado';
+        setTimeout(() => {
+          window.location.href = WORKER_BASE + '/dashboard';
+        }, 600);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setMsg('// ' + (data.error || 'token inválido'), 'error');
+        submitBtn.disabled = false;
+        btnLabel.textContent = 'Iniciar Sesión';
+        tokenInput.focus();
+        tokenInput.select();
+      }
+    } catch (err) {
+      setMsg('// network error · revisa tu conexión', 'error');
+      submitBtn.disabled = false;
+      btnLabel.textContent = 'Iniciar Sesión';
+    }
+  });
+</script>
+</body>
+</html>
