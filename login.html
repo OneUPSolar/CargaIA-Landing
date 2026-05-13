@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CargaIA | Acceso CRM</title>
-<meta name="description" content="Acceso al panel de control CargaIA — equipo interno.">
+<meta name="description" content="Acceso al CRM CargaIA con tu cuenta de Telegram.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
 <meta name="theme-color" content="#00f2ff">
 <meta name="robots" content="noindex, nofollow">
@@ -15,17 +15,15 @@
 
 <style>
   :root {
-    --primary: #ffffff;
-    --silver: #c0c0c8;
     --electric-cyan: #00f2ff;
     --electric-indigo: #6e00ff;
     --ink: #FFFFFF;
-    --muted: rgba(255, 255, 255, 0.40);
     --dim: rgba(255, 255, 255, 0.18);
     --hairline: rgba(255, 255, 255, 0.12);
     --bg: #000000;
     --bg-card: rgba(4, 4, 6, 0.85);
     --text: #ffffff;
+    --silver: #c0c0c8;
     --text-muted: rgba(255, 255, 255, 0.35);
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Outfit', sans-serif;
@@ -43,9 +41,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; }
-
-  /* Background mesh + glow */
   .mesh-bg {
     position: fixed; inset: 0; z-index: 0;
     background:
@@ -55,7 +50,6 @@
     pointer-events: none;
   }
 
-  /* CRT scanlines */
   .crt-overlay {
     position: fixed; inset: 0; z-index: 9000;
     background:
@@ -64,20 +58,16 @@
     background-size: 100% 3px, 4px 100%;
     pointer-events: none;
     mix-blend-mode: overlay;
-    opacity: 0.6;
+    opacity: 0.55;
+    animation: flicker 4s infinite;
   }
-  .crt-flicker { animation: flicker 4s infinite; }
-  @keyframes flicker {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.5; }
-  }
+  @keyframes flicker { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.45; } }
 
-  /* Scan beam */
   .scan-beam {
     position: fixed; left: 0; right: 0; top: 0;
-    height: 100vh; z-index: 1; pointer-events: none;
-    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.04), transparent);
+    z-index: 1; pointer-events: none;
     height: 200px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.04), transparent);
     animation: scan 8s linear infinite;
   }
   @keyframes scan {
@@ -85,7 +75,6 @@
     100% { transform: translateY(100vh); }
   }
 
-  /* Center wrap */
   .wrap {
     position: relative; z-index: 10;
     min-height: 100vh;
@@ -94,7 +83,6 @@
     padding: 2rem 1.25rem;
   }
 
-  /* Top HUD */
   .hud-top {
     position: fixed; top: 1.5rem; left: 0; right: 0;
     display: flex; justify-content: space-between;
@@ -107,7 +95,6 @@
   }
   .hud-top .right { color: var(--electric-cyan); }
 
-  /* Logo */
   .brand {
     font-family: var(--font-heading);
     font-weight: 200;
@@ -128,15 +115,14 @@
     opacity: 0.7;
   }
 
-  /* Glass panel */
   .panel {
     position: relative;
     width: 100%;
-    max-width: 440px;
+    max-width: 460px;
     background: var(--bg-card);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
-    padding: 3rem 2.75rem;
+    padding: 2.5rem 2.25rem 2.25rem;
     box-shadow:
       0 0 0 1px var(--hairline),
       inset 0 0 40px rgba(255, 255, 255, 0.025),
@@ -144,17 +130,15 @@
       0 0 50px rgba(0, 242, 255, 0.06);
   }
 
-  /* Corner brackets */
   .panel::before, .panel::after,
   .panel .br::before, .panel .br::after {
     content: ''; position: absolute;
     width: 18px; height: 18px;
-    border-color: var(--electric-cyan);
   }
-  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--electric-cyan); border-left: 1px solid var(--electric-cyan); }
-  .panel::after { top: -1px; right: -1px; border-top: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
-  .panel .br::before { bottom: -1px; left: -1px; border-bottom: 1px solid var(--electric-cyan); border-left: 1px solid var(--electric-cyan); }
-  .panel .br::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
+  .panel::before { top: -1px; left: -1px;  border-top: 1px solid var(--electric-cyan); border-left:  1px solid var(--electric-cyan); }
+  .panel::after  { top: -1px; right: -1px; border-top: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
+  .panel .br::before { bottom: -1px; left: -1px;  border-bottom: 1px solid var(--electric-cyan); border-left:  1px solid var(--electric-cyan); }
+  .panel .br::after  { bottom: -1px; right: -1px; border-bottom: 1px solid var(--electric-cyan); border-right: 1px solid var(--electric-cyan); }
 
   .panel-header {
     display: flex; justify-content: space-between;
@@ -163,7 +147,7 @@
     letter-spacing: 0.2em;
     color: var(--silver);
     opacity: 0.7;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   .panel-header .status {
     color: var(--electric-cyan);
@@ -185,16 +169,44 @@
     font-size: 0.7rem;
     color: var(--text-muted);
     letter-spacing: 0.1em;
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.75rem;
   }
 
-  .input-group { margin-bottom: 2rem; text-align: left; }
+  /* Telegram widget container — center the official iframe */
+  .tg-widget-wrap {
+    display: flex;
+    justify-content: center;
+    min-height: 50px;
+    margin-bottom: 1.25rem;
+  }
+  .tg-widget-wrap iframe {
+    border-radius: 6px !important;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin: 1.25rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  /* OTP fallback */
+  .input-group { margin-bottom: 1.25rem; text-align: left; }
   .mono-label {
     display: block;
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--electric-cyan);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
   }
@@ -202,7 +214,7 @@
     background: transparent;
     border: none;
     border-bottom: 1px solid var(--hairline);
-    padding: 0.9rem 0;
+    padding: 0.85rem 0;
     color: var(--ink);
     width: 100%;
     font-size: 0.9rem;
@@ -216,15 +228,19 @@
     border-bottom-color: var(--electric-cyan);
     background: rgba(0, 242, 255, 0.02);
   }
+  .input-group input.code {
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    text-align: center;
+  }
 
-  /* Button */
-  .btn-gold {
+  .btn {
     background: var(--ink);
     color: #000;
-    padding: 1.4rem 0;
+    padding: 1.05rem 0;
     width: 100%;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -235,19 +251,19 @@
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
     font-family: var(--font-main);
   }
-  .btn-gold:hover {
+  .btn:hover {
     background: #000;
     color: var(--ink);
     box-shadow: 0 0 40px rgba(0, 242, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
     border: 1px solid var(--electric-cyan);
   }
-  .btn-gold:disabled {
+  .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
   }
-  .btn-gold::before {
+  .btn::before {
     content: '';
     position: absolute;
     top: -50%; left: -150%;
@@ -256,21 +272,35 @@
     transform: rotate(35deg);
     transition: left 0.8s ease;
   }
-  .btn-gold:hover::before { left: 150%; }
+  .btn:hover::before { left: 150%; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--silver);
+    border: 1px solid var(--hairline);
+    box-shadow: none;
+  }
+  .btn-secondary:hover {
+    background: transparent;
+    color: var(--electric-cyan);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+  }
 
   .msg {
-    margin-top: 1.25rem;
+    margin-top: 1rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-align: center;
     min-height: 1rem;
+    line-height: 1.5;
   }
   .msg.error { color: #ff4444; }
-  .msg.ok { color: var(--electric-cyan); }
+  .msg.ok    { color: var(--electric-cyan); }
+  .msg.warn  { color: #ffb84d; }
 
   .footer-line {
-    margin-top: 2.5rem;
+    margin-top: 1.75rem;
     text-align: center;
     font-family: var(--font-mono);
     font-size: 0.6rem;
@@ -286,15 +316,19 @@
   }
   .footer-line a:hover { color: var(--electric-cyan); border-color: var(--electric-cyan); }
 
+  /* Tab switch */
+  .step { display: none; }
+  .step.active { display: block; }
+
   @media (max-width: 480px) {
-    .panel { padding: 2.25rem 1.75rem; }
+    .panel { padding: 2rem 1.5rem; }
     .brand { font-size: 1.6rem; }
     .hud-top { font-size: 0.55rem; padding: 0 1rem; }
   }
 </style>
 </head>
 <body>
-  <div class="crt-overlay crt-flicker"></div>
+  <div class="crt-overlay"></div>
   <div class="mesh-bg"></div>
   <div class="scan-beam"></div>
 
@@ -307,7 +341,7 @@
     <div class="brand">CARGA<span class="accent">IA</span></div>
     <div class="brand-sub">// Soft CRM · Internal Access</div>
 
-    <form class="panel" id="loginForm" autocomplete="off">
+    <div class="panel">
       <div class="br"></div>
 
       <div class="panel-header">
@@ -315,86 +349,258 @@
         <span class="status">● READY</span>
       </div>
 
-      <h1>Acceso <em>CRM</em></h1>
-      <p class="subtitle">// equipo interno · 2026</p>
+      <!-- STEP 1: choose method -->
+      <div class="step active" id="step-1">
+        <h1>Acceso <em>CRM</em></h1>
+        <p class="subtitle">// inicia con tu cuenta de Telegram</p>
 
-      <div class="input-group">
-        <label class="mono-label" for="token">Access Token</label>
-        <input
-          type="password"
-          id="token"
-          name="token"
-          placeholder="••••••••••••••••••••••••••••••"
-          required
-          autofocus
-          autocomplete="off"
-          spellcheck="false"
-        >
+        <!-- Telegram Login Widget (official) -->
+        <div class="tg-widget-wrap" id="tg-widget"></div>
+
+        <div class="divider">o usa un código</div>
+
+        <button type="button" class="btn btn-secondary" id="useOtpBtn">
+          Login con código por Telegram
+        </button>
+
+        <div class="msg" id="msg-1"></div>
       </div>
 
-      <button type="submit" class="btn-gold" id="submitBtn">
-        <span id="btnLabel">Iniciar Sesión</span>
-      </button>
+      <!-- STEP 2: OTP request — ask username -->
+      <div class="step" id="step-2">
+        <h1>Tu <em>@username</em></h1>
+        <p class="subtitle">// te mandamos un código por DM</p>
 
-      <div class="msg" id="msg"></div>
+        <form id="otpStartForm" autocomplete="off">
+          <div class="input-group">
+            <label class="mono-label" for="tgUsername">Telegram username</label>
+            <input
+              type="text"
+              id="tgUsername"
+              placeholder="@tu_handle (sin @)"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            >
+          </div>
+          <button type="submit" class="btn" id="otpStartBtn">
+            <span id="otpStartLabel">Enviar código</span>
+          </button>
+        </form>
 
-      <div class="footer-line">
-        ¿Sin acceso? <a href="https://wa.me/526631674617?text=Hola%20Manny%2C%20necesito%20acceso%20al%20CRM%20de%20CargaIA">Pedir invitación</a>
+        <div class="msg" id="msg-2"></div>
+
+        <div class="footer-line">
+          <a href="#" id="backTo1">← volver</a>
+        </div>
       </div>
-    </form>
+
+      <!-- STEP 3: enter OTP -->
+      <div class="step" id="step-3">
+        <h1>Código de <em>acceso</em></h1>
+        <p class="subtitle">// revisa tu chat con @<span id="botMention">cargaiachat_bot</span></p>
+
+        <form id="otpCheckForm" autocomplete="off">
+          <div class="input-group">
+            <label class="mono-label" for="otpCode">6 dígitos</label>
+            <input
+              type="text"
+              id="otpCode"
+              class="code"
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              placeholder="••••••"
+              autocomplete="one-time-code"
+              required
+            >
+          </div>
+          <button type="submit" class="btn" id="otpCheckBtn">
+            <span id="otpCheckLabel">Entrar</span>
+          </button>
+        </form>
+
+        <div class="msg" id="msg-3"></div>
+
+        <div class="footer-line">
+          <a href="#" id="backTo2">← cambiar usuario</a>
+        </div>
+      </div>
+
+      <!-- STEP 4: success / pending -->
+      <div class="step" id="step-4">
+        <h1 id="finalTitle">¡Acceso <em>concedido</em>!</h1>
+        <p class="subtitle" id="finalSubtitle">// redirigiendo al CRM…</p>
+        <div class="msg ok" id="msg-4"></div>
+      </div>
+
+      <div class="footer-line" style="margin-top: 2rem;">
+        ¿Sin acceso? <a href="https://t.me/cargaiachat_bot?start=invite">Pedir invitación al bot</a>
+      </div>
+    </div>
   </div>
 
 <script>
-  // Worker endpoint — production
+  // ─── Config ───
   const WORKER_BASE = 'https://cargaia-crm.hi-7e4.workers.dev';
+  const BOT_USERNAME = 'cargaiachat_bot'; // without @
 
-  const form = document.getElementById('loginForm');
-  const tokenInput = document.getElementById('token');
-  const submitBtn = document.getElementById('submitBtn');
-  const btnLabel = document.getElementById('btnLabel');
-  const msg = document.getElementById('msg');
-
-  function setMsg(text, type) {
-    msg.textContent = text;
-    msg.className = 'msg ' + (type || '');
+  // ─── DOM helpers ───
+  const $ = (id) => document.getElementById(id);
+  function setMsg(stepNum, text, type) {
+    const el = $('msg-' + stepNum);
+    el.textContent = text || '';
+    el.className = 'msg ' + (type || '');
+  }
+  function gotoStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    $('step-' + n).classList.add('active');
   }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const token = tokenInput.value.trim();
-    if (!token) return;
-
-    submitBtn.disabled = true;
-    btnLabel.textContent = 'Verificando…';
-    setMsg('// validating credentials…', 'ok');
-
+  // ─── Telegram Login Widget callback ───
+  // Telegram calls this global function with the auth payload (id, first_name, username, ..., hash).
+  window.onTelegramAuth = async (user) => {
+    setMsg(1, '// validando con Telegram…', 'ok');
     try {
-      const res = await fetch(WORKER_BASE + '/api/auth/login', {
+      const res = await fetch(WORKER_BASE + '/api/auth/telegram-widget', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token })
+        body: JSON.stringify(user),
       });
-
-      if (res.ok) {
-        setMsg('// access granted · redirecting…', 'ok');
-        btnLabel.textContent = '✓ Autenticado';
-        setTimeout(() => {
-          window.location.href = WORKER_BASE + '/dashboard';
-        }, 600);
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        gotoStep(4);
+        $('finalTitle').innerHTML = '¡Acceso <em>concedido</em>!';
+        $('finalSubtitle').textContent = '// redirigiendo al CRM…';
+        setMsg(4, 'Bienvenido ' + (data.user?.first_name || '') + ' · rol: ' + (data.user?.role || ''), 'ok');
+        setTimeout(() => { window.location.href = WORKER_BASE + '/dashboard'; }, 700);
+      } else if (res.status === 202 && data.status === 'pending') {
+        gotoStep(4);
+        $('finalTitle').innerHTML = 'Solicitud <em>recibida</em>';
+        $('finalSubtitle').textContent = '// cuenta pendiente de aprobación';
+        setMsg(4, 'Avisamos al admin. Te llegará una notificación por Telegram cuando te aprueben.', 'warn');
       } else {
-        const data = await res.json().catch(() => ({}));
-        setMsg('// ' + (data.error || 'token inválido'), 'error');
-        submitBtn.disabled = false;
-        btnLabel.textContent = 'Iniciar Sesión';
-        tokenInput.focus();
-        tokenInput.select();
+        setMsg(1, '// ' + (data.message || data.error || 'no autorizado'), 'error');
       }
     } catch (err) {
-      setMsg('// network error · revisa tu conexión', 'error');
-      submitBtn.disabled = false;
-      btnLabel.textContent = 'Iniciar Sesión';
+      setMsg(1, '// network error · revisa tu conexión', 'error');
     }
+  };
+
+  // ─── Inject the official Telegram Login Widget ───
+  // Note: the widget will only render if the page is served from a domain registered
+  // with @BotFather (/setdomain). Outside that domain, it shows nothing — that's why
+  // we always offer the OTP fallback below.
+  (function loadTelegramWidget() {
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://telegram.org/js/telegram-widget.js?22';
+    s.setAttribute('data-telegram-login', BOT_USERNAME);
+    s.setAttribute('data-size', 'large');
+    s.setAttribute('data-radius', '6');
+    s.setAttribute('data-userpic', 'false');
+    s.setAttribute('data-onauth', 'onTelegramAuth(user)');
+    s.setAttribute('data-request-access', 'write');
+    $('tg-widget').appendChild(s);
+  })();
+
+  $('botMention').textContent = BOT_USERNAME;
+
+  // ─── Step transitions ───
+  $('useOtpBtn').addEventListener('click', () => { setMsg(1, '', ''); gotoStep(2); });
+  $('backTo1').addEventListener('click', (e) => { e.preventDefault(); setMsg(2, '', ''); gotoStep(1); });
+  $('backTo2').addEventListener('click', (e) => { e.preventDefault(); setMsg(3, '', ''); gotoStep(2); });
+
+  // ─── OTP start ───
+  let pendingTgId = null;
+
+  $('otpStartForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = $('tgUsername').value.trim().replace(/^@/, '');
+    if (!username) return;
+    $('otpStartBtn').disabled = true;
+    $('otpStartLabel').textContent = 'Enviando…';
+    setMsg(2, '// localizando cuenta…', 'ok');
+
+    try {
+      const res = await fetch(WORKER_BASE + '/api/auth/tg-otp-start', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok && data.telegram_id) {
+        pendingTgId = data.telegram_id;
+        setMsg(3, '', '');
+        gotoStep(3);
+        $('otpCode').focus();
+      } else if (data.needs_bot_start) {
+        setMsg(2, '// primero manda /start al bot, luego vuelve aquí', 'warn');
+        window.open(data.bot_url, '_blank');
+      } else if (res.status === 403 && data.error === 'pending_approval') {
+        setMsg(2, '// tu cuenta sigue pendiente de aprobación', 'warn');
+      } else if (res.status === 403 && data.error === 'disabled') {
+        setMsg(2, '// cuenta deshabilitada', 'error');
+      } else {
+        setMsg(2, '// ' + (data.error || 'no encontrado'), 'error');
+      }
+    } catch (err) {
+      setMsg(2, '// network error', 'error');
+    } finally {
+      $('otpStartBtn').disabled = false;
+      $('otpStartLabel').textContent = 'Enviar código';
+    }
+  });
+
+  // ─── OTP check ───
+  $('otpCheckForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const code = $('otpCode').value.trim();
+    if (!code || !pendingTgId) return;
+    $('otpCheckBtn').disabled = true;
+    $('otpCheckLabel').textContent = 'Verificando…';
+    setMsg(3, '// validando código…', 'ok');
+
+    try {
+      const res = await fetch(WORKER_BASE + '/api/auth/tg-otp-check', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ telegram_id: pendingTgId, code }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        gotoStep(4);
+        $('finalTitle').innerHTML = '¡Acceso <em>concedido</em>!';
+        $('finalSubtitle').textContent = '// redirigiendo al CRM…';
+        setMsg(4, '✓ Autenticado', 'ok');
+        setTimeout(() => { window.location.href = WORKER_BASE + '/dashboard'; }, 600);
+      } else if (res.status === 410) {
+        setMsg(3, '// código expirado · pide uno nuevo', 'error');
+      } else if (res.status === 401) {
+        setMsg(3, '// código inválido', 'error');
+        $('otpCode').focus(); $('otpCode').select();
+      } else if (res.status === 403) {
+        setMsg(3, '// cuenta no autorizada (' + (data.role || '?') + ')', 'error');
+      } else {
+        setMsg(3, '// ' + (data.error || 'error'), 'error');
+      }
+    } catch (err) {
+      setMsg(3, '// network error', 'error');
+    } finally {
+      $('otpCheckBtn').disabled = false;
+      $('otpCheckLabel').textContent = 'Entrar';
+    }
+  });
+
+  // Auto-submit code when 6 digits typed
+  $('otpCode').addEventListener('input', (e) => {
+    const v = e.target.value.replace(/\D/g, '').slice(0, 6);
+    e.target.value = v;
+    if (v.length === 6) $('otpCheckForm').requestSubmit();
   });
 </script>
 </body>
