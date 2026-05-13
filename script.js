@@ -661,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. CTA Pre-Registration Form -> CargaIA Soft CRM (Cloudflare Worker)
     //    Repo: github.com/OneUPSolar/cargaia-crm
     //    Update this URL after `wrangler deploy` (e.g. https://cargaia-crm.<sub>.workers.dev/api/lead)
-    const CRM_ENDPOINT = 'https://cargaia-crm.gomaxify.workers.dev/api/lead';
+    const CRM_ENDPOINT = 'https://cargaia-crm.hi-7e4.workers.dev/api/lead';
 
     const ctaForm = document.getElementById('cta-form');
     const ctaSuccess = document.getElementById('cta-success');
