@@ -28,6 +28,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
   const [form, setForm] = useState({
     nombre: '',
     email: '',
+    telefono: '',
     region: '',
     tipo: ''
   });
@@ -68,7 +69,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
-    if (!form.nombre || !form.email || !form.region || !form.tipo) {
+    if (!form.nombre || !form.email || !form.telefono || !form.region || !form.tipo) {
       setError('Completa todos los campos.');
       return;
     }
@@ -79,6 +80,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
       timestamp: new Date().toISOString(),
       nombre: form.nombre,
       email: form.email,
+      telefono: form.telefono,
       region: form.region,
       tipo: form.tipo,
       tipo_usuario: form.tipo,
@@ -98,6 +100,37 @@ export default function SimulatorModal({ isOpen, onClose }) {
       });
       clearTimeout(timeoutId);
       if (!res.ok) throw new Error('Submission failed');
+
+      // Construir mensaje pre-llenado para WhatsApp
+      const whatsappPhone = '5266400000000'; // PLACEHOLDER — Josh confirmará el número real
+      const tipoLabel = {
+        homeowner: 'USUARIO (tengo o quiero un EV)',
+        investor: 'INVERSIONISTA (parte de la red)',
+        installer: 'INSTALADOR (partner)'
+      }[form.tipo] || form.tipo;
+
+      const cityLabel = (CITIES.find(c => c.value === form.region) || {}).label || form.region;
+
+      const message = [
+        'Hola CargaIA 👋',
+        '',
+        'Quiero reservar mi acceso a Fase 1.',
+        '',
+        `NOMBRE: ${form.nombre}`,
+        `EMAIL: ${form.email}`,
+        `TEL: ${form.telefono}`,
+        `CIUDAD: ${cityLabel}`,
+        `PERFIL: ${tipoLabel}`,
+        '',
+        'Enviado desde cargaia.com'
+      ].join('\n');
+
+      const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+
+      // Redirigir a WhatsApp DESPUÉS de que Sheets respondió (mismo turn, 
+      // no abrir antes para que no se cierre el form si el fetch falla)
+      window.location.href = whatsappUrl;
+
       setScreen('success');
     } catch (err) {
       clearTimeout(timeoutId);
@@ -178,7 +211,20 @@ export default function SimulatorModal({ isOpen, onClose }) {
                     />
                   </div>
 
-                  <div className="sim-form-field" style={{ animationDelay: '0.25s' }}>
+                  <div className="sim-form-field" style={{ animationDelay: '0.20s' }}>
+                    <label>COM_VOICE</label>
+                    <input
+                      type="tel"
+                      inputMode="tel"
+                      value={form.telefono}
+                      onChange={(e) => setForm({ ...form, telefono: e.target.value })}
+                      placeholder="+52_6641234567"
+                      pattern="[+0-9\s\(\)\-]{10,20}"
+                      required
+                    />
+                  </div>
+
+                  <div className="sim-form-field" style={{ animationDelay: '0.30s' }}>
                     <label>REGION</label>
                     <select
                       value={form.region}
@@ -190,7 +236,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
                     </select>
                   </div>
 
-                  <div className="sim-form-field" style={{ animationDelay: '0.35s' }}>
+                  <div className="sim-form-field" style={{ animationDelay: '0.40s' }}>
                     <label>PERFIL</label>
                     <div className="sim-form-tipo">
                       {CLIENT_TYPES.map(t => (
