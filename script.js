@@ -166,14 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.15,
         ease: "power3.out",
         onComplete: startTypewriter
-    }, "-=0.8")
-    // Hero SVG Draw-on
-    .to("#heroSvg .draw-on", {
-        strokeDashoffset: 0,
-        duration: 1.8,
-        stagger: 0.06,
-        ease: "power2.inOut"
-    }, "-=1.2");
+    }, "-=0.8");
 
     function startTypewriter() {
         const engTitle = "Mexico is going electric. Charge without fear.";
@@ -223,14 +216,21 @@ document.addEventListener('DOMContentLoaded', () => {
         repeat: -1
     });
 
-    // Mouse Parallax for Tech Infrastructure
+    // Mouse Parallax for Tech Infrastructure (throttled via rAF)
+    let parallaxQueued = false;
+    let parallaxX = 0;
+    let parallaxY = 0;
     document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 30;
-        const y = (e.clientY / window.innerHeight - 0.5) * 30;
-        
-        gsap.to(".mesh-bg", { x: x, y: y, duration: 1.5, ease: "power2.out" });
-        gsap.to(".infra-svg", { x: -x * 1.5, y: -y * 1.5, duration: 2, ease: "power2.out" });
-    });
+        parallaxX = (e.clientX / window.innerWidth - 0.5) * 30;
+        parallaxY = (e.clientY / window.innerHeight - 0.5) * 30;
+        if (parallaxQueued) return;
+        parallaxQueued = true;
+        requestAnimationFrame(() => {
+            gsap.to(".mesh-bg", { x: parallaxX, y: parallaxY, duration: 1.5, ease: "power2.out", overwrite: "auto" });
+            gsap.to(".infra-svg", { x: -parallaxX * 1.5, y: -parallaxY * 1.5, duration: 2, ease: "power2.out", overwrite: "auto" });
+            parallaxQueued = false;
+        });
+    }, { passive: true });
 
     // Scroll Animations for Section Titles
     document.querySelectorAll(".section-title").forEach(title => {
@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 trigger: "#car-pin",
                 start: "top top",
                 end: "+=2200", // Shortened from 3000 to remove blank space
-                scrub: 1.5,
+                scrub: 0.5,
                 pin: true,
                 pinSpacing: true
             }
