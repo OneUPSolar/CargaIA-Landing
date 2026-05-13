@@ -28,6 +28,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
   const [form, setForm] = useState({
     nombre: '',
     email: '',
+    countryCode: '+52',
     telefono: '',
     region: '',
     tipo: ''
@@ -40,7 +41,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
     if (isOpen) {
       setScreen('simulator');
       setDemoComplete(false);
-      setForm({ nombre: '', email: '', region: '', tipo: '' });
+      setForm({ nombre: '', email: '', countryCode: '+52', telefono: '', region: '', tipo: '' });
       setError(null);
       setSubmitting(false);
     }
@@ -66,11 +67,37 @@ export default function SimulatorModal({ isOpen, onClose }) {
 
   const goToForm = () => setScreen('form');
 
+  // Formatea dígitos crudos al formato visual según el país
+  const formatPhoneNumber = (digits, countryCode) => {
+    const cleaned = digits.replace(/\D/g, '').slice(0, 10);
+    if (countryCode === '+1') {
+      // US: (XXX) XXX-XXXX
+      if (cleaned.length === 0) return '';
+      if (cleaned.length <= 3) return `(${cleaned}`;
+      if (cleaned.length <= 6) return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+    }
+    // MX (default): XXX-XXX-XXXX
+    if (cleaned.length === 0) return '';
+    if (cleaned.length <= 3) return cleaned;
+    if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+    return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+  };
+
+  // Cuenta solo dígitos para validación
+  const phoneDigitsCount = (formatted) => {
+    return (formatted || '').replace(/\D/g, '').length;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (submitting) return;
     if (!form.nombre || !form.email || !form.telefono || !form.region || !form.tipo) {
       setError('Completa todos los campos.');
+      return;
+    }
+    if (phoneDigitsCount(form.telefono) !== 10) {
+      setError('El teléfono debe tener 10 dígitos.');
       return;
     }
     setSubmitting(true);
@@ -80,7 +107,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
       timestamp: new Date().toISOString(),
       nombre: form.nombre,
       email: form.email,
-      telefono: form.telefono,
+      telefono: `${form.countryCode} ${form.telefono}`,
       region: form.region,
       tipo: form.tipo,
       tipo_usuario: form.tipo,
@@ -118,7 +145,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
         '',
         `NOMBRE: ${form.nombre}`,
         `EMAIL: ${form.email}`,
-        `TEL: ${form.telefono}`,
+        `TEL: ${form.countryCode} ${form.telefono}`,
         `CIUDAD: ${cityLabel}`,
         `PERFIL: ${tipoLabel}`,
         '',
@@ -213,15 +240,34 @@ export default function SimulatorModal({ isOpen, onClose }) {
 
                   <div className="sim-form-field" style={{ animationDelay: '0.20s' }}>
                     <label>COM_VOICE</label>
-                    <input
-                      type="tel"
-                      inputMode="tel"
-                      value={form.telefono}
-                      onChange={(e) => setForm({ ...form, telefono: e.target.value })}
-                      placeholder="+52_6641234567"
-                      pattern="[+0-9\s\(\)\-]{10,20}"
-                      required
-                    />
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch' }}>
+                      <select
+                        value={form.countryCode}
+                        onChange={(e) => {
+                          const newCode = e.target.value;
+                          // Reformatea el número con el formato del nuevo país
+                          const reformatted = formatPhoneNumber(form.telefono, newCode);
+                          setForm({ ...form, countryCode: newCode, telefono: reformatted });
+                        }}
+                        style={{ flex: '0 0 auto', minWidth: '90px' }}
+                        required
+                      >
+                        <option value="+52">🇲🇽 +52</option>
+                        <option value="+1">🇺🇸 +1</option>
+                      </select>
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        value={form.telefono}
+                        onChange={(e) => {
+                          const formatted = formatPhoneNumber(e.target.value, form.countryCode);
+                          setForm({ ...form, telefono: formatted });
+                        }}
+                        placeholder={form.countryCode === '+1' ? '(555) 123-4567' : '664-123-4567'}
+                        style={{ flex: '1 1 auto' }}
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className="sim-form-field" style={{ animationDelay: '0.30s' }}>
