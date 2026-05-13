@@ -2623,12 +2623,9 @@ html, body {
      ──────────────────────────────────────────────────────────── */
 
   .sim-screen-content {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
-    -webkit-overflow-scrolling: touch;
   }
 
   .sim-screen-simulator {

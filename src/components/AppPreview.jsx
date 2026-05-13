@@ -192,7 +192,10 @@ export default function AppPreview({ autoPlay = false, onAutoPlayComplete, frame
       padding: frameless ? '20px 16px 12px' : '24px 20px',
       color: '#fff',
       fontFamily: 'Inter, sans-serif',
-      minHeight: '100%',
+      minHeight: frameless ? 'auto' : '100%',
+      flex: '1 0 auto',
+      display: 'flex',
+      flexDirection: 'column',
       background: 'linear-gradient(180deg, #0A0A0C 0%, #121216 100%)'
     }}>
 
