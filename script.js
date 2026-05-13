@@ -622,21 +622,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalAutoOpened) return;
         if (!scrollTriggerArmed) return;
 
-        // Require the user to have scrolled at least 60px from the resting
-        // position — this filters out passive scroll-restoration jitter and
-        // minor layout-shift wobble.
+        // Use window.scrollY instead of getBoundingClientRect().bottom
+        // to avoid false positives during layout shifts or GSAP refreshes.
+        // If the hero loses its height momentarily, getBoundingClientRect
+        // will return 0, which would falsely trigger the modal.
+        // We want to trigger when the user has scrolled down about 40% of the viewport.
+        if (window.scrollY < window.innerHeight * 0.4) return;
+
+        // Also require a genuine scroll delta from the starting position
+        // to filter out browser scroll-restoration to a point > 40vh.
         if (Math.abs(window.scrollY - initialScrollY) < 60) return;
 
-        const hero = document.getElementById('layer1');
-        if (!hero) return;
-        const heroBottom = hero.getBoundingClientRect().bottom;
-
-        if (heroBottom < window.innerHeight * 0.6) {
-            modalAutoOpened = true;
-            window.removeEventListener('scroll', onFirstScrollPastHero);
-            if (typeof window.openSimulatorModal === 'function') {
-                window.openSimulatorModal();
-            }
+        modalAutoOpened = true;
+        window.removeEventListener('scroll', onFirstScrollPastHero);
+        if (typeof window.openSimulatorModal === 'function') {
+            window.openSimulatorModal();
         }
     }
 

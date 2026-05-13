@@ -2423,6 +2423,10 @@ html, body {
     font-size: 0.9rem;
     font-family: inherit;
   }
+  .sim-form-field select option {
+    background: #0A0A0C;
+    color: #fff;
+  }
   .sim-form-field input:focus,
   .sim-form-field select:focus {
     outline: none;
