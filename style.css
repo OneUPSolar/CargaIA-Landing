@@ -266,20 +266,6 @@ body {
     z-index: -1;
 }
 
-.scan-beam {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 15vh;
-    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.03), transparent);
-    animation: scanMove 10s infinite linear;
-}
-
-@keyframes scanMove {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(100vh); }
-}
 
 .infra-svg {
     opacity: 0.6;
