@@ -128,16 +128,22 @@ export default function SimulatorModal({ isOpen, onClose }) {
 
             {/* SCREEN 1 — Simulator */}
             <div className={`sim-screen sim-screen-simulator ${screen === 'simulator' ? 'is-active' : screen === 'form' ? 'is-exit-left' : 'is-hidden'}`}>
-              <AppPreview autoPlay={true} onAutoPlayComplete={handleAutoPlayComplete} />
+              <div className="sim-screen-content">
+                <AppPreview
+                  autoPlay={true}
+                  onAutoPlayComplete={handleAutoPlayComplete}
+                  frameless={true}
+                />
 
-              {demoComplete && (
-                <div className="sim-cta-overlay">
-                  <div className="sim-cta-label">TU TURNO</div>
-                  <button className="sim-cta-button" onClick={goToForm}>
-                    RESERVAR_ACCESO →
-                  </button>
-                </div>
-              )}
+                {demoComplete && (
+                  <div className="sim-cta-block">
+                    <div className="sim-cta-label">TU TURNO</div>
+                    <button className="sim-cta-button" onClick={goToForm}>
+                      RESERVAR_ACCESO →
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* SCREEN 2 — Form */}

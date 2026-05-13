@@ -50,7 +50,7 @@ function formatMinutes(totalMinutes) {
   return m === 0 ? `${h}h` : `${h}h${m}m`;
 }
 
-export default function AppPreview({ autoPlay = false, onAutoPlayComplete } = {}) {
+export default function AppPreview({ autoPlay = false, onAutoPlayComplete, frameless = false } = {}) {
   const [batteryKwh, setBatteryKwh] = useState(82);
   const [currentCharge, setCurrentCharge] = useState(20);
   const [targetCharge, setTargetCharge] = useState(80);
@@ -187,16 +187,14 @@ export default function AppPreview({ autoPlay = false, onAutoPlayComplete } = {}
     return null;
   })();
 
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', margin: '4rem 0' }}>
-      <IosFrame time={currentTime} battery={Math.round(simulatedCharge)} darkMode={true}>
-        <div style={{
-          padding: '24px 20px',
-          color: '#fff',
-          fontFamily: 'Inter, sans-serif',
-          minHeight: '100%',
-          background: 'linear-gradient(180deg, #0A0A0C 0%, #121216 100%)'
-        }}>
+  const simulatorContent = (
+    <div style={{
+      padding: frameless ? '20px 16px 12px' : '24px 20px',
+      color: '#fff',
+      fontFamily: 'Inter, sans-serif',
+      minHeight: '100%',
+      background: 'linear-gradient(180deg, #0A0A0C 0%, #121216 100%)'
+    }}>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '18px', color: 'var(--electric-cyan)', margin: 0, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>CARGAIA_OS</h2>
@@ -411,6 +409,16 @@ export default function AppPreview({ autoPlay = false, onAutoPlayComplete } = {}
           </div>
 
         </div>
+  );
+
+  if (frameless) {
+    return simulatorContent;
+  }
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', margin: '4rem 0' }}>
+      <IosFrame time={currentTime} battery={Math.round(simulatedCharge)} darkMode={true}>
+        {simulatorContent}
       </IosFrame>
     </div>
   );
