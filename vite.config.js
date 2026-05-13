@@ -11,6 +11,7 @@ export default defineConfig({
         privacy: 'privacy.html',
         terms: 'terms.html',
         mediakit: 'mediakit/index.html',
+        forms: 'forms.html',
       },
     },
   },

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxia · CargaIA</title>
+<meta name="description" content="Hablá con Maxia — tu concierge de EV y solar.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<meta name="theme-color" content="#00f2ff">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@200;300;400&family=Outfit:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/src/forms.css">
+</head>
+<body>
+  <div class="crt-overlay"></div>
+  <div class="mesh-bg"></div>
+  <div class="scan-beam"></div>
+
+  <div class="hud-top">
+    <span>[CARGAIA_FORMS // MAXIA_CONCIERGE]</span>
+    <span class="right" id="hud-status">[INICIANDO]</span>
+  </div>
+
+  <!-- Chat container -->
+  <div class="chat-wrap" id="chat-wrap">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="avatar-ring">
+        <img src="/maxia.png" alt="Maxia" class="avatar-img">
+        <span class="online-dot"></span>
+      </div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Maxia <span class="badge">IA</span></div>
+        <div class="chat-header-sub" id="header-sub">// Concierge EV &amp; Solar · CargaIA</div>
+      </div>
+      <div class="header-brand">CARGA<span class="accent">IA</span></div>
+    </div>
+
+    <!-- Messages area -->
+    <div class="messages" id="messages">
+      <!-- bubbles rendered by JS -->
+    </div>
+
+    <!-- Typing indicator -->
+    <div class="typing-wrap" id="typing-wrap" style="display:none">
+      <img src="/maxia.png" alt="Maxia" class="bubble-avatar">
+      <div class="typing-indicator">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- Input bar -->
+    <div class="input-bar" id="input-bar">
+      <input
+        type="text"
+        id="msg-input"
+        placeholder="Escribe tu respuesta…"
+        autocomplete="off"
+        spellcheck="false"
+        maxlength="500"
+      >
+      <button id="send-btn" class="send-btn" aria-label="Enviar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Done screen (hidden until done:true) -->
+    <div class="done-screen" id="done-screen" style="display:none">
+      <div class="done-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="var(--electric-cyan)" stroke-width="1.5"/>
+          <path d="M8 12.5L10.5 15L16 9.5" stroke="var(--electric-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="done-title">¡Listo!</h2>
+      <p class="done-msg">Maxia ya tiene tus datos.<br>Te contactamos pronto. ⚡</p>
+      <a href="https://cargaia.com" class="btn-done">Volver a cargaia.com</a>
+    </div>
+  </div>
+
+  <script type="module" src="/src/forms.js"></script>
+</body>
+</html>
