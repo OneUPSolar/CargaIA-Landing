@@ -658,7 +658,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onFirstScrollPastHero, { passive: true });
 
-    // 6. CTA Pre-Registration Form
+    // 6. CTA Pre-Registration Form -> CargaIA Soft CRM (Cloudflare Worker)
+    //    Repo: github.com/OneUPSolar/cargaia-crm
+    //    Update this URL after `wrangler deploy` (e.g. https://cargaia-crm.<sub>.workers.dev/api/lead)
+    const CRM_ENDPOINT = 'https://cargaia-crm.gomaxify.workers.dev/api/lead';
+
     const ctaForm = document.getElementById('cta-form');
     const ctaSuccess = document.getElementById('cta-success');
 
@@ -672,20 +676,38 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             const payload = {
-                timestamp: new Date().toISOString(),
-                nombre: document.getElementById('cta-name').value,
-                email: document.getElementById('cta-email').value,
-                region: document.getElementById('cta-region')?.value || 'tijuana',
-                tipo_usuario: document.getElementById('cta-type')?.value || 'homeowner',
-                fuente: 'CTA Pre-Registro'
+                nombre: document.getElementById('cta-name').value.trim(),
+                email:  document.getElementById('cta-email').value.trim(),
+                tel:    document.getElementById('cta-phone').value.trim(),
+                ciudad: document.getElementById('cta-region')?.value || 'Tijuana',
+                perfil: document.getElementById('cta-type')?.value  || 'usuario',
+                source: 'cargaia.com',
+                timestamp: new Date().toISOString()
             };
 
             try {
-                await submitToSheets(payload);
+                // Primary: CargaIA CRM
+                const res = await fetch(CRM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error('CRM submission failed: ' + res.status);
+
+                // Backup: keep dual-writing to Google Sheets so nothing is ever lost
+                try { await submitToSheets(payload); } catch (_) { /* non-fatal */ }
+
                 ctaForm.classList.add('hidden');
                 ctaSuccess.classList.remove('hidden');
             } catch (error) {
                 console.error('Error:', error);
+                // Fallback to Sheets-only so we still capture the lead
+                try {
+                    await submitToSheets(payload);
+                    ctaForm.classList.add('hidden');
+                    ctaSuccess.classList.remove('hidden');
+                    return;
+                } catch (_) {}
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 alert('Error al registrar. Por favor intenta de nuevo.');

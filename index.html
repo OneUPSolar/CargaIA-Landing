@@ -565,20 +565,23 @@
                             <input type="email" id="cta-email" placeholder="Correo electrónico" required class="cta-input">
                         </div>
                         <div class="cta-input-row">
+                            <input type="tel" id="cta-phone" placeholder="WhatsApp (+52...)" required class="cta-input" pattern="[+0-9\s\-()]{10,}">
                             <select id="cta-region" class="cta-input cta-select">
-                                <option value="tijuana">Tijuana</option>
-                                <option value="mexicali">Mexicali</option>
-                                <option value="juarez">Ciudad Juárez</option>
-                                <option value="nogales">Nogales</option>
-                                <option value="reynosa">Reynosa</option>
-                                <option value="other_mx">Otra Ciudad (MX)</option>
-                                <option value="us_border">U.S. Border City</option>
+                                <option value="Tijuana">Tijuana</option>
+                                <option value="Mexicali">Mexicali</option>
+                                <option value="Ciudad Juárez">Ciudad Juárez</option>
+                                <option value="Nogales">Nogales</option>
+                                <option value="Reynosa">Reynosa</option>
+                                <option value="Otra MX">Otra Ciudad (MX)</option>
+                                <option value="US Border">U.S. Border City</option>
                             </select>
+                        </div>
+                        <div class="cta-input-row">
                             <select id="cta-type" class="cta-input cta-select">
-                                <option value="homeowner">Hogar / Casa</option>
-                                <option value="business">Negocio / Comercial</option>
-                                <option value="installer">Instalador</option>
-                                <option value="investor">Inversionista</option>
+                                <option value="usuario">Usuario (quiero cargar mi EV)</option>
+                                <option value="inversionista">Inversionista (capital)</option>
+                                <option value="instalador">Instalador certificado</option>
+                                <option value="proveedor">Proveedor / Distribuidor</option>
                             </select>
                         </div>
                         <button type="submit" class="cta-btn">ASEGURAR MI LUGAR →</button>
