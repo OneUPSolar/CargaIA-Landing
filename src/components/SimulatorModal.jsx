@@ -102,7 +102,7 @@ export default function SimulatorModal({ isOpen, onClose }) {
       if (!res.ok) throw new Error('Submission failed');
 
       // Construir mensaje pre-llenado para WhatsApp
-      const whatsappPhone = '5266400000000'; // PLACEHOLDER — Josh confirmará el número real
+      const whatsappPhone = '526631674617'; // CargaIA WhatsApp Business — Tijuana
       const tipoLabel = {
         homeowner: 'USUARIO (tengo o quiero un EV)',
         investor: 'INVERSIONISTA (parte de la red)',
