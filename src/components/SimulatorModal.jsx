@@ -14,9 +14,10 @@ const CITIES = [
 ];
 
 const CLIENT_TYPES = [
-  { value: 'usuario',      label: 'USUARIO',       desc: 'Tengo o quiero un EV' },
+  { value: 'usuario',      label: 'USUARIO',      desc: 'Tengo o quiero un EV' },
   { value: 'inversionista', label: 'INVERSIONISTA', desc: 'Quiero ser parte de la red' },
-  { value: 'instalador',    label: 'INSTALADOR',    desc: 'Quiero ser partner' }
+  { value: 'proveedor',    label: 'PROVEEDOR',    desc: 'Vendo equipo eléctrico' },
+  { value: 'distribuidor', label: 'DISTRIBUIDOR', desc: 'Vendo vehículos eléctricos' }
 ];
 
 export default function SimulatorModal({ isOpen, onClose }) {
@@ -131,15 +132,16 @@ export default function SimulatorModal({ isOpen, onClose }) {
       // Construir mensaje pre-llenado para WhatsApp
       const whatsappPhone = '526631674617'; // CargaIA WhatsApp Business — Tijuana
       const tipoLabel = {
-        homeowner: 'USUARIO (tengo o quiero un EV)',
-        investor: 'INVERSIONISTA (parte de la red)',
-        installer: 'INSTALADOR (partner)'
+        usuario: 'USUARIO (tengo o quiero un EV)',
+        inversionista: 'INVERSIONISTA (parte de la red)',
+        proveedor: 'PROVEEDOR (vendo equipo eléctrico)',
+        distribuidor: 'DISTRIBUIDOR (vendo vehículos eléctricos)'
       }[form.tipo] || form.tipo;
 
       const cityLabel = (CITIES.find(c => c.value === form.region) || {}).label || form.region;
 
       const message = [
-        'Hola CargaIA 👋',
+        'Hola CargaIA ⚡',
         '',
         'Quiero reservar mi acceso a Fase 1.',
         '',
