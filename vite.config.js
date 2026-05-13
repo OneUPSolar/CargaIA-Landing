@@ -7,6 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        login: 'login.html',
         ibero: 'ibero.html',
         privacy: 'privacy.html',
         terms: 'terms.html',
