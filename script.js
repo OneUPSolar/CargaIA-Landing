@@ -169,10 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, "-=0.8");
 
     function startTypewriter() {
-        const engTitle = "Mexico is going electric. Charge without fear.";
-        const spTitle = "México se electrifica. Carga sin miedo.";
-        const engSub = "Safe EV charging starts with real infrastructure. CargaIA deploys compliant, managed charging for homes and businesses across Mexico.";
-        const spSub = "La carga EV segura empieza con infraestructura real. CargaIA despliega carga certificada y gestionada para hogares y negocios en todo México.";
+        const engTitle = "The electric future arrived in Mexico.";
+        const spTitle = "El futuro eléctrico llegó a México.";
+        const engSub = "Certified charging infrastructure for Mexico. Reserve your spot with $10,000 MXN. Only 200 slots.";
+        const spSub = "Infraestructura de carga certificada para México. Asegura tu lugar con $10,000 MXN. Solo 200 cupos.";
         
         const titleEl = document.getElementById('type-title');
         const subEl = document.getElementById('type-subtitle');
