@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import AppPreview from './AppPreview';
 
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyGC43LO1vYrCql73lZvZ1mRHByTeToEQtSki2W_wJ-XezAt0IcVqgF75d6ORI0RyXDdg/exec';
+const CRM_ENDPOINT = 'https://cargaia-crm.hi-7e4.workers.dev/api/lead';
 
 const CITIES = [
   { value: 'tijuana',   label: 'Tijuana' },
@@ -14,10 +15,10 @@ const CITIES = [
 ];
 
 const CLIENT_TYPES = [
-  { value: 'usuario',      label: 'USUARIO',      desc: 'Tengo o quiero un EV' },
+  { value: 'usuario',      label: 'USUARIO',       desc: 'Tengo o quiero un EV' },
   { value: 'inversionista', label: 'INVERSIONISTA', desc: 'Quiero ser parte de la red' },
-  { value: 'proveedor',    label: 'PROVEEDOR',    desc: 'Vendo equipo eléctrico' },
-  { value: 'distribuidor', label: 'DISTRIBUIDOR', desc: 'Vendo vehículos eléctricos' }
+  { value: 'instalador',   label: 'INSTALADOR',    desc: 'Instalo cargadores' },
+  { value: 'proveedor',    label: 'PROVEEDOR',     desc: 'Vendo equipo eléctrico' }
 ];
 
 export default function SimulatorModal({ isOpen, onClose }) {
@@ -104,7 +105,17 @@ export default function SimulatorModal({ isOpen, onClose }) {
     setSubmitting(true);
     setError(null);
 
-    const payload = {
+    const crmPayload = {
+      nombre: form.nombre,
+      email: form.email,
+      tel: `${form.countryCode} ${form.telefono}`,
+      ciudad: form.region,
+      perfil: form.tipo,
+      source: 'cargaia.com/simulator',
+      timestamp: new Date().toISOString()
+    };
+
+    const sheetsPayload = {
       timestamp: new Date().toISOString(),
       nombre: form.nombre,
       email: form.email,
@@ -119,23 +130,33 @@ export default function SimulatorModal({ isOpen, onClose }) {
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      // Primary: CargaIA CRM (Worker)
+      const res = await fetch(CRM_ENDPOINT, {
         method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(crmPayload),
         signal: controller.signal
       });
       clearTimeout(timeoutId);
-      if (!res.ok) throw new Error('Submission failed');
+      if (!res.ok) throw new Error('CRM submission failed: ' + res.status);
+
+      // Backup: dual-write a Google Sheets (non-fatal)
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(sheetsPayload)
+        });
+      } catch (_) { /* non-fatal */ }
 
       // Construir mensaje pre-llenado para WhatsApp
       const whatsappPhone = '526631674617'; // CargaIA WhatsApp Business — Tijuana
       const tipoLabel = {
         usuario: 'USUARIO (tengo o quiero un EV)',
         inversionista: 'INVERSIONISTA (parte de la red)',
-        proveedor: 'PROVEEDOR (vendo equipo eléctrico)',
-        distribuidor: 'DISTRIBUIDOR (vendo vehículos eléctricos)'
+        instalador: 'INSTALADOR (instalo cargadores)',
+        proveedor: 'PROVEEDOR (vendo equipo eléctrico)'
       }[form.tipo] || form.tipo;
 
       const cityLabel = (CITIES.find(c => c.value === form.region) || {}).label || form.region;
@@ -156,14 +177,54 @@ export default function SimulatorModal({ isOpen, onClose }) {
 
       const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
 
-      // Redirigir a WhatsApp DESPUÉS de que Sheets respondió (mismo turn, 
+      // Redirigir a WhatsApp DESPUÉS de que Sheets/CRM respondió (mismo turn, 
       // no abrir antes para que no se cierre el form si el fetch falla)
       window.location.href = whatsappUrl;
 
       setScreen('success');
     } catch (err) {
       clearTimeout(timeoutId);
-      setError('Error al enviar. Intenta de nuevo.');
+      // Fallback: si CRM falla, intenta solo Sheets para no perder el lead
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(sheetsPayload)
+        });
+        
+        // Aún si solo Sheets funcionó, sigue con WhatsApp para no romper UX
+        const whatsappPhone = '526631674617'; // CargaIA WhatsApp Business — Tijuana
+        const tipoLabel = {
+          usuario: 'USUARIO (tengo o quiero un EV)',
+          inversionista: 'INVERSIONISTA (parte de la red)',
+          instalador: 'INSTALADOR (instalo cargadores)',
+          proveedor: 'PROVEEDOR (vendo equipo eléctrico)'
+        }[form.tipo] || form.tipo;
+
+        const cityLabel = (CITIES.find(c => c.value === form.region) || {}).label || form.region;
+
+        const message = [
+          'Hola CargaIA ⚡',
+          '',
+          'Quiero reservar mi acceso a Fase 1.',
+          '',
+          `NOMBRE: ${form.nombre}`,
+          `EMAIL: ${form.email}`,
+          `TEL: ${form.countryCode} ${form.telefono}`,
+          `CIUDAD: ${cityLabel}`,
+          `PERFIL: ${tipoLabel}`,
+          '',
+          'Enviado desde cargaia.com'
+        ].join('\n');
+
+        const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappUrl;
+        setScreen('success');
+        return;
+      } catch (_) { /* Sheets también falló */ }
+
+      setError(err.message || 'Error al registrar. Por favor intenta de nuevo.');
       setSubmitting(false);
     }
   };
