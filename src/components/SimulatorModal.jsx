@@ -249,7 +249,15 @@ export default function SimulatorModal({ isOpen, onClose }) {
                           const reformatted = formatPhoneNumber(form.telefono, newCode);
                           setForm({ ...form, countryCode: newCode, telefono: reformatted });
                         }}
-                        style={{ flex: '0 0 auto', minWidth: '90px' }}
+                        style={{ 
+                          flex: '0 0 110px',
+                          width: '110px',
+                          minWidth: '110px',
+                          maxWidth: '110px',
+                          padding: '0 8px',
+                          fontSize: '14px',
+                          boxSizing: 'border-box'
+                        }}
                         required
                       >
                         <option value="+52">🇲🇽 +52</option>
@@ -264,7 +272,12 @@ export default function SimulatorModal({ isOpen, onClose }) {
                           setForm({ ...form, telefono: formatted });
                         }}
                         placeholder={form.countryCode === '+1' ? '(555) 123-4567' : '664-123-4567'}
-                        style={{ flex: '1 1 auto' }}
+                        style={{ 
+                          flex: '1 1 0',
+                          minWidth: '0',
+                          width: '100%',
+                          boxSizing: 'border-box'
+                        }}
                         required
                       />
                     </div>
