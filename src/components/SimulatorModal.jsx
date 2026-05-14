@@ -375,6 +375,25 @@ export default function SimulatorModal({ isOpen, onClose }) {
                     </div>
                   </div>
 
+                  <div className="sim-form-disclaimer" style={{ 
+                    fontSize: '11px', 
+                    lineHeight: '1.5',
+                    color: 'rgba(255, 255, 255, 0.55)',
+                    padding: '12px 14px',
+                    marginTop: '8px',
+                    marginBottom: '4px',
+                    border: '1px solid rgba(0, 242, 255, 0.15)',
+                    borderRadius: '4px',
+                    background: 'rgba(0, 242, 255, 0.03)',
+                    fontFamily: 'monospace',
+                    letterSpacing: '0.02em',
+                    animationDelay: '0.4s'
+                  }}>
+                    <span style={{ color: 'rgba(0, 242, 255, 0.8)', marginRight: '6px' }}>[INFO]</span>
+                    Pre-orden $10,000 MXN <strong style={{ color: 'rgba(255,255,255,0.85)' }}>100% reembolsable</strong>. 
+                    El cobro inicia al firmar contrato oficial en agosto 2026.
+                  </div>
+
                   {error && <div className="sim-form-error">{error}</div>}
 
                   <button
