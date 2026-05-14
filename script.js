@@ -171,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTypewriter() {
         const engTitle = "The electric future arrived in Mexico.";
         const spTitle = "El futuro eléctrico llegó a México.";
-        const engSub = "Certified charging infrastructure for Mexico. Reserve your spot with $10,000 MXN. Only 200 slots.";
-        const spSub = "Infraestructura de carga certificada para México. Asegura tu lugar con $10,000 MXN. Solo 200 cupos.";
+        const engSub = "Certified charging infrastructure for Mexico. 100% refundable pre-order — billing starts with official contract in August 2026.";
+        const spSub = "Infraestructura de carga certificada para México. Pre-orden reembolsable al 100% — cobro inicia con contrato oficial en agosto 2026.";
         
         const titleEl = document.getElementById('type-title');
         const subEl = document.getElementById('type-subtitle');
