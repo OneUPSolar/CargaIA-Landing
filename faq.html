@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Preguntas frecuentes sobre carga de autos eléctricos en México | CargaIA</title>
+<meta name="description" content="Resolvemos tus dudas sobre autos eléctricos, carga en casa, costos, instalación y Carga-como-Servicio (CaaS) en Tijuana y México. Guía completa para nuevos usuarios y expertos.">
+<meta name="keywords" content="carga auto eléctrico México, cargador EV Tijuana, instalación cargador, CaaS México, Charging as a Service, autos eléctricos México, CargaIA, EV charging Mexico">
+
+<!-- SEO Open Graph -->
+<meta property="og:title" content="FAQ — Carga de autos eléctricos en México | CargaIA">
+<meta property="og:description" content="Todo sobre carga EV en México: costos, instalación, autos compatibles, ahorro vs gasolina, Tijuana y CaaS.">
+<meta property="og:url" content="https://cargaia.com/faq">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cargaia.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Robots: index for SEO -->
+<meta name="robots" content="index, follow">
+
+<!-- Hreflang for bilingual -->
+<link rel="alternate" hreflang="es" href="https://cargaia.com/faq">
+<link rel="alternate" hreflang="en" href="https://cargaia.com/faq?lang=en">
+<link rel="canonical" href="https://cargaia.com/faq">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.webmanifest">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #04040a;
+  --surface: #0a0a14;
+  --border: rgba(255,255,255,0.08);
+  --cyan: #00f2ff;
+  --cyan-dim: rgba(0, 242, 255, 0.5);
+  --text: rgba(255,255,255,0.85);
+  --muted: rgba(255,255,255,0.45);
+  --font: 'Space Grotesk', sans-serif;
+  --mono: 'Space Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* HEADER - cyberpunk style matching index */
+.header {
+  height: 60px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  background: rgba(4,4,10,0.95);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+.header-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.logo-text {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  text-decoration: none;
+}
+.logo-text .accent { color: var(--cyan); }
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.header-nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--cyan); }
+.btn-outline {
+  border: 1px solid var(--cyan);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+}
+
+/* MAIN content area */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2rem 8rem;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--cyan);
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+h1 {
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.lede {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+/* Language toggle */
+.lang-toggle {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  padding: 4px;
+  border-radius: 4px;
+}
+.lang-toggle button {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  padding: 0.4rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--cyan);
+  color: var(--bg);
+}
+
+/* Search + filters */
+.toolbar {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.search-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.8rem 1rem;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--cyan-dim);
+}
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter-chips button {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.filter-chips button.active {
+  background: rgba(0, 242, 255, 0.1);
+  color: var(--cyan);
+  border-color: var(--cyan-dim);
+}
+.filter-chips button:hover { color: var(--text); }
+
+/* Section headers */
+.section-title {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--cyan);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Q&A items */
+.qa-item {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+.qa-question {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.qa-question:hover { color: var(--cyan); }
+.qa-toggle {
+  font-family: var(--mono);
+  color: var(--cyan);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.qa-item.is-open .qa-toggle { transform: rotate(45deg); }
+.qa-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding-top 0.4s ease;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.qa-item.is-open .qa-answer {
+  max-height: 2000px;
+  padding-top: 1rem;
+}
+
+/* Placeholder coming soon */
+.coming-soon {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  margin: 3rem 0;
+}
+.coming-soon-icon {
+  font-family: var(--mono);
+  color: var(--cyan);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* FOOTER */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+footer a { color: var(--muted); text-decoration: none; margin: 0 1rem; }
+footer a:hover { color: var(--cyan); }
+
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  .lede { font-size: 1rem; }
+  main { padding: 2rem 1rem 6rem; }
+  .header-nav { gap: 0.75rem; }
+  .header-nav a { font-size: 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo-text">CARGA<span class="accent">IA</span></a>
+    <nav class="header-nav">
+      <a href="/faq">FAQ</a>
+      <a href="#waitlist" class="btn-outline">EARLY_ACCESS</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="tag">[KNOWLEDGE_BASE]</div>
+  <h1>Preguntas frecuentes.</h1>
+  <p class="lede">Todo lo que necesitas saber sobre autos eléctricos, carga residencial, costos y Carga-como-Servicio en México. Para nuevos usuarios y expertos.</p>
+
+  <div class="lang-toggle">
+    <button class="active" data-lang="es">ES</button>
+    <button data-lang="en">EN</button>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" class="search-input" placeholder="Buscar pregunta... (ej: 'cuánto cuesta', 'instalación', 'Tijuana')" id="faq-search">
+    <div class="filter-chips" id="faq-filters">
+      <button class="active" data-filter="all">TODAS</button>
+      <button data-filter="cargaia">SOBRE CARGAIA</button>
+      <button data-filter="costos">COSTOS</button>
+      <button data-filter="instalacion">INSTALACIÓN</button>
+      <button data-filter="ev-basico">EV BÁSICO</button>
+      <button data-filter="tijuana">TIJUANA</button>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-icon">[ ◯ ]</div>
+    <h3 style="font-weight:400;font-size:1.3rem;margin-bottom:0.5rem;">Contenido en preparación</h3>
+    <p style="color:var(--muted);font-size:0.9rem;">Estamos finalizando 35 preguntas y respuestas sobre carga EV en México. Disponibles en español e inglés muy pronto.</p>
+  </div>
+</main>
+
+<footer>
+  [CARGAIA_FAQ_v1.0] // © 2026 Maxify Inc. // Tijuana, B.C., México<br>
+  <a href="/">INICIO</a> · <a href="/privacy">PRIVACIDAD</a> · <a href="/terms">TÉRMINOS</a>
+</footer>
+
+</body>
+</html>

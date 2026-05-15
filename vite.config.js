@@ -13,6 +13,7 @@ export default defineConfig({
         terms: 'terms.html',
         mediakit: 'mediakit/index.html',
         forms: 'forms.html',
+        faq: 'faq.html',
       },
     },
   },
