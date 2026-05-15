@@ -290,6 +290,42 @@ footer {
 footer a { color: var(--muted); text-decoration: none; margin: 0 1rem; }
 footer a:hover { color: var(--cyan); }
 
+/* Legal disclaimer */
+.legal-disclaimer {
+  margin-top: 5rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.legal-disclaimer p {
+  margin-bottom: 1rem;
+}
+.legal-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+.legal-disclaimer strong {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.legal-disclaimer .updated-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--cyan);
+  opacity: 0.7;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
 @media (max-width: 768px) {
   h1 { font-size: 2rem; }
   .lede { font-size: 1rem; }
@@ -334,17 +370,341 @@ footer a:hover { color: var(--cyan); }
     </div>
   </div>
 
-  <div class="coming-soon">
-    <div class="coming-soon-icon">[ ◯ ]</div>
-    <h3 style="font-weight:400;font-size:1.3rem;margin-bottom:0.5rem;">Contenido en preparación</h3>
-    <p style="color:var(--muted);font-size:0.9rem;">Estamos finalizando 35 preguntas y respuestas sobre carga EV en México. Disponibles en español e inglés muy pronto.</p>
-  </div>
+<div id="faq-content" data-lang="es">
+
+<!-- ─── SECCIÓN 1 ─── -->
+<h2 class="section-title" data-section="cargaia">[01] Sobre CargaIA</h2>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">¿Qué es CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA es la primera empresa de Carga-como-Servicio (CaaS) en México. En lugar de comprar e instalar un cargador para tu auto eléctrico, CargaIA instala y mantiene la infraestructura completa en tu casa o negocio, y tú pagas una mensualidad fija que incluye el equipo, instalación certificada, app inteligente y soporte. Operamos en Baja California con planes de expandirnos a Sonora, Jalisco, Nuevo León y el Bajío.</p></div>
+</div>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">¿Cómo funciona el modelo de Carga-como-Servicio? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Funciona como una suscripción de internet o energía solar: no compras el hardware, pagas por el servicio. CargaIA instala un cargador certificado en tu propiedad, lo conecta a nuestra plataforma de monitoreo, y tú obtienes carga ilimitada o por demanda según tu plan. Si el equipo falla, lo reemplazamos sin costo. Si te mudas, lo desinstalamos o lo migramos. Sin contratos trampa, cancelación con 30 días de aviso.</p></div>
+</div>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">¿Quién es CargaIA y dónde está basada? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA es una marca de Maxify Technologies, una empresa enfocada en infraestructura de movilidad eléctrica para México y eventualmente Estados Unidos. Nuestra operación piloto arranca en Tijuana, Baja California, con expansión planeada a otras ciudades mexicanas a partir de 2027.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 2 ─── -->
+<h2 class="section-title" data-section="costos">[02] Costos y suscripción</h2>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">¿Cuánto cuesta el servicio de CargaIA al mes? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>La suscripción residencial mensual de CargaIA está en proceso de pricing final con base en el piloto Fase 1. El modelo incluye en una sola mensualidad: el cargador certificado (sin costo de hardware), la instalación con permisos NOM/NEC, monitoreo inteligente vía app, soporte técnico y mantenimiento. Compárelo con comprar un cargador residencial ($800-1,500 USD) más la instalación ($500-2,000 MXN) más el mantenimiento.</p></div>
+</div>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">¿La pre-orden de $10,000 MXN es reembolsable? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí, la pre-orden de $10,000 MXN para Fase 1 es 100% reembolsable. El monto solo se aplica como crédito a tu primera mensualidad cuando firmamos contrato oficial de servicio en agosto 2026. Si tu sitio no califica técnicamente para instalación o si decides no continuar antes de firmar contrato, te devolvemos el monto completo sin penalización.</p></div>
+</div>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">¿Qué incluye la mensualidad de CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>La mensualidad incluye: (1) el cargador eléctrico certificado, (2) instalación profesional con permisos NOM/NEC y aprobación CFE cuando aplique, (3) app móvil para monitoreo y control, (4) soporte técnico 24/7, (5) mantenimiento preventivo y correctivo, (6) reemplazo de equipo si falla por defecto de fábrica. No incluye el costo del kWh consumido, que se factura por separado según tarifa CFE residencial.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 3 ─── -->
+<h2 class="section-title" data-section="instalacion">[03] Instalación y compatibilidad</h2>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">¿CargaIA es compatible con mi auto eléctrico? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA usa cargadores con conector SAE J1772 (Tipo 1) y CCS Combo, los estándares más comunes en México. Esto significa que es compatible con todos los autos eléctricos vendidos en México: Tesla Model 3/Y (con adaptador), Nissan Leaf, Chevrolet Bolt, BYD Dolphin/Yuan/Tang/Han, Volvo XC40, Polestar 2, Ford Mustang Mach-E, MG ZS EV, JAC E10X, y otros. Para autos chinos con conector GB/T podemos cotizar cargador específico.</p></div>
+</div>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">¿Cuánto tiempo tarda la instalación de un cargador CargaIA en mi casa? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>La instalación de un cargador residencial CargaIA Nivel 2 tarda típicamente entre 2 y 4 horas en condiciones normales, distribuidas en una sola visita. Esto incluye: evaluación del panel eléctrico, instalación del breaker dedicado de 40-60A, tendido de cable hasta el punto del cargador (típicamente 3-15 metros), montaje del equipo y pruebas. Si requiere actualización del panel eléctrico o trámite especial con CFE, el plazo total puede extenderse a 1-3 semanas.</p></div>
+</div>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">¿Qué requisitos eléctricos tiene mi casa para instalar un cargador CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Tu casa necesita: (1) servicio eléctrico CFE de 220V (estándar en México), (2) espacio disponible en el panel eléctrico para un breaker de 40-60A dedicado, (3) capacidad contratada con CFE suficiente (típicamente 5-10 kW disponibles), (4) ubicación física cercana al lugar donde estaciones el auto. Durante la evaluación gratuita verificamos todo esto antes de instalar. Si el sitio no califica, te devolvemos la pre-orden completa.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 4 ─── -->
+<h2 class="section-title" data-section="tecnico">[04] Producto técnico</h2>
+
+<div class="qa-item" data-section="tecnico">
+  <button class="qa-question">¿Qué potencia de carga ofrece CargaIA en residencias? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA ofrece carga Nivel 2 residencial en 240V a 48A, lo que equivale a 11.5 kW de potencia de carga. En términos prácticos, esto significa cargar la batería de un auto eléctrico promedio (50-75 kWh) en aproximadamente 5-8 horas, una noche completa. Comparado con la carga lenta Nivel 1 (110V, ~1.4 kW) que tomaría más de 24 horas, la diferencia es sustancial.</p></div>
+</div>
+
+<div class="qa-item" data-section="tecnico">
+  <button class="qa-question">¿CargaIA es seguro? ¿Cumple normas eléctricas mexicanas? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí. Toda instalación CargaIA cumple con la Norma Oficial Mexicana NOM-001-SEDE (Instalaciones Eléctricas), el código eléctrico NEC americano de referencia, y los lineamientos de la Comisión Federal de Electricidad (CFE). Cada instalación incluye protección contra sobrecarga, falla a tierra (GFCI), pararrayos opcional y aislamiento certificado. Nuestros electricistas están certificados por la STPS.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 5 ─── -->
+<h2 class="section-title" data-section="empresa">[05] Empresa y soporte</h2>
+
+<div class="qa-item" data-section="empresa">
+  <button class="qa-question">¿Cómo me apunto al piloto de CargaIA en Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Para apuntarte al piloto Fase 1 en Tijuana, visita cargaia.com, completa la pre-orden con $10,000 MXN reembolsables y selecciona tu perfil (usuario residencial, inversionista, instalador o proveedor). CargaIA te contactará en agosto 2026 para evaluar tu sitio, firmar contrato de servicio y agendar instalación. Solo hay 200 cupos en Fase 1 — primero llegado, primero servido. Si tu sitio no califica, te devolvemos el monto íntegro.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 6 ─── -->
+<h2 class="section-title" data-section="economia">[06] Dudas económicas</h2>
+
+<div class="qa-item" data-section="economia">
+  <button class="qa-question">¿Me conviene más comprar mi propio cargador que rentar con CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Depende de tu horizonte y comodidad con responsabilidades. Comprar un cargador residencial cuesta entre $15,000-30,000 MXN (hardware) más $5,000-15,000 MXN (instalación certificada) más mantenimiento futuro. Con CargaIA pagas mensualidad fija y el equipo, instalación, mantenimiento y reemplazo están incluidos sin costo adicional. Si planeas vivir en la misma casa 7+ años y tienes presupuesto inicial de $25,000+ MXN, comprar podría salir más barato a largo plazo. Si prefieres cero responsabilidad de mantenimiento, garantía total y flexibilidad para mudarte, CargaIA es la opción.</p></div>
+</div>
+
+<div class="qa-item" data-section="economia">
+  <button class="qa-question">¿Qué pasa si me mudo de casa antes de que termine mi suscripción? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Si te mudas dentro del área de cobertura de CargaIA, migramos tu cargador a tu nueva ubicación sin costo de hardware (solo aplica costo de re-instalación si tu nuevo domicilio requiere trabajos eléctricos adicionales). Si te mudas fuera de cobertura, puedes cancelar tu suscripción con 30 días de aviso sin penalización después del primer año de servicio. Durante el primer año, aplica una tarifa de desinstalación de $3,000 MXN para cubrir costos operativos.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 7 ─── -->
+<h2 class="section-title" data-section="tarifas">[07] Tarifas eléctricas</h2>
+
+<div class="qa-item" data-section="tarifas">
+  <button class="qa-question">¿La mensualidad de CargaIA incluye el costo del kWh consumido? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>No, la mensualidad CargaIA cubre el equipo, instalación y mantenimiento. El consumo eléctrico se factura aparte directamente con la Comisión Federal de Electricidad (CFE) en tu recibo de luz, según tu tarifa residencial (1, 1A, 1B, DAC, etc.). Nuestra app inteligente te muestra exactamente cuántos kWh consumes cargando, para que puedas presupuestar y optimizar tu carga durante horas de menor costo (madrugada).</p></div>
+</div>
+
+<div class="qa-item" data-section="tarifas">
+  <button class="qa-question">¿Es más caro cargar mi auto eléctrico en CargaIA que llenar gasolina? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Mucho más barato. Un auto eléctrico típico consume entre 15-20 kWh por cada 100 km. A tarifa CFE residencial promedio de $4 MXN por kWh, son $60-80 MXN por 100 km. Un auto gasolina compacto promedio rinde 10-15 km/litro a gasolina Magna de $24-26 MXN/litro, son $160-260 MXN por 100 km. La diferencia: cargar eléctrico cuesta entre 60-70% menos que gasolina. En tarifas DAC el ahorro se reduce, por eso ofrecemos optimización de carga nocturna para mantenerte en tarifa subsidiada.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 8 ─── -->
+<h2 class="section-title" data-section="solar">[08] Solar y paneles</h2>
+
+<div class="qa-item" data-section="solar">
+  <button class="qa-question">¿Puedo conectar mi cargador CargaIA a paneles solares? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí, CargaIA es compatible con paneles solares residenciales. Si ya tienes paneles instalados, integramos tu cargador a tu sistema solar para que cargue tu auto con energía generada en tu propio techo. Si no tienes paneles, CargaIA ofrece paquete combinado solar + carga EV bajo el mismo modelo de suscripción mensual, eliminando casi por completo tu factura de luz y combustible. La integración solar usa medición neta (net metering) con CFE cuando el sistema lo permite.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 9 ─── -->
+<h2 class="section-title" data-section="garantias">[09] Seguridad y garantías</h2>
+
+<div class="qa-item" data-section="garantias">
+  <button class="qa-question">¿Qué pasa si mi cargador CargaIA se descompone? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Como el cargador es propiedad de CargaIA, tú no asumes ningún costo de falla. Reportas el problema vía app o WhatsApp, enviamos técnico certificado en menos de 48 horas hábiles (24 horas en Tijuana metropolitana), diagnosticamos y reparamos sin cargo si la falla es por defecto de fábrica, uso normal o causa eléctrica externa. Si el daño es por uso indebido o vandalismo, aplica cargo de reparación según evaluación. Mientras tu cargador está fuera de servicio, recibes crédito proporcional en tu siguiente mensualidad.</p></div>
+</div>
+
+<div class="qa-item" data-section="garantias">
+  <button class="qa-question">¿Los cargadores CargaIA tienen seguro? ¿Y mi auto está protegido? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí. Toda la infraestructura instalada por CargaIA está cubierta por nuestra póliza de responsabilidad civil contratada con aseguradora mexicana acreditada. Esta cubre daños accidentales al equipo, incidentes eléctricos que pudieran afectar tu instalación y responsabilidad por terceros. Tu vehículo eléctrico debe estar cubierto por tu seguro automotriz personal — los cargadores Nivel 2 certificados raramente causan daño al vehículo gracias a protecciones múltiples (GFCI, sobrecarga, falla a tierra), pero recomendamos confirmar con tu aseguradora que tu póliza cubre eventos eléctricos.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 10 ─── -->
+<h2 class="section-title" data-section="comercial">[10] Comercial y facturación</h2>
+
+<div class="qa-item" data-section="comercial">
+  <button class="qa-question">¿CargaIA factura CFDI para empresas y deducción fiscal? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí. Una vez que CargaIA esté constituida formalmente como entidad mexicana (proceso en curso, finalizando agosto 2026), emitiremos CFDI 4.0 conforme a normativa SAT para todos los servicios prestados a personas físicas con actividad empresarial, personas morales y régimen RIF. Tu mensualidad y cualquier servicio adicional será deducible al 100% como gasto operativo si tu giro lo permite. Si necesitas factura desde antes de agosto 2026 para algún piloto comercial, contáctanos directamente para condiciones especiales.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 11 ─── -->
+<h2 class="section-title" data-section="ev-basico">[11] Autos eléctricos para principiantes: decidir comprar</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Vale la pena comprar un auto eléctrico en México en 2026? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí, para perfiles específicos. Un auto eléctrico tiene sentido si: (1) tienes acceso a estacionamiento con toma eléctrica en casa o trabajo, (2) manejas más de 30 km al día (te paga el ahorro de combustible más rápido), (3) tu presupuesto inicial es de $400,000 MXN o más (los EVs económicos arrancan ahí), (4) vives en ciudades con infraestructura básica de carga (CDMX, Monterrey, Guadalajara, Tijuana, Querétaro). Si das mucha vuelta urbana, casi no haces carretera larga, y puedes cargar de noche en casa, ahorras entre $30,000-60,000 MXN al año vs gasolina. Si haces más de 500 km diarios o vives en zona rural sin infraestructura, todavía no es tu momento.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Cuál es el auto eléctrico más barato que puedo comprar en México? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>A mayo 2026, las opciones más económicas son: BYD Dolphin Mini (~$420,000 MXN), JAC E10X (~$380,000-440,000 MXN), MG ZS EV (~$520,000 MXN), Renault Kwid E-Tech (~$430,000 MXN), Chevrolet Bolt usado seminuevo (~$380,000-450,000 MXN). Marcas chinas como BYD, JAC, Changan están dominando el segmento de entrada. Tesla Model 3 arranca desde $850,000 MXN. Los precios cambian frecuentemente por subsidios, tipo de cambio y promociones de marca, así que verifica directamente con concesionario.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Cuánto cuesta cargar un auto eléctrico al mes en México? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Para un auto eléctrico promedio que recorre 1,500 km al mes, el costo de electricidad es de aproximadamente $900-1,400 MXN al mes cargando en casa con tarifa CFE residencial básica. Comparado con un auto de gasolina compacto que gastaría $3,200-4,800 MXN al mes en combustible para el mismo kilometraje, el ahorro mensual es de $2,000-3,500 MXN. Cargas públicas son más caras (~$8-15 MXN/kWh vs $2-5 MXN/kWh residencial) y deben usarse solo para viajes largos. La carga nocturna en tarifa subsidiada es donde está la economía real.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Cuánta autonomía real tiene un auto eléctrico en México? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>La autonomía oficial WLTP/EPA de un auto eléctrico moderno está entre 250-500 km, pero la autonomía real en México suele ser 15-25% menor por varios factores: aire acondicionado en clima cálido (Tijuana, Mérida, Monterrey), tráfico urbano denso, manejo en carretera a más de 110 km/h, baterías sometidas a calor extremo. En la práctica, un Nissan Leaf nuevo da 180-220 km reales, un Tesla Model 3 Long Range da 380-450 km reales, un BYD Dolphin da 280-320 km reales. Para uso urbano diario en México 200-300 km de autonomía es suficiente. Para viajes carreteros frecuentes necesitas 400+ km o planificar paradas en cargadores rápidos.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 12 ─── -->
+<h2 class="section-title" data-section="ev-basico">[12] Autos eléctricos para principiantes: rutina diaria</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Necesito cargador especial en casa o puedo conectarlo a un enchufe normal? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Técnicamente puedes conectar un auto eléctrico a un enchufe normal de 110V, pero NO es recomendable como solución permanente. La carga sería ultra lenta (de 30 a 60 horas para una carga completa) y representa riesgo de sobrecalentar el cableado de tu casa, que no está diseñado para 8-12 horas continuas de alta corriente. Lo correcto es instalar un cargador Nivel 2 dedicado de 220V, que carga el auto en 4-8 horas con instalación eléctrica adecuada. Por eso CargaIA existe: instalamos el cargador certificado sin que tengas que comprar e instalar tú.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Dónde puedo cargar mi auto eléctrico si no estoy en casa? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>En México hay tres tipos de cargadores públicos: (1) cargadores Nivel 2 en centros comerciales, hoteles y oficinas (típicamente 7-22 kW, cargan en 3-8 horas), (2) cargadores rápidos DC en gasolineras y rest-stops carreteros (50-150 kW, cargan 80% en 30-60 minutos), (3) Tesla Superchargers exclusivos para Tesla en ubicaciones limitadas. Apps útiles: PlugShare, ChargeMap, Electromaps muestran cargadores cercanos con disponibilidad en tiempo real. Las redes más grandes son ChargeNow (BMW), EVgo en Tijuana/Mexicali fronterizos, Cumbre Charge, EZVOLT. La carga en casa cubre 80-90% del uso típico; la pública es para viajes largos o emergencias.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Qué pasa si se me acaba la batería en la carretera? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>A diferencia de quedarse sin gasolina, quedarse sin batería en un auto eléctrico no es inmediatamente catastrófico porque todos los EVs te alertan con suficiente anticipación (avisos a 20%, 10%, 5% de batería restante) y los sistemas de navegación integrados te muestran cargadores cercanos. Si efectivamente quedaste sin batería, las opciones son: (1) llamar grúa para llevarte al cargador más cercano (cobertura tradicional de seguros y AMA cubre esto), (2) algunos modelos (Tesla, BMW) tienen reserva interna que da 10-20 km adicionales después del aviso de "0%", (3) Unidad móvil de carga DC que vienen a ti — servicio de emergencia que está iniciando en México pero todavía no es ubicuo. Planificar viajes carreteros con paradas en cargadores conocidos es la mejor estrategia.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 13 ─── -->
+<h2 class="section-title" data-section="ev-basico">[13] Autos eléctricos para principiantes: mantenimiento</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Los autos eléctricos necesitan mantenimiento? ¿Cuánto cuestan? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Mucho menos que un auto de combustión. Los autos eléctricos no tienen aceite que cambiar, ni filtros de aire/combustible, ni bujías, ni distribuidor, ni catalizador, ni transmisión compleja. Solo necesitan: (1) rotación de llantas cada 10,000 km como cualquier auto, (2) cambio de líquido de frenos cada 2 años, (3) inspección anual del sistema de batería, (4) reemplazo de filtro de cabina si tu modelo lo tiene. El costo de mantenimiento anual promedio de un EV en México es de $4,000-8,000 MXN comparado con $15,000-25,000 MXN de un auto gasolina equivalente. La batería de tracción tiene garantía típica de 8 años o 160,000 km.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Cuánto dura la batería de un auto eléctrico? ¿Tengo que cambiarla? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Las baterías modernas de litio-ion en autos eléctricos están diseñadas para durar entre 1,500-3,000 ciclos de carga, lo que equivale a 250,000-500,000 km de uso real. La mayoría de fabricantes (Tesla, Nissan, GM, BYD) ofrecen garantía de batería de 8 años o 160,000 km, garantizando al menos 70% de capacidad original al final de ese periodo. En la práctica, los Nissan Leaf modelo 2013 de prueba siguen funcionando hoy con 85-90% de capacidad. El reemplazo completo de batería es caro ($150,000-400,000 MXN según modelo), pero solo se necesita en autos con más de 10-12 años de uso intenso. Para uso normal en ciudad, la batería sobrevive más que el chasis del auto.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">¿Es seguro conducir un auto eléctrico bajo lluvia o cruzar charcos? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Sí, completamente. Los autos eléctricos cumplen las mismas normas internacionales de protección IP67 que aplican a equipos electrónicos sumergibles, y son sometidos a pruebas más estrictas de aislamiento eléctrico que los autos de combustión. El sistema eléctrico de alta tensión está completamente sellado y aislado del chasis. Puedes pasar charcos, cruzar lluvia intensa y lavar tu auto con manguera sin riesgo eléctrico alguno. De hecho, conducir bajo lluvia es más seguro en un EV que en un auto gasolina porque no hay sistema de admisión de aire que pueda mojarse y dañar el motor. Lo único a evitar es inundación profunda (más de 30 cm de agua) que podría dañar componentes electrónicos en general.</p></div>
+</div>
+
+<!-- ─── SECCIÓN 14 ─── -->
+<h2 class="section-title" data-section="tijuana">[14] Tijuana y movilidad local</h2>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">¿Por qué Tijuana necesita autos eléctricos urgentemente? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Tijuana enfrenta tres problemas que los autos eléctricos resuelven directamente: (1) contaminación del aire, donde la ciudad alcanza niveles peligrosos de PM2.5 varios días al año, principalmente por emisiones vehiculares en cruces fronterizos congestionados como San Ysidro y Otay, (2) costo creciente de combustible, con precios de gasolina entre los más altos del país por logística fronteriza, golpeando especialmente a los más de 80,000 transmigrantes que cruzan diariamente, (3) dependencia energética del exterior, importando gasolina mientras Baja California tiene de los recursos solares más abundantes de México (más de 300 días de sol al año). La transición a autos eléctricos en Tijuana no es lujo, es necesidad económica y de salud pública.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">¿Qué tan contaminado está el aire en Tijuana y cómo ayuda un auto eléctrico? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Tijuana registra concentraciones de PM2.5 (partículas finas que penetran pulmones) entre 12-25 µg/m³ en condiciones normales y picos superiores a 50 µg/m³ durante temporadas de inversión térmica, valores que la Organización Mundial de la Salud considera dañinos para la salud humana. Las emisiones del transporte representan aproximadamente 60% de la contaminación urbana en la ciudad. Un auto eléctrico genera cero emisiones de escape en el punto de uso, lo que significa que cada conversión de gasolina a eléctrico reduce directamente la carga contaminante en las colonias por donde circula. Si solo el 5% de los vehículos privados en Tijuana fueran eléctricos, las concentraciones de PM2.5 caerían entre 8-12% según estimaciones de calidad del aire urbano.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">¿Cuánto puedo ahorrar al año si cambio mi auto de gasolina por un eléctrico en Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Un conductor promedio en Tijuana que recorre entre 18,000-25,000 km al año puede ahorrar entre $35,000 y $65,000 MXN anuales al cambiar de un auto compacto de gasolina a uno eléctrico. El cálculo incluye: ahorro de combustible ($24,000-42,000 MXN/año), menor mantenimiento ($8,000-15,000 MXN/año), exención de verificación vehicular obligatoria si el modelo califica (no aplica para todos), descuentos en tenencia vehicular en Baja California para autos cero emisiones cuando aplican. Si además agregas paneles solares para cubrir tu consumo eléctrico, el ahorro total se acerca a eliminar tu factura de combustible. En 5-7 años el ahorro acumulado supera la diferencia de precio inicial vs un auto gasolina equivalente.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">¿Tijuana tiene suficiente infraestructura de carga para mi auto eléctrico hoy? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Insuficiente, y esa es exactamente la brecha que CargaIA viene a cerrar. Tijuana tiene actualmente menos de 50 cargadores públicos confiables distribuidos principalmente en plazas comerciales, hoteles fronterizos y algunas oficinas corporativas, comparado con más de 1,200 estaciones de gasolina. Para una ciudad de 2 millones de habitantes con creciente flota de EVs (BYD, Tesla, Chevrolet Bolt importados de USA), el déficit es claro. Por eso CargaIA se enfoca primero en carga residencial, donde se hace 80-90% del consumo real, y construirá red de carga pública en una segunda fase. Si tienes auto eléctrico en Tijuana hoy, tu mejor estrategia es asegurar carga confiable en casa primero.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">¿Qué hace CargaIA específicamente para resolver problemas de movilidad en Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA enfoca su Fase 1 piloto en Tijuana por razones específicas: (1) capacidad solar abundante para integrar paneles a la red de carga, (2) flota EV creciente debido a importaciones desde California, (3) ingresos familiares promedio suficientes para suscripción mensual, (4) consciencia ciudadana sobre contaminación. Nuestra solución concreta es: instalar cargadores certificados en hogares de Tijuana sin que tengas que comprar el equipo, conectarlos a tarifas residenciales optimizadas con CFE, y a futuro integrar generación solar local para reducir dependencia eléctrica externa. No vendemos autos eléctricos, vendemos la infraestructura que hace que tener uno sea práctico, accesible y económicamente sensato para una familia tijuanense promedio.</p></div>
+</div>
+
+</div><!-- end #faq-content -->
+
+<!-- ─── DISCLAIMER LEGAL FORMAL ─── -->
+<div class="legal-disclaimer">
+<p><strong>AVISO LEGAL Y FISCAL</strong></p>
+<p>La información contenida en esta página tiene carácter meramente informativo y orientativo. CargaIA y Maxify Technologies, sus subsidiarias y afiliadas no asumen responsabilidad alguna por decisiones tomadas con base en los datos aquí publicados, los cuales pueden estar sujetos a cambios por actualización de tarifas de la Comisión Federal de Electricidad (CFE), modificaciones a la normativa fiscal del Servicio de Administración Tributaria (SAT), reformas a la Norma Oficial Mexicana NOM-001-SEDE-2012, fluctuaciones del tipo de cambio peso-dólar, o cambios en precios y disponibilidad de equipos y vehículos por parte de fabricantes y distribuidores autorizados.</p>
+<p>Los datos económicos, comparativos de costos, autonomía vehicular, capacidad de carga y especificaciones técnicas mencionados reflejan condiciones de mercado y normatividad vigentes a la fecha de última actualización. Cualquier servicio prestado por CargaIA quedará formalizado mediante contrato individual de prestación de servicios, donde se establecerán los términos, condiciones, alcances, costos y obligaciones específicas aplicables. La emisión de Comprobantes Fiscales Digitales por Internet (CFDI) versión 4.0 se realizará una vez que CargaIA esté formalmente constituida como sociedad mercantil mexicana ante el SAT, proceso en curso a la fecha de esta publicación.</p>
+<p>Esta página no constituye oferta vinculante ni publicidad engañosa en términos de la Ley Federal de Protección al Consumidor y la Procuraduría Federal del Consumidor (PROFECO). Para asesoría personalizada o aclaraciones, contacta directamente con CargaIA a través de los canales oficiales en cargaia.com.</p>
+<p class="updated-date">Última actualización: mayo 15, 2026 · CARGAIA_FAQ_v1.0</p>
+</div>
 </main>
 
 <footer>
   [CARGAIA_FAQ_v1.0] // © 2026 Maxify Inc. // Tijuana, B.C., México<br>
   <a href="/">INICIO</a> · <a href="/privacy">PRIVACIDAD</a> · <a href="/terms">TÉRMINOS</a>
 </footer>
+
+<script>
+(function() {
+  // ─── ACCORDION TOGGLE ───
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.qa-question');
+    if (!btn) return;
+    const item = btn.closest('.qa-item');
+    item.classList.toggle('is-open');
+  });
+
+  // ─── SEARCH ───
+  const searchInput = document.getElementById('faq-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      const items = document.querySelectorAll('.qa-item');
+      const sections = document.querySelectorAll('.section-title');
+      
+      // Reset section filter when searching
+      if (query) {
+        document.querySelectorAll('#faq-filters button').forEach(b => b.classList.remove('active'));
+        document.querySelector('#faq-filters button[data-filter="all"]').classList.add('active');
+      }
+      
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const matches = !query || text.includes(query);
+        item.style.display = matches ? '' : 'none';
+        if (matches && query) item.classList.add('is-open'); // expand on match
+      });
+      
+      // Hide section headers with no visible items
+      sections.forEach(section => {
+        let next = section.nextElementSibling;
+        let hasVisible = false;
+        while (next && !next.classList.contains('section-title')) {
+          if (next.classList.contains('qa-item') && next.style.display !== 'none') {
+            hasVisible = true;
+            break;
+          }
+          next = next.nextElementSibling;
+        }
+        section.style.display = hasVisible ? '' : 'none';
+      });
+    });
+  }
+
+  // ─── SECTION FILTER CHIPS ───
+  const filters = document.getElementById('faq-filters');
+  if (filters) {
+    filters.addEventListener('click', function(e) {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      
+      // Toggle active state
+      filters.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.dataset.filter;
+      const items = document.querySelectorAll('.qa-item');
+      const sections = document.querySelectorAll('.section-title');
+      
+      // Clear search input when filtering
+      if (searchInput) searchInput.value = '';
+      
+      if (filter === 'all') {
+        items.forEach(item => item.style.display = '');
+        sections.forEach(section => section.style.display = '');
+      } else {
+        items.forEach(item => {
+          const section = item.dataset.section || '';
+          item.style.display = section === filter ? '' : 'none';
+        });
+        sections.forEach(section => {
+          const sec = section.dataset.section || '';
+          section.style.display = sec === filter ? '' : 'none';
+        });
+      }
+    });
+  }
+
+  // ─── LANGUAGE TOGGLE (UI-only for Commit 2 — full content in Commit 3) ───
+  const langButtons = document.querySelectorAll('.lang-toggle button');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      langButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // English content arrives in Commit 3 — for now ES is default
+      const lang = btn.dataset.lang;
+      if (lang === 'en') {
+        alert('English version coming soon / Versión en inglés próximamente');
+        // Revert to ES
+        langButtons.forEach(b => b.classList.remove('active'));
+        document.querySelector('.lang-toggle button[data-lang="es"]').classList.add('active');
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
