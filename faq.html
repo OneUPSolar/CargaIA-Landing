@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,8 +19,9 @@
 <meta name="robots" content="index, follow">
 
 <!-- Hreflang for bilingual -->
-<link rel="alternate" hreflang="es" href="https://cargaia.com/faq">
+<link rel="alternate" hreflang="es-MX" href="https://cargaia.com/faq">
 <link rel="alternate" hreflang="en" href="https://cargaia.com/faq?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://cargaia.com/faq">
 <link rel="canonical" href="https://cargaia.com/faq">
 
 <!-- Favicons -->
@@ -350,8 +351,8 @@ footer a:hover { color: var(--cyan); }
 
 <main>
   <div class="tag">[KNOWLEDGE_BASE]</div>
-  <h1>Preguntas frecuentes.</h1>
-  <p class="lede">Todo lo que necesitas saber sobre autos eléctricos, carga residencial, costos y Carga-como-Servicio en México. Para nuevos usuarios y expertos.</p>
+  <h1 data-es="Preguntas frecuentes." data-en="Frequently asked questions.">Preguntas frecuentes.</h1>
+  <p class="lede faq-subtitle" data-es="Todo lo que necesitas saber sobre autos eléctricos, carga residencial, costos y Carga-como-Servicio en México. Para nuevos usuarios y expertos." data-en="Everything you need to know about electric vehicles, residential charging, costs and Charging-as-a-Service in Mexico. For new users and experts.">Todo lo que necesitas saber sobre autos eléctricos, carga residencial, costos y Carga-como-Servicio en México. Para nuevos usuarios y expertos.</p>
 
   <div class="lang-toggle">
     <button class="active" data-lang="es">ES</button>
@@ -359,14 +360,14 @@ footer a:hover { color: var(--cyan); }
   </div>
 
   <div class="toolbar">
-    <input type="text" class="search-input" placeholder="Buscar pregunta... (ej: 'cuánto cuesta', 'instalación', 'Tijuana')" id="faq-search">
+    <input type="search" class="search-input" id="faq-search" placeholder="Buscar pregunta... (ej: 'cuánto cuesta')" data-placeholder-es="Buscar pregunta... (ej: 'cuánto cuesta')" data-placeholder-en="Search question... (e.g. 'how much does it cost')">
     <div class="filter-chips" id="faq-filters">
-      <button class="active" data-filter="all">TODAS</button>
-      <button data-filter="cargaia">SOBRE CARGAIA</button>
-      <button data-filter="costos">COSTOS</button>
-      <button data-filter="instalacion">INSTALACIÓN</button>
-      <button data-filter="ev-basico">EV BÁSICO</button>
-      <button data-filter="tijuana">TIJUANA</button>
+      <button class="active" data-filter="all" data-label-es="TODAS" data-label-en="ALL">TODAS</button>
+      <button data-filter="cargaia" data-label-es="SOBRE CARGAIA" data-label-en="ABOUT CARGAIA">SOBRE CARGAIA</button>
+      <button data-filter="costos" data-label-es="COSTOS" data-label-en="COSTS">COSTOS</button>
+      <button data-filter="instalacion" data-label-es="INSTALACIÓN" data-label-en="INSTALLATION">INSTALACIÓN</button>
+      <button data-filter="ev-basico" data-label-es="EV BÁSICO" data-label-en="EV BASICS">EV BÁSICO</button>
+      <button data-filter="tijuana" data-label-es="TIJUANA" data-label-en="TIJUANA">TIJUANA</button>
     </div>
   </div>
 
@@ -592,12 +593,242 @@ footer a:hover { color: var(--cyan); }
 </div><!-- end #faq-content -->
 
 <!-- ─── DISCLAIMER LEGAL FORMAL ─── -->
-<div class="legal-disclaimer">
+<div class="legal-disclaimer" data-lang="es">
 <p><strong>AVISO LEGAL Y FISCAL</strong></p>
 <p>La información contenida en esta página tiene carácter meramente informativo y orientativo. CargaIA y Maxify Technologies, sus subsidiarias y afiliadas no asumen responsabilidad alguna por decisiones tomadas con base en los datos aquí publicados, los cuales pueden estar sujetos a cambios por actualización de tarifas de la Comisión Federal de Electricidad (CFE), modificaciones a la normativa fiscal del Servicio de Administración Tributaria (SAT), reformas a la Norma Oficial Mexicana NOM-001-SEDE-2012, fluctuaciones del tipo de cambio peso-dólar, o cambios en precios y disponibilidad de equipos y vehículos por parte de fabricantes y distribuidores autorizados.</p>
 <p>Los datos económicos, comparativos de costos, autonomía vehicular, capacidad de carga y especificaciones técnicas mencionados reflejan condiciones de mercado y normatividad vigentes a la fecha de última actualización. Cualquier servicio prestado por CargaIA quedará formalizado mediante contrato individual de prestación de servicios, donde se establecerán los términos, condiciones, alcances, costos y obligaciones específicas aplicables. La emisión de Comprobantes Fiscales Digitales por Internet (CFDI) versión 4.0 se realizará una vez que CargaIA esté formalmente constituida como sociedad mercantil mexicana ante el SAT, proceso en curso a la fecha de esta publicación.</p>
 <p>Esta página no constituye oferta vinculante ni publicidad engañosa en términos de la Ley Federal de Protección al Consumidor y la Procuraduría Federal del Consumidor (PROFECO). Para asesoría personalizada o aclaraciones, contacta directamente con CargaIA a través de los canales oficiales en cargaia.com.</p>
 <p class="updated-date">Última actualización: mayo 15, 2026 · CARGAIA_FAQ_v1.0</p>
+</div>
+
+<div id="faq-content-en" data-lang="en" style="display: none;">
+
+<!-- ─── SECTION 1 ─── -->
+<h2 class="section-title" data-section="cargaia">[01] About CargaIA</h2>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">What is CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA is the first Charging-as-a-Service (CaaS) company in Mexico. Instead of purchasing and installing a charger for your electric vehicle, CargaIA installs and maintains the complete infrastructure at your home or business, and you pay a fixed monthly fee that includes equipment, certified installation, smart app, and support. We operate in Baja California with plans to expand to Sonora, Jalisco, Nuevo León, and the Bajío region.</p></div>
+</div>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">How does the Charging-as-a-Service model work? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>It works like an internet or solar energy subscription: you don't buy the hardware, you pay for the service. CargaIA installs a certified charger at your property, connects it to our monitoring platform, and you get unlimited or on-demand charging depending on your plan. If the equipment fails, we replace it at no cost. If you move, we uninstall or migrate it. No long-term lock-in contracts, cancellation with 30 days notice.</p></div>
+</div>
+
+<div class="qa-item is-open" data-section="cargaia">
+  <button class="qa-question">Who is CargaIA and where is it based? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA is a brand of Maxify Technologies, a company focused on electric mobility infrastructure for Mexico and eventually the United States. Our pilot operation launches in Tijuana, Baja California, with planned expansion to other Mexican cities starting in 2027.</p></div>
+</div>
+
+<!-- ─── SECTION 2 ─── -->
+<h2 class="section-title" data-section="costos">[02] Costs and subscription</h2>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">How much does CargaIA service cost per month? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA's monthly residential subscription pricing is being finalized based on Phase 1 pilot data. The model bundles into a single monthly fee: the certified charger (zero hardware cost upfront), installation with NOM/NEC permits, smart monitoring via app, technical support, and maintenance. Compare this with purchasing a residential charger ($800-1,500 USD) plus installation ($500-2,000 MXN) plus ongoing maintenance.</p></div>
+</div>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">Is the $10,000 MXN pre-order refundable? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes, the $10,000 MXN pre-order for Phase 1 is 100% refundable. The amount is only applied as credit to your first monthly fee when we sign the official service contract in August 2026. If your site doesn't qualify technically for installation or if you decide not to continue before contract signing, we refund the full amount with no penalty.</p></div>
+</div>
+
+<div class="qa-item" data-section="costos">
+  <button class="qa-question">What does the CargaIA monthly fee include? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>The monthly fee includes: (1) the certified electric charger, (2) professional installation with NOM/NEC permits and CFE approval when applicable, (3) mobile app for monitoring and control, (4) 24/7 technical support, (5) preventive and corrective maintenance, (6) equipment replacement if it fails due to manufacturing defect. The cost of kWh consumed is not included — it's billed separately according to your residential CFE rate.</p></div>
+</div>
+
+<!-- ─── SECTION 3 ─── -->
+<h2 class="section-title" data-section="instalacion">[03] Installation and compatibility</h2>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">Is CargaIA compatible with my electric vehicle? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA uses chargers with SAE J1772 (Type 1) and CCS Combo connectors, the most common standards in Mexico. This means it's compatible with every electric vehicle sold in Mexico: Tesla Model 3/Y (with adapter), Nissan Leaf, Chevrolet Bolt, BYD Dolphin/Yuan/Tang/Han, Volvo XC40, Polestar 2, Ford Mustang Mach-E, MG ZS EV, JAC E10X, and others. For Chinese vehicles with GB/T connector, we can quote a specific charger configuration.</p></div>
+</div>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">How long does it take to install a CargaIA charger at my home? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Installing a CargaIA Level 2 residential charger typically takes between 2 and 4 hours under normal conditions, completed in a single visit. This includes: electrical panel assessment, installation of a dedicated 40-60A breaker, cable routing to the charger location (typically 3-15 meters), equipment mounting, and testing. If the project requires electrical panel upgrades or special CFE permit processing, the total timeline can extend to 1-3 weeks.</p></div>
+</div>
+
+<div class="qa-item" data-section="instalacion">
+  <button class="qa-question">What electrical requirements does my home need for a CargaIA charger? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Your home needs: (1) 220V CFE electrical service (standard in Mexico), (2) available space in your electrical panel for a dedicated 40-60A breaker, (3) sufficient contracted capacity with CFE (typically 5-10 kW available), (4) physical location near where you park. During the free site assessment we verify all of this before installation. If your site doesn't qualify, we refund the full pre-order amount.</p></div>
+</div>
+
+<!-- ─── SECTION 4 ─── -->
+<h2 class="section-title" data-section="tecnico">[04] Technical product</h2>
+
+<div class="qa-item" data-section="tecnico">
+  <button class="qa-question">What charging power does CargaIA offer for residential use? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA offers residential Level 2 charging at 240V/48A, equivalent to 11.5 kW of charging power. In practical terms, this means charging an average EV battery (50-75 kWh) in approximately 5-8 hours — a full overnight cycle. Compared to slow Level 1 charging (110V, ~1.4 kW) which would take over 24 hours, the difference is substantial.</p></div>
+</div>
+
+<div class="qa-item" data-section="tecnico">
+  <button class="qa-question">Is CargaIA safe? Does it comply with Mexican electrical standards? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes. Every CargaIA installation complies with the Mexican Official Standard NOM-001-SEDE (Electrical Installations), the referenced American NEC electrical code, and the Comisión Federal de Electricidad (CFE) guidelines. Each installation includes protection against overload, ground fault (GFCI), optional surge protection, and certified insulation. Our electricians are certified by STPS.</p></div>
+</div>
+
+<!-- ─── SECTION 5 ─── -->
+<h2 class="section-title" data-section="empresa">[05] Company and support</h2>
+
+<div class="qa-item" data-section="empresa">
+  <button class="qa-question">How do I sign up for the CargaIA pilot in Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>To sign up for the Phase 1 pilot in Tijuana, visit cargaia.com, complete the pre-order with $10,000 MXN (refundable), and select your profile (residential user, investor, installer, or supplier). CargaIA will contact you in August 2026 to assess your site, sign service contract, and schedule installation. Only 200 slots in Phase 1 — first-come, first-served. If your site doesn't qualify, we refund the full amount.</p></div>
+</div>
+
+<!-- ─── SECTION 6 ─── -->
+<h2 class="section-title" data-section="economia">[06] Economic considerations</h2>
+
+<div class="qa-item" data-section="economia">
+  <button class="qa-question">Should I buy my own charger or rent with CargaIA? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>It depends on your horizon and comfort with responsibilities. Buying a residential charger costs between $15,000-30,000 MXN (hardware) plus $5,000-15,000 MXN (certified installation) plus future maintenance. With CargaIA you pay a fixed monthly fee and equipment, installation, maintenance, and replacement are included at no additional cost. If you plan to live in the same house for 7+ years and have $25,000+ MXN of initial budget, buying might be cheaper long term. If you prefer zero maintenance responsibility, full warranty, and flexibility to move, CargaIA is the option.</p></div>
+</div>
+
+<div class="qa-item" data-section="economia">
+  <button class="qa-question">What happens if I move before my subscription ends? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>If you move within CargaIA's coverage area, we migrate your charger to your new location at no hardware cost (only re-installation cost applies if your new address requires additional electrical work). If you move outside coverage, you can cancel your subscription with 30 days notice without penalty after the first year of service. During the first year, a $3,000 MXN uninstallation fee applies to cover operational costs.</p></div>
+</div>
+
+<!-- ─── SECTION 7 ─── -->
+<h2 class="section-title" data-section="tarifas">[07] Electrical tariffs</h2>
+
+<div class="qa-item" data-section="tarifas">
+  <button class="qa-question">Does the CargaIA monthly fee include the kWh consumed? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>No, the CargaIA monthly fee covers equipment, installation, and maintenance. Electrical consumption is billed separately directly with the Comisión Federal de Electricidad (CFE) on your light bill, according to your residential rate (1, 1A, 1B, DAC, etc.). Our smart app shows exactly how many kWh you consume charging, so you can budget and optimize charging during lower-cost hours (overnight).</p></div>
+</div>
+
+<div class="qa-item" data-section="tarifas">
+  <button class="qa-question">Is charging my EV with CargaIA more expensive than filling up with gasoline? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Much cheaper. A typical electric vehicle consumes between 15-20 kWh per 100 km. At average residential CFE rate of $4 MXN per kWh, that's $60-80 MXN per 100 km. A compact gasoline car averaging 10-15 km per liter at Magna gasoline of $24-26 MXN/liter costs $160-260 MXN per 100 km. The difference: electric charging costs 60-70% less than gasoline. In DAC tariffs the savings decrease, which is why we offer nighttime charging optimization to keep you in subsidized rates.</p></div>
+</div>
+
+<!-- ─── SECTION 8 ─── -->
+<h2 class="section-title" data-section="solar">[08] Solar and panels</h2>
+
+<div class="qa-item" data-section="solar">
+  <button class="qa-question">Can I connect my CargaIA charger to solar panels? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes, CargaIA is compatible with residential solar panels. If you already have panels installed, we integrate your charger into your solar system so it charges your car with energy generated from your own roof. If you don't have panels, CargaIA offers a combined solar + EV charging package under the same monthly subscription model, nearly eliminating your electricity and fuel bills. Solar integration uses net metering with CFE when the system allows.</p></div>
+</div>
+
+<!-- ─── SECTION 9 ─── -->
+<h2 class="section-title" data-section="garantias">[09] Safety and warranties</h2>
+
+<div class="qa-item" data-section="garantias">
+  <button class="qa-question">What happens if my CargaIA charger breaks down? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Since the charger is property of CargaIA, you bear no failure costs. You report the problem via app or WhatsApp, we dispatch a certified technician within 48 business hours (24 hours in Tijuana metro area), diagnose, and repair at no cost if the failure is due to manufacturing defect, normal use, or external electrical cause. If damage is due to misuse or vandalism, a repair charge applies per assessment. While your charger is out of service, you receive proportional credit on your next monthly fee.</p></div>
+</div>
+
+<div class="qa-item" data-section="garantias">
+  <button class="qa-question">Are CargaIA chargers insured? Is my car protected? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes. All infrastructure installed by CargaIA is covered by our civil liability insurance contracted with an accredited Mexican insurer. This covers accidental damage to equipment, electrical incidents that could affect your installation, and third-party liability. Your electric vehicle must be covered by your personal auto insurance — certified Level 2 chargers rarely cause vehicle damage thanks to multiple protections (GFCI, overload, ground fault), but we recommend confirming with your insurer that your policy covers electrical events.</p></div>
+</div>
+
+<!-- ─── SECTION 10 ─── -->
+<h2 class="section-title" data-section="comercial">[10] Commercial and invoicing</h2>
+
+<div class="qa-item" data-section="comercial">
+  <button class="qa-question">Does CargaIA issue CFDI for businesses and tax deductions? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes. Once CargaIA is formally constituted as a Mexican entity (currently in progress, finalizing August 2026), we'll issue CFDI 4.0 according to SAT regulations for all services provided to individuals with business activity, legal entities, and RIF regime. Your monthly fee and any additional services will be 100% deductible as operating expense if your business activity allows. If you need invoicing before August 2026 for a commercial pilot, contact us directly for special conditions.</p></div>
+</div>
+
+<!-- ─── SECTION 11 ─── -->
+<h2 class="section-title" data-section="ev-basico">[11] EVs for beginners: deciding to buy</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">Is it worth buying an electric vehicle in Mexico in 2026? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes, for specific profiles. An electric car makes sense if: (1) you have access to parking with an electrical outlet at home or work, (2) you drive more than 30 km daily (fuel savings pay back faster), (3) your initial budget is $400,000 MXN or more (entry-level EVs start there), (4) you live in cities with basic charging infrastructure (CDMX, Monterrey, Guadalajara, Tijuana, Querétaro). If you mostly drive urban routes, rarely take long highway trips, and can charge overnight at home, you save between $30,000-60,000 MXN per year vs gasoline. If you drive more than 500 km daily or live in rural areas without infrastructure, it's not your moment yet.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">What's the cheapest electric car I can buy in Mexico? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>As of May 2026, the most economic options are: BYD Dolphin Mini (~$420,000 MXN), JAC E10X (~$380,000-440,000 MXN), MG ZS EV (~$520,000 MXN), Renault Kwid E-Tech (~$430,000 MXN), Chevrolet Bolt used certified pre-owned (~$380,000-450,000 MXN). Chinese brands like BYD, JAC, Changan are dominating the entry segment. Tesla Model 3 starts at $850,000 MXN. Prices change frequently due to subsidies, exchange rate, and brand promotions — verify directly with dealerships.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">How much does it cost to charge an electric car per month in Mexico? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>For an average EV driving 1,500 km per month, electricity cost is approximately $900-1,400 MXN per month charging at home with basic residential CFE rate. Compared to a compact gasoline car that would spend $3,200-4,800 MXN per month on fuel for the same mileage, monthly savings are $2,000-3,500 MXN. Public charging is more expensive (~$8-15 MXN/kWh vs $2-5 MXN/kWh residential) and should be used only for long trips. Overnight charging in subsidized rate is where the real economy lives.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">What's the real range of an electric car in Mexico? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Official WLTP/EPA range of a modern EV is between 250-500 km, but real-world range in Mexico is usually 15-25% lower due to several factors: air conditioning in hot climates (Tijuana, Mérida, Monterrey), dense urban traffic, highway driving above 110 km/h, batteries subjected to extreme heat. In practice, a new Nissan Leaf delivers 180-220 real km, a Tesla Model 3 Long Range delivers 380-450 real km, a BYD Dolphin delivers 280-320 real km. For daily urban use in Mexico, 200-300 km of range is enough. For frequent highway trips you need 400+ km or to plan stops at fast chargers.</p></div>
+</div>
+
+<!-- ─── SECTION 12 ─── -->
+<h2 class="section-title" data-section="ev-basico">[12] EVs for beginners: daily routine</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">Do I need a special charger at home or can I plug into a regular outlet? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Technically you can plug an electric vehicle into a regular 110V outlet, but it's NOT recommended as a permanent solution. Charging would be ultra slow (30-60 hours for a full charge) and represents risk of overheating your home's wiring, which isn't designed for 8-12 continuous hours of high current. The right approach is to install a dedicated 220V Level 2 charger, which charges the car in 4-8 hours with proper electrical installation. That's why CargaIA exists: we install the certified charger so you don't have to buy and install it yourself.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">Where can I charge my electric car if I'm not at home? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>In Mexico there are three types of public chargers: (1) Level 2 chargers at shopping centers, hotels, and offices (typically 7-22 kW, charging in 3-8 hours), (2) DC fast chargers at gas stations and highway rest-stops (50-150 kW, charging 80% in 30-60 minutes), (3) Tesla Superchargers exclusive to Tesla at limited locations. Useful apps: PlugShare, ChargeMap, Electromaps show nearby chargers with real-time availability. The largest networks are ChargeNow (BMW), EVgo in Tijuana/Mexicali border, Cumbre Charge, EZVOLT. Home charging covers 80-90% of typical use; public is for long trips or emergencies.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">What happens if I run out of battery on the highway? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Unlike running out of gasoline, running out of battery in an electric car isn't immediately catastrophic because all EVs alert you with sufficient anticipation (warnings at 20%, 10%, 5% battery remaining) and integrated navigation systems show nearby chargers. If you actually ran out of battery, options are: (1) call a tow truck to take you to the nearest charger (traditional insurance and AMA coverage covers this), (2) some models (Tesla, BMW) have internal reserve giving 10-20 km after the "0%" warning, (3) mobile DC charging units that come to you — emergency service that's starting in Mexico but isn't yet ubiquitous. Planning highway trips with stops at known chargers is the best strategy.</p></div>
+</div>
+
+<!-- ─── SECTION 13 ─── -->
+<h2 class="section-title" data-section="ev-basico">[13] EVs for beginners: maintenance</h2>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">Do electric cars need maintenance? How much does it cost? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Much less than a combustion car. Electric vehicles don't have oil to change, air/fuel filters, spark plugs, distributor, catalytic converter, or complex transmission. They only need: (1) tire rotation every 10,000 km like any car, (2) brake fluid change every 2 years, (3) annual battery system inspection, (4) cabin filter replacement if your model has one. Average annual EV maintenance cost in Mexico is $4,000-8,000 MXN compared to $15,000-25,000 MXN for an equivalent gasoline car. The traction battery has typical warranty of 8 years or 160,000 km.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">How long does an EV battery last? Do I have to replace it? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Modern lithium-ion batteries in electric cars are designed to last between 1,500-3,000 charge cycles, equivalent to 250,000-500,000 km of real use. Most manufacturers (Tesla, Nissan, GM, BYD) offer battery warranty of 8 years or 160,000 km, guaranteeing at least 70% of original capacity at the end of that period. In practice, 2013 model Nissan Leafs in testing still work today with 85-90% capacity. Complete battery replacement is expensive ($150,000-400,000 MXN depending on model), but only needed in cars with more than 10-12 years of intensive use. For normal city use, the battery outlives the car's chassis.</p></div>
+</div>
+
+<div class="qa-item" data-section="ev-basico">
+  <button class="qa-question">Is it safe to drive an electric car in rain or cross puddles? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Yes, completely. Electric vehicles meet the same IP67 international protection standards that apply to submersible electronic equipment, and are subjected to stricter electrical insulation testing than combustion vehicles. The high-voltage electrical system is completely sealed and isolated from the chassis. You can cross puddles, drive in heavy rain, and wash your car with a hose with no electrical risk whatsoever. In fact, driving in rain is safer in an EV than in a gasoline car because there's no air intake system that could get wet and damage the engine. The only thing to avoid is deep flooding (more than 30 cm of water) which could damage general electronic components.</p></div>
+</div>
+
+<!-- ─── SECTION 14 ─── -->
+<h2 class="section-title" data-section="tijuana">[14] Tijuana and local mobility</h2>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">Why does Tijuana urgently need electric cars? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Tijuana faces three problems that electric cars solve directly: (1) air pollution, where the city reaches dangerous PM2.5 levels several days per year, mainly from vehicle emissions at congested border crossings like San Ysidro and Otay, (2) rising fuel costs, with gasoline prices among the highest in the country due to border logistics, hitting especially hard the 80,000+ transmigrants who cross daily, (3) external energy dependence, importing gasoline while Baja California has some of the most abundant solar resources in Mexico (300+ days of sun per year). The transition to electric vehicles in Tijuana isn't luxury, it's economic and public health necessity.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">How polluted is the air in Tijuana and how does an electric car help? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Tijuana registers PM2.5 concentrations (fine particles that penetrate lungs) between 12-25 µg/m³ in normal conditions and peaks above 50 µg/m³ during thermal inversion seasons, levels the World Health Organization considers harmful to human health. Transportation emissions represent approximately 60% of urban pollution in the city. An electric car generates zero tailpipe emissions at point of use, meaning each conversion from gasoline to electric directly reduces pollutant load in the neighborhoods where it circulates. If just 5% of private vehicles in Tijuana were electric, PM2.5 concentrations would drop between 8-12% according to urban air quality estimates.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">How much can I save per year by switching from gasoline to electric in Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>An average driver in Tijuana driving 18,000-25,000 km per year can save between $35,000 and $65,000 MXN annually by switching from a compact gasoline car to electric. The calculation includes: fuel savings ($24,000-42,000 MXN/year), lower maintenance ($8,000-15,000 MXN/year), exemption from mandatory vehicle verification if the model qualifies (doesn't apply to all), discounts on Baja California vehicle tenancy for zero-emission cars when applicable. If you also add solar panels to cover your electrical consumption, total savings come close to eliminating your fuel bill. In 5-7 years accumulated savings surpass the initial price difference vs an equivalent gasoline car.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">Does Tijuana have enough charging infrastructure for my EV today? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>Insufficient, and that's exactly the gap CargaIA comes to close. Tijuana currently has fewer than 50 reliable public chargers distributed mainly at shopping plazas, border hotels, and some corporate offices, compared to more than 1,200 gas stations. For a city of 2 million inhabitants with growing EV fleet (BYD, Tesla, Chevrolet Bolt imported from USA), the deficit is clear. That's why CargaIA focuses first on residential charging, where 80-90% of real consumption happens, and will build public charging network in a second phase. If you have an electric car in Tijuana today, your best strategy is to secure reliable home charging first.</p></div>
+</div>
+
+<div class="qa-item" data-section="tijuana">
+  <button class="qa-question">What does CargaIA specifically do to solve mobility problems in Tijuana? <span class="qa-toggle">+</span></button>
+  <div class="qa-answer"><p>CargaIA focuses its Phase 1 pilot in Tijuana for specific reasons: (1) abundant solar capacity to integrate panels into the charging network, (2) growing EV fleet due to imports from California, (3) average family income sufficient for monthly subscription, (4) citizen awareness about pollution. Our concrete solution is: install certified chargers in Tijuana homes without you having to buy the equipment, connect them to optimized residential tariffs with CFE, and in the future integrate local solar generation to reduce external electrical dependence. We don't sell electric cars, we sell the infrastructure that makes owning one practical, accessible, and economically sensible for an average Tijuana family.</p></div>
+</div>
+
+</div><!-- end #faq-content-en -->
+
+<!-- ─── LEGAL DISCLAIMER ENGLISH ─── -->
+<div class="legal-disclaimer" data-lang="en" style="display: none;">
+<p><strong>LEGAL AND TAX NOTICE</strong></p>
+<p>The information contained on this page is for informational and orientation purposes only. CargaIA and Maxify Technologies, their subsidiaries and affiliates, assume no responsibility for decisions made based on data published herein, which may be subject to change due to updates in Comisión Federal de Electricidad (CFE) rates, modifications to tax regulations of the Servicio de Administración Tributaria (SAT), reforms to the Mexican Official Standard NOM-001-SEDE-2012, peso-dollar exchange rate fluctuations, or changes in prices and availability of equipment and vehicles by manufacturers and authorized distributors.</p>
+<p>Economic data, cost comparisons, vehicle range, charging capacity, and technical specifications mentioned reflect market and regulatory conditions valid as of last update. Any service provided by CargaIA will be formalized through individual service provision contracts, where specific terms, conditions, scopes, costs, and applicable obligations will be established. Issuance of Comprobantes Fiscales Digitales por Internet (CFDI) version 4.0 will occur once CargaIA is formally constituted as a Mexican mercantile company before SAT, a process currently in progress as of this publication.</p>
+<p>This page does not constitute a binding offer or misleading advertising under terms of the Mexican Federal Consumer Protection Law and the Procuraduría Federal del Consumidor (PROFECO). For personalized advice or clarifications, contact CargaIA directly through official channels at cargaia.com.</p>
+<p class="updated-date">Last updated: May 15, 2026 · CARGAIA_FAQ_v1.0</p>
 </div>
 </main>
 
@@ -608,6 +839,8 @@ footer a:hover { color: var(--cyan); }
 
 <script>
 (function() {
+  let currentLang = 'es'; // default
+
   // ─── ACCORDION TOGGLE ───
   document.addEventListener('click', function(e) {
     const btn = e.target.closest('.qa-question');
@@ -621,23 +854,27 @@ footer a:hover { color: var(--cyan); }
   if (searchInput) {
     searchInput.addEventListener('input', function(e) {
       const query = e.target.value.toLowerCase().trim();
-      const items = document.querySelectorAll('.qa-item');
-      const sections = document.querySelectorAll('.section-title');
+      // Only search within visible language
+      const activeContainer = document.querySelector(`[data-lang="${currentLang}"]`);
+      if (!activeContainer) return;
+      
+      const items = activeContainer.querySelectorAll('.qa-item');
+      const sections = activeContainer.querySelectorAll('.section-title');
       
       // Reset section filter when searching
       if (query) {
         document.querySelectorAll('#faq-filters button').forEach(b => b.classList.remove('active'));
-        document.querySelector('#faq-filters button[data-filter="all"]').classList.add('active');
+        const allBtn = document.querySelector('#faq-filters button[data-filter="all"]');
+        if (allBtn) allBtn.classList.add('active');
       }
       
       items.forEach(item => {
         const text = item.textContent.toLowerCase();
         const matches = !query || text.includes(query);
         item.style.display = matches ? '' : 'none';
-        if (matches && query) item.classList.add('is-open'); // expand on match
+        if (matches && query) item.classList.add('is-open');
       });
       
-      // Hide section headers with no visible items
       sections.forEach(section => {
         let next = section.nextElementSibling;
         let hasVisible = false;
@@ -660,15 +897,17 @@ footer a:hover { color: var(--cyan); }
       const btn = e.target.closest('button');
       if (!btn) return;
       
-      // Toggle active state
       filters.querySelectorAll('button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       
       const filter = btn.dataset.filter;
-      const items = document.querySelectorAll('.qa-item');
-      const sections = document.querySelectorAll('.section-title');
+      // Only filter within active language container
+      const activeContainer = document.querySelector(`[data-lang="${currentLang}"]`);
+      if (!activeContainer) return;
       
-      // Clear search input when filtering
+      const items = activeContainer.querySelectorAll('.qa-item');
+      const sections = activeContainer.querySelectorAll('.section-title');
+      
       if (searchInput) searchInput.value = '';
       
       if (filter === 'all') {
@@ -687,22 +926,100 @@ footer a:hover { color: var(--cyan); }
     });
   }
 
-  // ─── LANGUAGE TOGGLE (UI-only for Commit 2 — full content in Commit 3) ───
+  // ─── LANGUAGE TOGGLE — REAL CONTENT SWITCH ───
   const langButtons = document.querySelectorAll('.lang-toggle button');
-  langButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      langButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      // English content arrives in Commit 3 — for now ES is default
-      const lang = btn.dataset.lang;
-      if (lang === 'en') {
-        alert('English version coming soon / Versión en inglés próximamente');
-        // Revert to ES
-        langButtons.forEach(b => b.classList.remove('active'));
-        document.querySelector('.lang-toggle button[data-lang="es"]').classList.add('active');
+  
+  function switchLang(lang) {
+    currentLang = lang;
+    
+    // Toggle visible content containers
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      if (el.classList.contains('lang-toggle') || el.tagName === 'BUTTON') return;
+      el.style.display = el.dataset.lang === lang ? '' : 'none';
+    });
+    
+    // Update lang buttons
+    langButtons.forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    
+    // Update html lang attribute for SEO + accessibility
+    document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'es-MX');
+    
+    // Update page title and meta for SEO
+    if (lang === 'en') {
+      document.title = 'FAQ — Frequently Asked Questions about EV Charging in Mexico | CargaIA';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', 'Everything you need to know about electric vehicles, residential charging, costs and Charging-as-a-Service in Mexico. For new users and experts.');
+    } else {
+      document.title = 'FAQ — Preguntas Frecuentes sobre Carga de Autos Eléctricos en México | CargaIA';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', 'Todo lo que necesitas saber sobre autos eléctricos, carga residencial, costos y Carga-como-Servicio en México. Para nuevos usuarios y expertos.');
+    }
+    
+    // Update H1 text
+    const h1 = document.querySelector('h1');
+    if (h1 && h1.dataset.es && h1.dataset.en) {
+      h1.textContent = lang === 'en' ? h1.dataset.en : h1.dataset.es;
+    }
+    
+    // Update H1 subtitle
+    const subtitle = document.querySelector('.faq-subtitle');
+    if (subtitle && subtitle.dataset.es && subtitle.dataset.en) {
+      subtitle.textContent = lang === 'en' ? subtitle.dataset.en : subtitle.dataset.es;
+    }
+    
+    // Update search placeholder
+    if (searchInput && searchInput.dataset.placeholderEs && searchInput.dataset.placeholderEn) {
+      searchInput.placeholder = lang === 'en' ? searchInput.dataset.placeholderEn : searchInput.dataset.placeholderEs;
+    }
+    
+    // Update filter chips labels
+    document.querySelectorAll('#faq-filters button').forEach(btn => {
+      if (btn.dataset.labelEs && btn.dataset.labelEn) {
+        btn.textContent = lang === 'en' ? btn.dataset.labelEn : btn.dataset.labelEs;
       }
     });
+    
+    // Reset search and filters when switching
+    if (searchInput) searchInput.value = '';
+    const allBtn = document.querySelector('#faq-filters button[data-filter="all"]');
+    if (allBtn) {
+      document.querySelectorAll('#faq-filters button').forEach(b => b.classList.remove('active'));
+      allBtn.classList.add('active');
+    }
+    
+    // Update URL with lang param for shareability + SEO
+    const url = new URL(window.location);
+    if (lang === 'en') {
+      url.searchParams.set('lang', 'en');
+    } else {
+      url.searchParams.delete('lang');
+    }
+    window.history.replaceState({}, '', url);
+    
+    // Store preference
+    try { localStorage.setItem('cargaia-faq-lang', lang); } catch(e) {}
+  }
+  
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      switchLang(btn.dataset.lang);
+    });
   });
+  
+  // Initial language: URL param > localStorage > default 'es'
+  let initialLang = 'es';
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  if (urlLang === 'en') {
+    initialLang = 'en';
+  } else {
+    try {
+      const stored = localStorage.getItem('cargaia-faq-lang');
+      if (stored === 'en') initialLang = 'en';
+    } catch(e) {}
+  }
+  if (initialLang === 'en') switchLang('en');
 })();
 </script>
 
