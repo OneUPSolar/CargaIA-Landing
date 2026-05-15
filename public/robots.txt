@@ -1,0 +1,38 @@
+# robots.txt for cargaia.com
+# Updated: May 15, 2026
+
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /admin/
+
+# Allow important AI/search crawlers explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://cargaia.com/sitemap.xml
