@@ -171,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTypewriter() {
         const engTitle = "The electric future arrived in Mexico.";
         const spTitle = "El futuro eléctrico llegó a México.";
-        const engSub = "Certified charging infrastructure for Mexico. 100% refundable pre-order — billing starts with official contract in August 2026.";
-        const spSub = "Infraestructura de carga certificada para México. Pre-orden reembolsable al 100% — cobro inicia con contrato oficial en agosto 2026.";
+        const engSub = "Forget about buying and installing chargers. CargaIA mounts, connects and maintains your charging infrastructure for a single monthly fee. 100% refundable pre-order — billing starts August 2026.";
+        const spSub = "Olvídate de comprar e instalar cargadores. CargaIA monta, conecta y mantiene tu infraestructura de carga por una sola mensualidad. Pre-orden reembolsable al 100% — cobro inicia agosto 2026.";
         
         const titleEl = document.getElementById('type-title');
         const subEl = document.getElementById('type-subtitle');
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Phase 1: Type English Title (Snappier)
         typeTl.to(titleEl, { text: engTitle, duration: 1.5, ease: "none" })
-        .to(subEl, { text: engSub, duration: 2, ease: "none" }, "-=0.5")
+        .to(subEl, { text: engSub, duration: 3, ease: "none" }, "-=0.5")
 
         // Phase 2: Glitch Transition
         .to([titleEl, subEl], { 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Phase 3: Type Spanish
         .to(titleEl, { text: spTitle, duration: 1.5, ease: "none" })
-        .to(subEl, { text: spSub, duration: 2, ease: "none" }, "-=0.5");
+        .to(subEl, { text: spSub, duration: 3, ease: "none" }, "-=0.5");
     }
 
     // Animated Flow SVG Line
